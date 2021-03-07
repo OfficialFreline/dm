@@ -1,0 +1,7 @@
+"dm"
+{
+  "base" "base"
+  "title" "Deathmatch"
+  "maps" "^dm_"
+  "menusystem" "1"
+}
