@@ -164,3 +164,11 @@ function draw.RectBlur( x, y, w, h )
         render_SetScissorRect( 0, 0, 0, 0, false )
     end
 end
+
+surface.CreateFont( 'HUDNumber5', {
+    size = 30,
+    weight = 800,
+    antialias = true,
+    shadow = false,
+    font = 'Default',
+} )

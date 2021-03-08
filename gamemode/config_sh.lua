@@ -35,3 +35,15 @@ c.ModelsTable = {
 	'models/player/hostage/hostage_03.mdl',
 	'models/player/arctic.mdl',
 }
+
+// Weapons that are available for use
+c.GreenWeapon = {
+	'weapon_crowbar',
+	'weapon_fists',
+	'weapon_smg1',
+	'weapon_medkit',
+	'weapon_ar2',
+	'weapon_frag',
+	'weapon_pistol',
+	'weapon_shotgun',
+}
