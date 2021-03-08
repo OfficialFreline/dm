@@ -1,12 +1,3 @@
-local BlackWeapons = {
-	-- 'weapon_physgun',
-	-- 'weapon_physcannon',
-	-- 'weapon_rpg',
-	'weapon_slam',
-	-- 'weapon_crossbow',
-	'weapon_bugbait',
-}
-
 local function openSpawnMenu()
 	SpawnMenu = vgui.Create( 'dm_frame' )
 	SpawnMenu:SetSize( ScrW() * 0.5166, ScrH() * 0.55 )
@@ -25,7 +16,7 @@ local function openSpawnMenu()
 	sp:SetColumns( 3 )
 
 	for k, v in pairs( list.Get( 'Weapon' ) ) do
-		if ( not v.Spawnable or table.HasValue( BlackWeapons, v.ClassName )  ) then
+		if ( not v.Spawnable or not table.HasValue( DM.Config.GreenWeapon, v.ClassName ) ) then
 			continue
 		end
 

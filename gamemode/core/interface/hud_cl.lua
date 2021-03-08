@@ -23,15 +23,38 @@ hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
 			
 	local Attach = ply:GetAttachment( Bone )
 	local ColorAlpha = 255 * ( 1 - math.Clamp( ( Distantion - 250 ) * 0.01, 0, 1 ) )
+	local TextNick = ply:Nick()
 
 	cam.Start3D2D( Attach.Pos + Vector( 0, 0, 15 ), Angle( 0, ( Attach.Pos - EyePos ):Angle().y - 90, 90 ), 0.05 )
-		local TextNick = ply:Nick()
-
 		draw.SimpleTextOutlined( TextNick, 'Hud.2', 0, 0, Color( 255, 255, 255, ColorAlpha ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 2, Color( 0, 0, 0, ColorAlpha ) )	
 	cam.End3D2D()
 end )
 
 function GM:HUDPaint()
+	-- Effect at low HP
+	local health = LocalPlayer():Health()
+
+	if ( health <= 40 ) then
+		if( health <= 30 ) then
+			local blurmul = 0
+			local cutoff = 50
+
+			if ( health <= 20 ) then
+				cutoff = 120
+			end
+
+			if( health <= 10 ) then
+				cutoff = 200
+			end	
+
+			blurmul = 1 - math.Clamp( health / cutoff, 0, 1 )
+
+			DrawMotionBlur( 0.15 * blurmul, 0.955 * blurmul, 0.07 * blurmul )
+		end
+
+		surface.SetDrawColor( 135, 0, 0, 160 * ( 1 - math.Clamp( health * 0.02, 0, 1 ) ) )
+		surface.DrawRect( 0, 0, scrw, scrh )
+	end
 	-- Death
 	if ( not LocalPlayer():Alive() ) then
 		return
@@ -40,7 +63,7 @@ function GM:HUDPaint()
 	surface.SetFont( 'Hud.1' )
 
 	-- Health
-	local text = LocalPlayer():Health() .. '%'
+	local text = health .. '%'
 
 	draw.RectBlur( 30, scrh - 100, surface.GetTextSize( text ) + 22, 70 )
 

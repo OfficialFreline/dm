@@ -4,4 +4,5 @@
   "title" "Deathmatch"
   "maps" "^dm_"
   "menusystem" "1"
+  "author_name" "Freline"
 }

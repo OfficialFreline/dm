@@ -91,6 +91,12 @@ if ( SERVER ) then
 		-- if ( pl:Admin() ) then
 			local weapon = net.ReadString()
 
+			if ( not table.HasValue( DM.Config.GreenWeapon, weapon ) ) then
+				pl:ChatPrint( 'This weapon cannot be given away.' )
+
+				return
+			end
+
 			pl:Give( weapon )
 			pl:SelectWeapon( weapon )
 		-- end
