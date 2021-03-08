@@ -29,6 +29,7 @@ DMCommandsTable = {
 		name = 'Copy the position of the player vector',
 		action = function( ply )
 			local txt = ( 'Vector( %s )' ):format( string.gsub( tostring( ply:GetPos() ), ' ', ', ' ) )
+
 			SetClipboardText( txt )
 
 			ChatText( 'Copied: ' .. txt )
@@ -363,17 +364,23 @@ function openTab()
 		end
 		playerAvatarButton.DoClick = function()
 			local DM = DermaMenu()
+			local steamid = v:SteamID()
+			local steamid64 = v:SteamID64()
 
 			DM:AddOption( v:GetNWString( 'ply_name' ), function()
 				SetClipboardText( v:GetNWString( 'ply_name' ) )
 			end ):SetIcon( 'icon16/emoticon_happy.png' )
-			DM:AddOption( 'SteamID:  ' .. v:SteamID(), function()
-				SetClipboardText( ply:SteamID() )
+			DM:AddOption( 'SteamID:  ' .. steamid, function()
+				SetClipboardText( steamid )
+
+				ChatText( 'Copied: ' .. steamid )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
-			DM:AddOption( 'SteamID64:  ' .. ( v:SteamID64() or 'Unknown' ), function()
-				SetClipboardText( ply:SteamID64() )
+			DM:AddOption( 'SteamID64:  ' .. ( steamid64 or 'Unknown' ), function()
+				SetClipboardText( steamid64 )
+
+				ChatText( 'Copied: ' .. steamid64 )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
-			DM:AddOption( 'Ранг:  ' .. v:GetNWString( 'ply_rank' ), function()
+			DM:AddOption( 'Rank:  ' .. v:GetNWString( 'ply_rank' ), function()
 				SetClipboardText( v:GetNWString( 'ply_rank' ) )
 			end ):SetIcon( 'icon16/user_suit.png' )
 
