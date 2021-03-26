@@ -1,20 +1,38 @@
+local ents_FindByClass = ents.FindByClass
+local hook_Add = hook.Add
+local gui_SetMousePos = gui.SetMousePos
+local gui_MousePos = gui.MousePos
+local gui_EnableScreenClicker = gui.EnableScreenClicker
+local string_match = string.match
+local string_lower = string.lower
+local hook_Remove = hook.Remove
+local Material = Material
+local Color = Color
+local surface_CreateFont = surface.CreateFont
+local surface_SetDrawColor = surface.SetDrawColor
+local surface_SetMaterial = surface.SetMaterial
+local surface_DrawRect = surface.DrawRect
+local surface_DrawTexturedRect = surface.DrawTexturedRect
+local render_UpdateScreenEffectTexture = render.UpdateScreenEffectTexture
+local render_SetScissorRect = render.SetScissorRect
+
 include( 'shared.lua' )
 
 timer.Create( 'CleanBodys', 60, 0, function()
     RunConsoleCommand( 'r_cleardecals' )
 
-    for k, v in ipairs( ents.FindByClass( 'class C_ClientRagdoll' ) ) do
+    for k, v in ipairs( ents_FindByClass( 'class C_ClientRagdoll' ) ) do
         v:Remove()
     end
 
-    for k, v in ipairs( ents.FindByClass( 'class C_PhysPropClientside' ) ) do
+    for k, v in ipairs( ents_FindByClass( 'class C_PhysPropClientside' ) ) do
         v:Remove()
     end   
 end )
 
 RunConsoleCommand( 'cl_drawmonitors', 0 )
 
-hook.Add( 'InitPostEntity', 'cl_init', function()
+hook_Add( 'InitPostEntity', 'cl_init', function()
 	LocalPlayer():ConCommand( 'stopsound; cl_updaterate 32; cl_cmdrate 32; cl_interp_ratio 2; cl_interp 0; mem_max_heapsize 2048; datacachesize 512; mem_min_heapsize 512' )
 end )
 
@@ -25,12 +43,12 @@ function GM:ShowSpare1()
 	GUIToggled = not GUIToggled
 
 	if ( GUIToggled ) then
-		gui.SetMousePos( mouseX, mouseY )
+		gui_SetMousePos( mouseX, mouseY )
 	else
-		mouseX, mouseY = gui.MousePos()
+		mouseX, mouseY = gui_MousePos()
 	end
 
-	gui.EnableScreenClicker( GUIToggled )
+	gui_EnableScreenClicker( GUIToggled )
 end
 
 local FKeyBinds = {
@@ -41,7 +59,7 @@ local FKeyBinds = {
 }
 
 function GM:PlayerBindPress( ply, bind, pressed )
-	local bnd = string.match( string.lower( bind ), 'gm_[a-z]+[12]?' )
+	local bnd = string_match( string_lower( bind ), 'gm_[a-z]+[12]?' )
 
 	if ( bnd and FKeyBinds[ bnd ] and GAMEMODE[ FKeyBinds[ bnd ] ] ) then
 		GAMEMODE[ FKeyBinds[ bnd ]]( GAMEMODE )
@@ -50,37 +68,37 @@ function GM:PlayerBindPress( ply, bind, pressed )
 	return
 end
 
-hook.Remove( 'RenderScreenspaceEffects', 'RenderColorModify' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderBloom' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderToyTown' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderTexturize' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderSunbeams' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderSobel' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderSharpen' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderMaterialOverlay' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderMotionBlur' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderColorModify' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderBloom' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderToyTown' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderTexturize' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderSunbeams' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderSobel' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderSharpen' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderMaterialOverlay' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderMotionBlur' )
-hook.Remove( 'RenderScreenspaceEffects', 'RenderBokeh' )
-hook.Remove( 'RenderScene', 'RenderStereoscopy' )
-hook.Remove( 'RenderScene', 'RenderSuperDoF' )
-hook.Remove( 'RenderScene', 'RenderStereoscopy' )
-hook.Remove( 'RenderScene', 'RenderSuperDoF' )
-hook.Remove( 'PreRender', 'PreRenderFrameBlend' )
-hook.Remove( 'GUIMousePressed', 'SuperDOFMouseDown' )
-hook.Remove( 'GUIMouseReleased', 'SuperDOFMouseUp' )
-hook.Remove( 'PreventScreenClicks', 'SuperDOFPreventClicks' )
-hook.Remove( 'PostRender', 'RenderFrameBlend' )
-hook.Remove( 'PostDrawEffects', 'RenderWidgets' )
-hook.Remove( 'Think', 'DOFThink' )
-hook.Remove( 'NeedsDepthPass', 'NeedsDepthPass_Bokeh' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderColorModify' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderBloom' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderToyTown' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderTexturize' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderSunbeams' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderSobel' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderSharpen' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderMaterialOverlay' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderMotionBlur' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderColorModify' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderBloom' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderToyTown' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderTexturize' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderSunbeams' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderSobel' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderSharpen' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderMaterialOverlay' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderMotionBlur' )
+hook_Remove( 'RenderScreenspaceEffects', 'RenderBokeh' )
+hook_Remove( 'RenderScene', 'RenderStereoscopy' )
+hook_Remove( 'RenderScene', 'RenderSuperDoF' )
+hook_Remove( 'RenderScene', 'RenderStereoscopy' )
+hook_Remove( 'RenderScene', 'RenderSuperDoF' )
+hook_Remove( 'PreRender', 'PreRenderFrameBlend' )
+hook_Remove( 'GUIMousePressed', 'SuperDOFMouseDown' )
+hook_Remove( 'GUIMouseReleased', 'SuperDOFMouseUp' )
+hook_Remove( 'PreventScreenClicks', 'SuperDOFPreventClicks' )
+hook_Remove( 'PostRender', 'RenderFrameBlend' )
+hook_Remove( 'PostDrawEffects', 'RenderWidgets' )
+hook_Remove( 'Think', 'DOFThink' )
+hook_Remove( 'NeedsDepthPass', 'NeedsDepthPass_Bokeh' )
 
 function render.SupportsHDR()
 	return false
@@ -105,12 +123,6 @@ end
 local scrw, scrh = ScrW(), ScrH()
 local Mat = Material( 'pp/blurscreen' )
 local WhiteColor = Color( 255, 255, 255 )
-local surface_SetDrawColor = surface.SetDrawColor
-local surface_DrawRect = surface.DrawRect
-local surface_SetMaterial = surface.SetMaterial
-local surface_DrawTexturedRect = surface.DrawTexturedRect
-local render_UpdateScreenEffectTexture = render.UpdateScreenEffectTexture
-local render_SetScissorRect = render.SetScissorRect
 
 local function DrawRect( x, y, w, h, t )
 	if ( not t ) then
@@ -165,7 +177,7 @@ function draw.RectBlur( x, y, w, h )
     end
 end
 
-surface.CreateFont( 'HUDNumber5', {
+surface_CreateFont( 'HUDNumber5', {
     size = 30,
     weight = 800,
     antialias = true,

@@ -3,6 +3,7 @@
   "base" "base"
   "title" "Deathmatch"
   "maps" "^dm_"
+  "category" "pvp"
   "menusystem" "1"
   "author_name" "Freline"
 }

@@ -89,10 +89,10 @@ function GM:HUDPaint()
 				b = 100
 			end
 
-			draw.RectBlur( scrw / 2 - surface.GetTextSize( text ) * 0.5 - 10, scrh - 100, surface.GetTextSize( text ) + 20, 70 )
+			draw.RectBlur( scrw * 0.5 - surface.GetTextSize( text ) * 0.5 - 10, scrh - 100, surface.GetTextSize( text ) + 20, 70 )
 
-			draw.OutlinedBox( scrw / 2 - surface.GetTextSize( text ) * 0.5 - 10, scrh - 100, surface.GetTextSize( text ) + 20, 70, Color( 75, 75, 75, 205 ), Color( 0, 0, 0 ), 1 )
-			draw.SimpleText( text, 'Hud.1', scrw / 2 - surface.GetTextSize( text ) * 0.5, scrh - b, Color( 255, 255, 255 ) )
+			draw.OutlinedBox( scrw * 0.5 - surface.GetTextSize( text ) * 0.5 - 10, scrh - 100, surface.GetTextSize( text ) + 20, 70, Color( 75, 75, 75, 205 ), Color( 0, 0, 0 ), 1 )
+			draw.SimpleText( text, 'Hud.1', scrw * 0.5 - surface.GetTextSize( text ) * 0.5, scrh - b, Color( 255, 255, 255 ) )
         end 
 	end
 

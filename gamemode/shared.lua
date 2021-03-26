@@ -29,6 +29,7 @@ local IncludeDirectory = function( dir )
 end
 
 Include( 'config_sh.lua' )
+Include( 'config_cmds_cl.lua' )
 
 IncludeDirectory( 'core/language' )
 IncludeDirectory( 'core' )

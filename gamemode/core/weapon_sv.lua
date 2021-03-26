@@ -1,3 +1,5 @@
+util.AddNetworkString( 'Dweapon' )
+
 local PLAYER = FindMetaTable( 'Player' )
 
 function _canDropWeapon( ply, weapon )
@@ -60,3 +62,7 @@ function PLAYER:DropWeapon()
 
     return 
 end
+
+net.Receive( 'Dweapon', function( len, pl )
+    pl:DropWeapon()
+end )
