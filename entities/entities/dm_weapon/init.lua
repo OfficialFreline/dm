@@ -104,6 +104,7 @@ function ENT:Use( activator, caller )
     end
 
     self:DecreaseAmount()
+    self:EmitSound( 'items/ammo_pickup.wav' ) -- For a better perception
 end
 
 function ENT:StartTouch( ent )
