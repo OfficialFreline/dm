@@ -4,7 +4,7 @@ DMCommandsTable = {
 		action = function( ply )
 			menuTab:Remove()
 
-			openTab()
+			GMopenTab()
 		end,
 	},
 	{

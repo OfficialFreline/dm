@@ -1,6 +1,4 @@
-local openTab
-
-function openTab()
+function GMopenTab()
 	menuTab = vgui.Create( 'DPanel' )
 	menuTab:SetSize( ScrW() * 0.6, ScrH() * 0.7 )
 	menuTab:Center()
@@ -111,7 +109,9 @@ function openTab()
 			local globalPanel = vgui.Create( 'DPanel', menuTab )
 			globalPanel:Dock( FILL )
 			globalPanel:DockMargin( 10, 80, 10, 10 )
-			globalPanel.Paint = nil
+			globalPanel.Paint = function( self, w, h )
+				draw.Blur( self )
+			end
 
 			local w = menuTab:GetWide() - 20
 
@@ -219,7 +219,7 @@ end
 
 function GM:ScoreboardShow()
 	if ( not IsValid( menuTab ) ) then
-		openTab()
+		GMopenTab()
 	else
 		menuTab:SetVisible( true )
 	end
@@ -227,5 +227,5 @@ end
 
 function GM:ScoreboardHide()
 	menuTab:SetVisible( false )
-	menuTab:Remove()
+	-- menuTab:Remove() // Required for tests
 end
