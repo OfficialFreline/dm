@@ -2,8 +2,11 @@
 {
   "base" "base"
   "title" "Deathmatch"
-  "maps" "^dm_"
+  "maps" "^dm_|^gm_"
   "category" "pvp"
   "menusystem" "1"
+
   "author_name" "Freline"
+  "author_email" ""
+  "author_url" "https://github.com/OfficialFreline/gmod-deathmatch"
 }
