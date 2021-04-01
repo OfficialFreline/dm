@@ -26,7 +26,7 @@ hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
 	local TextNick = ply:Nick()
 
 	cam.Start3D2D( Attach.Pos + Vector( 0, 0, 15 ), Angle( 0, ( Attach.Pos - EyePos ):Angle().y - 90, 90 ), 0.05 )
-		draw.SimpleTextOutlined( TextNick, 'Hud.2', 0, 0, Color( 255, 255, 255, ColorAlpha ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 2, Color( 0, 0, 0, ColorAlpha ) )	
+		draw.SimpleTextOutlined( TextNick, 'Hud.2', 0, 0, Color( 255, 255, 255, ColorAlpha ), 1, 1, 2, Color( 0, 0, 0, ColorAlpha ) )	
 	cam.End3D2D()
 end )
 
@@ -55,6 +55,7 @@ function GM:HUDPaint()
 		surface.SetDrawColor( 135, 0, 0, 160 * ( 1 - math.Clamp( health * 0.02, 0, 1 ) ) )
 		surface.DrawRect( 0, 0, scrw, scrh )
 	end
+
 	-- Death
 	if ( not LocalPlayer():Alive() ) then
 		return
@@ -69,6 +70,13 @@ function GM:HUDPaint()
 
 	draw.OutlinedBox( 30, scrh - 100, surface.GetTextSize( text ) + 22, 70, Color( 75, 75, 75, 205 ), Color( 0, 0, 0 ) )
 	draw.SimpleText( text, 'Hud.1', 40, scrh - 96, Color( 255, 255, 255 ) )
+
+	--[[
+		draw.SimpleTextOutlined( health, 'Hud.0', 74, scrh - 75, Color( 255, 255, 255 ), 1, 1, 1, Color( 0, 0, 0 ) )
+
+		draw.Circle( 75, scrh - 75, 10, 20, health * 3.6, Color( 43, 43, 43 ), -50, 0 )
+		draw.Circle( 75, scrh - 75, 8, 10, health * 3.6, Color( 206, 68, 68 ), -50, 0 )
+	]]--
 
 	-- Ammo
 

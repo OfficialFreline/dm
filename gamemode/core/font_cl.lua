@@ -19,6 +19,13 @@ surface.CreateFont( 'Tab.3', {
 	font = 'Arial',
 } )
 
+-- surface.CreateFont( 'Hud.0', {
+-- 	size = 45,
+-- 	antialias = true,
+-- 	extended = true,
+-- 	font = 'Arial',
+-- } )
+
 surface.CreateFont( 'Hud.1', {
 	size = 65,
 	antialias = true,

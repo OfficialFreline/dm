@@ -38,11 +38,12 @@ function GM:PlayerInitialSpawn( ply )
 	ply:DataSave()
 
 	player_manager.SetPlayerClass( ply, 'dm_player' )
+
+	ply:ChatPrint( 'To take the weapon press Q' )
 end
 
 function GM:PlayerSpawn( ply )
 	ply:SetupHands()
- 	ply:Give( 'weapon_crowbar' )
 
 	if ( ply:Admin() ) then
  		ply:Give( 'weapon_physgun' )

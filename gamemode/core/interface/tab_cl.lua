@@ -1,3 +1,14 @@
+function AddActionDM( Name, Do, AdminBool, LocalPlayerBool )
+	local tabl = {
+		name = Name,
+		action = Do,
+		admin = AdminBool,
+		localplayer = LocalPlayerBool,
+	}
+
+	table.Add( DMCommandsTable, { tabl } )
+end // Lightweight system
+
 function GMopenTab()
 	menuTab = vgui.Create( 'DPanel' )
 	menuTab:SetSize( ScrW() * 0.6, ScrH() * 0.7 )
@@ -100,10 +111,13 @@ function GMopenTab()
 
 			surface.SetFont( 'Tab.1' )
 
+			local nick = v:GetNWString( 'ply_name' ) or ''
+			local txt = 'Player: ' .. nick
+
 			local PlayerLabel = vgui.Create( 'DLabel', menuTab )
-			PlayerLabel:SetPos( menuTab:GetWide() * 0.5 - surface.GetTextSize( v:GetNWString( 'ply_name' ) or '' ) * 0.5, 11 )
+			PlayerLabel:SetPos( menuTab:GetWide() * 0.5 - surface.GetTextSize( txt ) * 0.5, 11 )
 			PlayerLabel:SetSize( menuTab:GetWide(), 50 )
-			PlayerLabel:SetText( v:GetNWString( 'ply_name' ) )
+			PlayerLabel:SetText( txt )
 			PlayerLabel:SetFont( 'Tab.1' )
 
 			local globalPanel = vgui.Create( 'DPanel', menuTab )

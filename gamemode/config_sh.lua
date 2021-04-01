@@ -21,7 +21,7 @@ c.SpawnPositionsList = {
 	Vector( 716, 725, -144 ),
 	Vector( -1840, 2054, -9 ),
 	Vector( 1076, 180, 64 ),
-}
+} -- gm_construct map
 
 // Models used
 c.ModelsTable = {
