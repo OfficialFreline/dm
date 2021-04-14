@@ -28,12 +28,12 @@ local IncludeDirectory = function( dir )
 	end
 end
 
-Include( 'config_sh.lua' )
+Include( 'config/main_sh.lua' )
 
 IncludeDirectory( 'core/language' )
-IncludeDirectory( 'core' )
 IncludeDirectory( 'core/player' )
+IncludeDirectory( 'core' )
 IncludeDirectory( 'core/interface/vgui' )
 IncludeDirectory( 'core/interface' )
 
-Include( 'config_cmds_cl.lua' )
+Include( 'config/cmds_cl.lua' )

@@ -3,6 +3,8 @@ AddCSLuaFile( 'shared.lua' )
 
 include( 'shared.lua' )
 
+timer.Destroy( 'HostnameThink' )
+
 hook.Add( 'PreGamemodeLoaded', 'widgets_disabler_cpu', function()
 	function widgets.PlayerTick()
         -- Clear

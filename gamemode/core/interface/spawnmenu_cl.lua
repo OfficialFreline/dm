@@ -20,7 +20,7 @@ local function openSpawnMenu()
 			continue
 		end
 
-		local button = vgui.Create( 'DButton' )
+		local button = vgui.Create( 'dm_button' )
 		button:SetTall( 136 )
 		button:SetText( '' )
 		button.Paint = function( self, w, h )

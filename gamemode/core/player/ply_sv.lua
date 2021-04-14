@@ -9,7 +9,7 @@ net.Receive( 'PlayerChangeNick', function( len, pl )
 		net.WriteEntity( pl )
 	net.Broadcast()
 
-    pl:SetNWString( 'ply_name', nick )
+    pl:SetNick( nick )
 end )
 
 net.Receive( 'PlayerCheckData', function( len, pl )
@@ -17,10 +17,10 @@ net.Receive( 'PlayerCheckData', function( len, pl )
 
 	Data = pl:DataLoad()
 
-	pl:SetNWString( 'ply_name', Data.name )
-	pl:SetNWString( 'ply_rank', Data.rank )
-	pl:SetNWInt( 'ply_frags', Data.frags )
-	pl:SetNWInt( 'ply_deaths', Data.deaths )
+	pl:SetNick( Data.name )
+	pl:SetRank( Data.rank )
+	pl:SetFrags( Data.frags )
+	pl:SetDeaths( Data.deaths )
 end )
 
 local PLAYER = FindMetaTable( 'Player' )
@@ -30,10 +30,10 @@ function GM:PlayerInitialSpawn( ply )
 
 	Data = ply:DataLoad()
 
-	ply:SetNWString( 'ply_name', Data.name )
-	ply:SetNWString( 'ply_rank', Data.rank )
-	ply:SetNWInt( 'ply_frags', Data.frags )
-	ply:SetNWInt( 'ply_deaths', Data.deaths )
+	ply:SetNick( Data.name )
+	ply:SetRank( Data.rank )
+	ply:SetFrags( Data.frags )
+	ply:SetDeaths( Data.deaths )
 
 	ply:DataSave()
 
@@ -49,16 +49,18 @@ function GM:PlayerSpawn( ply )
  		ply:Give( 'weapon_physgun' )
 	end
 
-	ply:SetPos( table.Random( DM.Config.SpawnPositionsList ) )
+	local map = table.Random( DM.Config.SpawnPositionsList[ game.GetMap() ] )
+
+	ply:SetPos( map )
 	ply:SetModel( table.Random( DM.Config.ModelsTable ) )
 end
 
 hook.Add( 'PlayerDeath', 'ply_sv', function( victim, inflictor, attacker )
 	if ( victim == attacker ) then
-		victim:SetNWInt( 'ply_deaths', victim:GetNWInt( 'ply_deaths' ) + 1 )
+		victim:SetDeaths( victim:GetDeaths() + 1 )
 	else
-		victim:SetNWInt( 'ply_deaths', victim:GetNWInt( 'ply_deaths' ) + 1 )
-		attacker:SetNWInt( 'ply_frags', attacker:GetNWInt( 'ply_frags' ) + 1 )
+		victim:SetDeaths( victim:GetDeaths() + 1 )
+		attacker:SetFrags( attacker:GetFrags() + 1 )
 	end
 end )
 

@@ -1,8 +1,6 @@
 if ( CLIENT ) then
 	CreateConVar( 'cl_playercolor', '0.24 0.34 0.41', { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, '' )
-	CreateConVar( 'cl_weaponcolor', '0.30 1.80 2.10', { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, '' )
-	CreateConVar( 'cl_playerskin', '0', { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, '' )
-	CreateConVar( 'cl_playerbodygroups', '0', { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, '' )
+	CreateConVar( 'dm_weaponcolor', '0.30 1.80 2.10', { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, '' )
 end
 
 player_manager.RegisterClass( 'dm_player', {
@@ -16,29 +14,6 @@ player_manager.RegisterClass( 'dm_player', {
 		local col = self.Player:GetInfo( 'cl_weaponcolor' )
 
 		self.Player:SetWeaponColor( Vector( col ) )
-	end,
-
-	SetModel = function( self )
-		local cl_playermodel = self.Player:GetInfo( 'cl_playermodel' )
-		local modelname = player_manager.TranslatePlayerModel( cl_playermodel )
-
-		self.Player:SetModel( Model( modelname ) )
-
-		local skin = self.Player:GetInfoNum( 'cl_playerskin', 0 )
-
-		self.Player:SetSkin( skin )
-
-		local groups = self.Player:GetInfo( 'cl_playerbodygroups' )
-
-		if ( groups == nil ) then
-			groups = ''
-		end
-
-		local groups = string.Explode( ' ', groups )
-
-		for k = 0, self.Player:GetNumBodyGroups() - 1 do
-			self.Player:SetBodygroup( k, tonumber( groups[ k + 1 ] ) or 0 )
-		end
 	end,
 
 	TauntCam = TauntCamera(),
@@ -69,17 +44,49 @@ player_manager.RegisterClass( 'dm_player', {
 
 local PLAYER = FindMetaTable( 'Player' )
 
+function PLAYER:GetNick()
+	return self:GetNWString( 'ply_name' )
+end
+
+function PLAYER:GetRank()
+	return self:GetNWString( 'ply_rank' )
+end
+
+function PLAYER:GetFrags()
+	return self:GetNWInt( 'ply_frags' )
+end
+
+function PLAYER:GetDeaths()
+	return self:GetNWInt( 'ply_deaths' )
+end
+
+function PLAYER:SetNick( name )
+	return self:SetNWString( 'ply_name', name )
+end
+
+function PLAYER:SetRank( rank )
+	return self:SetNWString( 'ply_rank', rank )
+end
+
+function PLAYER:SetFrags( frags )
+	return self:SetNWInt( 'ply_frags', frags )
+end
+
+function PLAYER:SetDeaths( deaths )
+	return self:SetNWInt( 'ply_deaths', deaths )
+end
+
 function PLAYER:DataSave()
 	if ( not file.IsDir( 'dm', 'DATA' ) ) then 
 		file.CreateDir( 'dm' ) 
 	end
 
 	local Data = { 
-		name = self:GetNWString( 'ply_name' ),
+		name = self:GetNick(),
 		steamid64 = self:SteamID64(),
-		rank = self:GetNWString( 'ply_rank' ),
-		frags = self:GetNWInt( 'ply_frags' ),
-		deaths = self:GetNWInt( 'ply_deaths' ),
+		rank = self:GetRank(),
+		frags = self:GetFrags(),
+		deaths = self:GetDeaths(),
 	}
 
 	file.Write( 'dm/' .. self:UniqueID() .. '.json', util.TableToJSON( Data ) )

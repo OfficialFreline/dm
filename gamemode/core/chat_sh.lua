@@ -1,4 +1,6 @@
 if ( CLIENT ) then
+	local color_white = Color( 255, 255, 255 )
+
 	hook.Add( 'ChatText', 'Chat', function( index, name, text, type )
 		if ( type == 'joinleave' ) then
 			return true
@@ -8,14 +10,14 @@ if ( CLIENT ) then
 	net.Receive( 'NetConnPly', function( len, pl )
 		local name = net.ReadString()
 
-		chat.AddText( Color( 15, 170, 235 ), name, Color( 255, 255, 255 ), ' ' .. DM.Translate( 'ConnPly', true ) )
+		chat.AddText( Color( 15, 170, 235 ), name, color_white, ' ' .. DM.GetPhrase( 'ConnPly' ) )
 		chat.PlaySound()
 	end )
 
 	net.Receive( 'NetDiscPly', function( len, pl )
 		local ply = net.ReadEntity()
 
-		chat.AddText( Color( 15, 170, 235 ), ply:Nick() .. ' (' .. ply:SteamID() .. ')', Color( 255, 255, 255 ), ' ' .. DM.Translate( 'DiscPly', true ) )
+		chat.AddText( Color( 15, 170, 235 ), ply:GetNick() .. ' (' .. ply:SteamID() .. ')', color_white, ' ' .. DM.GetPhrase( 'DiscPly' ) )
 		chat.PlaySound()
 	end )
 
@@ -23,7 +25,7 @@ if ( CLIENT ) then
 		local pl = net.ReadEntity()
 		local text = net.ReadString()
 
-		chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), pl:GetNWString( 'ply_name' ), Color( 255, 255, 255 ), '->', Color( 85, 130, 158 ), DM.Translate( 'You', true ), Color( 255, 255, 255 ), ': ' .. text )
+		chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), pl:GetNick(), color_white, '->', Color( 85, 130, 158 ), DM.Translate( 'You', true ), color_white, ': ' .. text )
 		chat.PlaySound()
 	end )
 
@@ -31,17 +33,17 @@ if ( CLIENT ) then
 		local nick = net.ReadString()
 		local ply = net.ReadEntity()
 
-		chat.AddText( Color( 15, 170, 235 ), ply:GetNWString( 'ply_name' ), Color( 255, 255, 255 ), ' changed his nickname to ', Color( 70, 162, 112 ), nick, Color( 255, 255, 255 ), '.' )
+		chat.AddText( Color( 15, 170, 235 ), ply:GetNick(), color_white, ' changed his nickname to ', Color( 70, 162, 112 ), nick, color_white, '.' )
 		chat.PlaySound()
 	end )
 
 	function ChatText( text )
-		chat.AddText( Color( 85, 78, 164 ), '<> ', Color( 255, 255, 255 ), text )
+		chat.AddText( Color( 85, 78, 164 ), '<> ', color_white, text )
 		chat.PlaySound()
 	end
 
 	function ChatTextAdmin( text )
-		chat.AddText( Color( 222, 84, 84 ), '| ', Color( 255, 255, 255 ), text )
+		chat.AddText( Color( 222, 84, 84 ), '| ', color_white, text )
 		chat.PlaySound()
 	end
 end

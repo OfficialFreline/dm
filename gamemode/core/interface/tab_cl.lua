@@ -16,8 +16,8 @@ function GMopenTab()
 	menuTab:MakePopup()
 	menuTab:SetKeyBoardInputEnabled( false )
 	menuTab.Paint = function( self, w, h )
-		draw.OutlinedBox( 0, 0, w, h, Color( 75, 75, 75, 245 ), Color( 0, 0, 0 ) ) -- Background
-		draw.OutlinedBox( 0, 0, w, 70, Color( 125, 125, 125 ), Color( 0, 0, 0 ) ) -- Bar
+		draw.OutlinedBox( 0, 0, w, h, Color( 75, 75, 75, 245 ), Color( 0, 0, 0, 230 ) ) -- Background
+		draw.OutlinedBox( 0, 0, w, 70, Color( 63, 63, 63 ), Color( 0, 0, 0 ) ) -- Bar
 	end
 
 	local Title = 'Deathmatch'
@@ -33,14 +33,13 @@ function GMopenTab()
 	local sp = vgui.Create( 'dm_scrollpanel', menuTab )
 	sp:Dock( FILL )
 	sp:DockMargin( 10, 80, 10, 10 )
-	-- sp:GetVBar():SetWide( 0 )
 	sp.Paint = function( self, w, h )
 		draw.Blur( self )
 	end
 
 	surface.SetFont( 'Tab.2' )
 
-	local infoButton = vgui.Create( 'DButton', sp )
+	local infoButton = vgui.Create( 'dm_button', sp )
 	infoButton:SetTall( 30 )
 	infoButton:Dock( TOP )
 	infoButton:SetText( '' )
@@ -56,34 +55,33 @@ function GMopenTab()
 		local playerAvatar
 		local playerAvatarButton
 
-		local playerButton = vgui.Create( 'DButton', sp )
-		playerButton:SetTall( 40 )
-		playerButton:Dock( TOP )
-		playerButton:DockMargin( 0, 5, 0, 0 )
-		playerButton:SetText( '' )
+		local playerButtonM = vgui.Create( 'dm_button', sp )
+		playerButtonM:SetTall( 40 )
+		playerButtonM:Dock( TOP )
+		playerButtonM:DockMargin( 0, 5, 0, 0 )
+		playerButtonM:SetText( '' )	
+
+		local playerButton = vgui.Create( 'dm_button', playerButtonM )
+		playerButton:Dock( FILL )
+		playerButton:SetText( '' )	
 		playerButton.Paint = function( self, w, h )
 			if ( IsValid( v ) ) then
 				local x
 				local textColor = Color( 255, 255, 255 )
 
 				if ( self:IsHovered() or playerAvatarButton:IsHovered() ) then
-					draw.RoundedBox( 4, 3, 3, w - 6, h - 6, Color( 115, 115, 115, 200 ) )
-
 					textColor = Color( 235, 235, 235 )
 
 					playerAvatar:SetVisible( true )
 
 					x = 30
 				else
-					draw.RoundedBox( 4, 0, 0, w, h, Color( 115, 115, 115, 200 ) )
-					draw.OutlinedBox( 3, 3, w - 6, h - 6, Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 50 ) )
-
 					playerAvatar:SetVisible( false )
 
 					x = 0
 				end
 
-				local name = v:GetNWString( 'ply_name' )
+				local name = v:GetNick()
 
 				if ( name == nil ) then
 					name = v:Name()
@@ -92,14 +90,14 @@ function GMopenTab()
 				draw.SimpleText( name, 'Tab.3', 12 + x, 11, textColor )
 				draw.SimpleText( v:Ping() or '', 'Tab.3', w - surface.GetTextSize( v:Ping() or '' ) - 12, 11, textColor )
 
-				local frags = v:GetNWString( 'ply_frags' )
-				local deaths = v:GetNWString( 'ply_deaths' )
+				local frags = v:GetFrags()
+				local deaths = v:GetDeaths()
 
 				if ( deaths < 1 ) then
 					deaths = 1
 				end
 
-				local text = frags / deaths .. ' (' .. frags .. '/' .. deaths .. ')' or ''
+				local text = string.sub( frags / deaths, 0, 6 ) .. ' (' .. frags .. '/' .. deaths .. ')' or ''
 
 				draw.SimpleText( text, 'Tab.3', w * 0.5 - surface.GetTextSize( text ) * 0.5, 11, textColor )
 			end
@@ -111,7 +109,7 @@ function GMopenTab()
 
 			surface.SetFont( 'Tab.1' )
 
-			local nick = v:GetNWString( 'ply_name' ) or ''
+			local nick = v:GetNick() or ''
 			local txt = 'Player: ' .. nick
 
 			local PlayerLabel = vgui.Create( 'DLabel', menuTab )
@@ -140,11 +138,18 @@ function GMopenTab()
 			playerPrev:Dock( FILL )
 			playerPrev:SetModel( v:GetModel() or 'models/player/alyx.mdl' )
 			playerPrev:SetFOV( 32 )
+			playerPrev.LayoutEntity = function( Entity )
+				return
+			end
+
+			function playerPrev.Entity:GetPlayerColor()
+				return v:GetPlayerColor()
+			end
 
 			local playerPrev_panel2 = vgui.Create( 'DPanel', playerPrev )
 			playerPrev_panel2:Dock( FILL )
 			playerPrev_panel2.Paint = function( self, w, h )
-				draw.OutlinedBox( 0, 0, w, h, Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 150 ) )
+				draw.OutlinedBox( 0, 0, w, h, Color( 0, 0, 0, 0 ), Color( 255, 255, 255, 50 ) )
 			end
 
 			local scrollpanel = vgui.Create( 'dm_scrollpanel', globalPanel )
@@ -217,13 +222,13 @@ function GMopenTab()
 
 				ChatText( 'Copied: ' .. steamid )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
-			DM:AddOption( 'SteamID64:  ' .. ( steamid64 or 'Unknown' ), function()
+			DM:AddOption( 'SteamID64:  ' .. steamid64, function()
 				SetClipboardText( steamid64 )
 
 				ChatText( 'Copied: ' .. steamid64 )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
-			DM:AddOption( 'Rank:  ' .. v:GetNWString( 'ply_rank' ), function()
-				SetClipboardText( v:GetNWString( 'ply_rank' ) )
+			DM:AddOption( 'Rank:  ' .. v:GetRank(), function()
+				SetClipboardText( v:GetRank() )
 			end ):SetIcon( 'icon16/user_suit.png' )
 
 			DM:Open()
@@ -241,5 +246,5 @@ end
 
 function GM:ScoreboardHide()
 	menuTab:SetVisible( false )
-	-- menuTab:Remove() // Required for tests
+	menuTab:Remove() // Required for tests
 end

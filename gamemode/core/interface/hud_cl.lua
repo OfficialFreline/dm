@@ -64,22 +64,17 @@ function GM:HUDPaint()
 	surface.SetFont( 'Hud.1' )
 
 	-- Health
-	local text = health .. '%'
+	local siz = scrw * 0.15
+	local s = 24
 
-	draw.RectBlur( 30, scrh - 100, surface.GetTextSize( text ) + 22, 70 )
+	draw.RectBlur( 25 + s, scrh - 50, siz, 25 )
 
-	draw.OutlinedBox( 30, scrh - 100, surface.GetTextSize( text ) + 22, 70, Color( 75, 75, 75, 205 ), Color( 0, 0, 0 ) )
-	draw.SimpleText( text, 'Hud.1', 40, scrh - 96, Color( 255, 255, 255 ) )
+	draw.OutlinedBox( 25 + s, scrh - 50, siz, 25, Color( 59, 59, 59, 150 ), Color( 0, 0, 0 ) )
+	draw.OutlinedBox( 25 + s, scrh - 50, math.Clamp( health, 0, 100 ) * siz / 100, 25, Color( 62, 230, 132 ), Color( 0, 0, 0 ) )
 
-	--[[
-		draw.SimpleTextOutlined( health, 'Hud.0', 74, scrh - 75, Color( 255, 255, 255 ), 1, 1, 1, Color( 0, 0, 0 ) )
-
-		draw.Circle( 75, scrh - 75, 10, 20, health * 3.6, Color( 43, 43, 43 ), -50, 0 )
-		draw.Circle( 75, scrh - 75, 8, 10, health * 3.6, Color( 206, 68, 68 ), -50, 0 )
-	]]--
+	draw.OutlinedBox( 25, scrh - 50, 25, 25, Color( 63, 63, 63 ), Color( 0, 0, 0) ) // Square bar
 
 	-- Ammo
-
 	local Weapon = LocalPlayer():GetActiveWeapon()
 
 	if ( IsValid( Weapon ) ) then
@@ -105,8 +100,7 @@ function GM:HUDPaint()
 	end
 
 	-- Crosshair
-	draw_RoundedBox( 5, scrw * 0.5 - 4, scrh * 0.5 - 4, 8, 8, Color( 0, 0, 0, 200 ) )
-	draw_RoundedBox( 5, scrw * 0.5 - 3, scrh * 0.5 - 3, 6, 6, Color( 255, 255, 255, 200 ) )
+	draw_RoundedBox( 0, scrw * 0.5 - 2, scrh * 0.5 - 2, 4, 4, Color( 255, 255, 255, 200 ) )
 end
 
 local DeleteHudElementsList = {

@@ -1,7 +1,7 @@
 local PLAYER = FindMetaTable( 'Player' )
 
 function PLAYER:Admin()
-	return self:GetNWString( 'ply_rank' ) == 'admin'
+	return self:GetRank() == 'admin'
 end
 
 if ( SERVER ) then
@@ -33,7 +33,7 @@ if ( SERVER ) then
 		if ( pl:Admin() ) then
 			local target = net.ReadEntity()
 
-			target:SetNWString( 'ply_rank', 'admin' )
+			target:SetRank( 'admin' )
 			target:DataSave()
 
 			net.Start( 'DmAdminSetAdminMsg' )
@@ -47,7 +47,7 @@ if ( SERVER ) then
 		if ( pl:Admin() ) then
 			local target = net.ReadEntity()
 
-			target:SetNWString( 'ply_rank', 'user' )
+			target:SetRank( 'user' )
 			target:DataSave()
 
 			net.Start( 'DmAdminRemoveAdminMsg' )
@@ -104,11 +104,13 @@ if ( SERVER ) then
 end
 
 if ( CLIENT ) then
+	local color_white = Color( 255, 255, 255 )
+
 	net.Receive( 'DmAdminSetAdminMsg', function()
 		local pl = net.ReadEntity()
 		local target = net.ReadEntity()
 
-		chat.AddText( Color( 202, 68, 68 ), '[', Color( 255, 255, 255 ), pl:GetNWString( 'ply_name' ), Color( 202, 68, 68 ), '] ', Color( 255, 255, 255 ), 'Issued admin panel to player ', Color( 102, 95, 180 ), target:GetNWString( 'ply_name' ), Color( 255, 255, 255 ), '.' )
+		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Issued admin panel to player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
 		chat.PlaySound()
 	end )
 
@@ -116,7 +118,7 @@ if ( CLIENT ) then
 		local pl = net.ReadEntity()
 		local target = net.ReadEntity()
 
-		chat.AddText( Color( 202, 68, 68 ), '[', Color( 255, 255, 255 ), pl:GetNWString( 'ply_name' ), Color( 202, 68, 68 ), '] ', Color( 255, 255, 255 ), 'Removed the admin panel from the player ', Color( 102, 95, 180 ), target:GetNWString( 'ply_name' ), Color( 255, 255, 255 ), '.' )
+		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Removed the admin panel from the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
 		chat.PlaySound()
 	end )
 
@@ -125,7 +127,7 @@ if ( CLIENT ) then
 		local target = net.ReadEntity()
 		local HP = net.ReadString()
 
-		chat.AddText( Color( 202, 68, 68 ), '[', Color( 255, 255, 255 ), pl:GetNWString( 'ply_name' ), Color( 202, 68, 68 ), '] ', Color( 255, 255, 255 ), 'Installed ', Color( 102, 95, 180 ), HP .. '%', Color( 255, 255, 255 ), ' health for the player ', Color( 102, 95, 180 ), target:GetNWString( 'ply_name' ), Color( 255, 255, 255 ), '.' )
+		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Installed ', Color( 102, 95, 180 ), HP .. '%', color_white, ' health for the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
 		chat.PlaySound()
 	end )
 
@@ -134,7 +136,7 @@ if ( CLIENT ) then
 		local target = net.ReadEntity()
 		local mdl = net.ReadString()
 
-		chat.AddText( Color( 202, 68, 68 ), '[', Color( 255, 255, 255 ), pl:GetNWString( 'ply_name' ), Color( 202, 68, 68 ), '] ', Color( 255, 255, 255 ), 'Changed the model for player ', Color( 102, 95, 180 ), target:GetNWString( 'ply_name' ), Color( 255, 255, 255 ), ' to ', Color( 102, 95, 180 ), mdl, Color( 255, 255, 255 ), '.' )
+		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Changed the model for player ', Color( 102, 95, 180 ), target:GetNick(), color_white, ' to ', Color( 102, 95, 180 ), mdl, color_white, '.' )
 		chat.PlaySound()
 	end )
 end
