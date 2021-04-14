@@ -11,7 +11,7 @@ player_manager.RegisterClass( 'dm_player', {
 
 		self.Player:SetPlayerColor( Vector( col ) )
 
-		local col = self.Player:GetInfo( 'cl_weaponcolor' )
+		local col = self.Player:GetInfo( 'dm_weaponcolor' )
 
 		self.Player:SetWeaponColor( Vector( col ) )
 	end,
