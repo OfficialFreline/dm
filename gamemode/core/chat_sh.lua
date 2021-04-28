@@ -10,14 +10,14 @@ if ( CLIENT ) then
 	net.Receive( 'NetConnPly', function( len, pl )
 		local name = net.ReadString()
 
-		chat.AddText( Color( 15, 170, 235 ), name, color_white, ' ' .. DM.GetPhrase( 'ConnPly' ) )
+		chat.AddText( Color( 15, 170, 235 ), name, color_white, ' ' .. DM.Translate( 'ConnPly', true ) )
 		chat.PlaySound()
 	end )
 
 	net.Receive( 'NetDiscPly', function( len, pl )
 		local ply = net.ReadEntity()
 
-		chat.AddText( Color( 15, 170, 235 ), ply:GetNick() .. ' (' .. ply:SteamID() .. ')', color_white, ' ' .. DM.GetPhrase( 'DiscPly' ) )
+		chat.AddText( Color( 15, 170, 235 ), ply:GetNick() .. ' (' .. ply:SteamID() .. ')', color_white, ' ' .. DM.Translate( 'DiscPly', true ) )
 		chat.PlaySound()
 	end )
 
