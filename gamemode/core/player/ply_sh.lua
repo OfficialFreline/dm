@@ -53,11 +53,11 @@ function PLAYER:GetRank()
 end
 
 function PLAYER:GetFrags()
-	return self:GetNWInt( 'ply_frags' )
+	return self:GetNWInt( 'ply_frags' ) or 0
 end
 
 function PLAYER:GetDeaths()
-	return self:GetNWInt( 'ply_deaths' )
+	return self:GetNWInt( 'ply_deaths' ) or 0
 end
 
 function PLAYER:SetNick( name )
