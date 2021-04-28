@@ -77,7 +77,7 @@ AddActionDM( x, function( ply )
 				net.WriteString( s )
 			net.SendToServer( ply )
 
-			chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), DM.Translate( 'You', true ), Color( 255, 255, 255 ), '->', Color( 85, 130, 158 ), ply:GetNWString( 'ply_name' ), Color( 255, 255, 255 ), ': ' .. s )
+			chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), DM.Translate( 'You', true ), Color( 255, 255, 255 ), '->', Color( 85, 130, 158 ), ply:GetNick(), Color( 255, 255, 255 ), ': ' .. s )
 		else
 			chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), 'To myself', Color( 255, 255, 255 ), ': ' .. s )
 		end
