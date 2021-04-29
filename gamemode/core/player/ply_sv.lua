@@ -58,7 +58,7 @@ end
 hook.Add( 'PlayerDeath', 'ply_sv', function( victim, inflictor, attacker )
 	if ( victim == attacker ) then
 		victim:SetDeaths( victim:GetDeaths() + 1 )
-	else
+	elseif ( not attacker:IsWorld() ) then
 		victim:SetDeaths( victim:GetDeaths() + 1 )
 		attacker:SetFrags( attacker:GetFrags() + 1 )
 	end
