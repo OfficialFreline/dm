@@ -1,4 +1,5 @@
 local color_white = Color( 255, 255, 255 )
+local color_black = Color( 0, 0, 0 )
 local scrw, scrh = ScrW(), ScrH()
 local draw_RoundedBox = draw.RoundedBox
 
@@ -11,7 +12,7 @@ hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
 
 	local Distantion = ply:GetPos():Distance( EyePos )
 
-	if ( Distantion > 350 or not ply:Alive() ) then
+	if ( Distantion > 550 or not ply:Alive() ) then
 		return
 	end
 
@@ -22,7 +23,7 @@ hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
 	end
 			
 	local Attach = ply:GetAttachment( Bone )
-	local ColorAlpha = 255 * ( 1 - math.Clamp( ( Distantion - 250 ) * 0.01, 0, 1 ) )
+	local ColorAlpha = 255 * ( 1 - math.Clamp( ( Distantion - 450 ) * 0.01, 0, 1 ) )
 	local TextNick = ply:Nick()
 
 	cam.Start3D2D( Attach.Pos + Vector( 0, 0, 15 ), Angle( 0, ( Attach.Pos - EyePos ):Angle().y - 90, 90 ), 0.05 )
@@ -66,13 +67,13 @@ function GM:HUDPaint()
 	-- Health
 	local siz = scrw * 0.15
 	local s = 24
+	local tall = 16
 
-	draw.RectBlur( 25 + s, scrh - 50, siz, 25 )
+	draw.RectBlur( 25 + s, scrh - tall - 25, siz, tall )
 
-	draw.OutlinedBox( 25 + s, scrh - 50, siz, 25, Color( 59, 59, 59, 150 ), Color( 0, 0, 0 ) )
-	draw.OutlinedBox( 25 + s, scrh - 50, math.Clamp( health, 0, 100 ) * siz / 100, 25, Color( 62, 230, 132 ), Color( 0, 0, 0 ) )
-
-	draw.OutlinedBox( 25, scrh - 50, 25, 25, Color( 63, 63, 63 ), Color( 0, 0, 0) ) // Square bar
+	draw.OutlinedBox( 25 + s, scrh - tall - 25, siz, tall, Color( 59, 59, 59, 150 ), color_black )
+	draw.OutlinedBox( 25 + s, scrh - tall - 25, math.Clamp( health, 0, 100 ) * siz / 100, tall, Color( 62, 230, 132 ), color_black )
+	draw.OutlinedBox( 25, scrh - tall - 25, 25, tall, Color( 63, 63, 63 ), color_black ) // Square bar
 
 	-- Ammo
 	local Weapon = LocalPlayer():GetActiveWeapon()
@@ -92,21 +93,18 @@ function GM:HUDPaint()
 				b = 100
 			end
 
-			draw.RectBlur( scrw * 0.5 - surface.GetTextSize( text ) * 0.5 - 10, scrh - 100, surface.GetTextSize( text ) + 20, 70 )
-
-			draw.OutlinedBox( scrw * 0.5 - surface.GetTextSize( text ) * 0.5 - 10, scrh - 100, surface.GetTextSize( text ) + 20, 70, Color( 75, 75, 75, 205 ), Color( 0, 0, 0 ), 1 )
-			draw.SimpleText( text, 'Hud.1', scrw * 0.5 - surface.GetTextSize( text ) * 0.5, scrh - b, Color( 255, 255, 255 ) )
+			draw.SimpleText( text, 'Hud.1', 25, scrh - tall - 62, color_white )
         end 
 	end
 
 	-- Crosshair
-	draw_RoundedBox( 0, scrw * 0.5 - 2, scrh * 0.5 - 2, 4, 4, Color( 255, 255, 255, 200 ) )
+	-- draw_RoundedBox( 0, scrw * 0.5 - 2, scrh * 0.5 - 2, 4, 4, Color( 255, 255, 255, 200 ) )
 end
 
 local DeleteHudElementsList = {
 	[ 'CHudHealth' ] = true,
 	[ 'CHudBattery' ] = true,
-	[ 'CHudCrosshair' ] = true,
+	[ 'CHudCrosshair' ] = false,
 	[ 'CHudAmmo' ] = true,
 	[ 'CHudSecondaryAmmo' ] = true,
 }

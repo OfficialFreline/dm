@@ -20,7 +20,7 @@ surface.CreateFont( 'Tab.3', {
 } )
 
 surface.CreateFont( 'Hud.1', {
-	size = 65,
+	size = 35,
 	antialias = true,
 	extended = true,
 	font = 'Arial',
