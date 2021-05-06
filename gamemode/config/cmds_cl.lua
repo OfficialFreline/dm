@@ -4,12 +4,6 @@
 	end, true, true ) -- The first bool - for the admin panel or not, the second - for the local player (for the team activator) or not.
 ]]--
 
-AddActionDM( 'Back to the list of players', function( ply )
-	menuTab:Remove()
-
-	GMopenTab()
-end )
-
 AddActionDM( 'Open Steam', function( ply )
 	ply:ShowProfile()
 end )
@@ -85,8 +79,7 @@ AddActionDM( x, function( ply )
 end )
 
 AddActionDM( 'Throw away the taken weapon', function( ply )
-	net.Start( 'Dweapon' )
-	net.SendToServer()
+	RunConsoleCommand( 'dm_dropswep', LocalPlayer():GetActiveWeapon():GetClass() )
 end, false, true )
 
 AddActionDM( 'Issue admin panel', function( ply )
@@ -128,32 +121,33 @@ AddActionDM( 'Install HP', function( ply )
 	DM:Open()
 end, true, false )
 
-AddActionDM( 'Change model', function( ply )
-	local menu = vgui.Create( 'dm_frame' )
-	menu:SetSize( ScrW() * 0.5, ScrH() * 0.5 )
-	menu:Center()
-	menu:MakePopup()
-	menu:SetTitle( 'Model selection' )
-
-	local browser = vgui.Create( 'DFileBrowser', menu )
-	browser:Dock( FILL )
-	browser:SetPath( 'GAME' )
-	browser:SetBaseFolder( 'models' )
-	browser:SetName( 'Available' )
-	browser:SetFileTypes( '*.mdl' )
-	browser:SetOpen( true )
-	browser:SetModels( true )
-
-	function browser:OnSelect( path, pnl )
-		net.Start( 'DMAdminEditModel' )
-			net.WriteString( path )
-			net.WriteEntity( ply )
-		net.SendToServer()
-
-		menu:Close()
-	end
-end, true, true )
-
 AddActionDM( 'Commit suicide', function( ply )
 	RunConsoleCommand( 'kill' )
 end, false, true )
+
+AddActionDM( 'Resize', function( ply )
+	local DM = DermaMenu()
+
+	DM:AddOption( 'Standart', function()
+		net.Start( 'DMAdminSetScale' )
+			net.WriteFloat( 1.0 )
+			net.WriteEntity( ply )
+		net.SendToServer()
+	end )
+
+	DM:AddOption( '0.5', function()
+		net.Start( 'DMAdminSetScale' )
+			net.WriteFloat( 0.5 )
+			net.WriteEntity( ply )
+		net.SendToServer()
+	end )
+
+	DM:AddOption( '1.5', function()
+		net.Start( 'DMAdminSetScale' )
+			net.WriteFloat( 1.5 )
+			net.WriteEntity( ply )
+		net.SendToServer()
+	end )
+
+	DM:Open()
+end, true, false )

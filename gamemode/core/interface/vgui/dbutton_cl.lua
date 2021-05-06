@@ -1,4 +1,9 @@
+local color_white = Color( 255, 255, 255 )
 local PANEL = {}
+
+function PANEL:Init()
+	self:SetTextColor( color_white )
+end
 
 function PANEL:Paint( w, h )
 	if ( self:IsHovered() ) then

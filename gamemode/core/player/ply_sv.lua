@@ -21,6 +21,7 @@ net.Receive( 'PlayerCheckData', function( len, pl )
 	pl:SetRank( Data.rank )
 	pl:SetFrags( Data.frags )
 	pl:SetDeaths( Data.deaths )
+	pl:SetModel( Data.model )
 end )
 
 local PLAYER = FindMetaTable( 'Player' )
@@ -34,6 +35,7 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetRank( Data.rank )
 	ply:SetFrags( Data.frags )
 	ply:SetDeaths( Data.deaths )
+	ply:SetModel( Data.model )
 
 	ply:DataSave()
 
@@ -45,14 +47,9 @@ end
 function GM:PlayerSpawn( ply )
 	ply:SetupHands()
 
-	if ( ply:Admin() ) then
- 		ply:Give( 'weapon_physgun' )
-	end
-
 	local map = table.Random( DM.Config.SpawnPositionsList[ game.GetMap() ] )
 
 	ply:SetPos( map )
-	ply:SetModel( table.Random( DM.Config.ModelsTable ) )
 end
 
 hook.Add( 'PlayerDeath', 'ply_sv', function( victim, inflictor, attacker )
@@ -80,6 +77,7 @@ function PLAYER:DataLoad()
 		Data.rank = 'user'
 		Data.frags = 0
 		Data.deaths = 0
+		Data.model = 'models/player/alyx.mdl'
 
 		self:DataSave()
 

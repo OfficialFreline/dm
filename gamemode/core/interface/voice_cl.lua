@@ -12,8 +12,6 @@ function PANEL:Init()
 	self.Avatar:Dock( LEFT )
 	self.Avatar:SetSize( 32, 32 )
 
-	self.Color = color_transparent
-
 	self:SetSize( 250, 40 )
 	self:DockPadding( 4, 4, 4, 4 )
 	self:DockMargin( 2, 2, 2, 2 )
@@ -26,8 +24,7 @@ function PANEL:Setup( ply )
 	self.LabelName:SetText( ply:GetNick() )
 
 	self.Avatar:SetPlayer( ply )
-	
-	self.Color = team.GetColor( ply:Team() )
+
 	self:InvalidateLayout()
 end
 
@@ -59,6 +56,7 @@ function PANEL:Paint( w, h )
 
 		if ( self.lastName != nick ) then
 			self.LabelName:SetText( nick )
+			
 			self.lastName = nick
 		end
 	end

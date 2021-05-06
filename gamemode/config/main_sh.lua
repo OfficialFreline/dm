@@ -25,19 +25,6 @@ c.SpawnPositionsList = {
 	},
 }
 
-// Models used
-c.ModelsTable = {
-	'models/player/alyx.mdl',
-	'models/player/breen.mdl',
-	'models/player/gman_high.mdl',
-	'models/player/combine_super_soldier.mdl',
-	'models/player/soldier_stripped.mdl',
-	'models/player/zombie_classic.mdl',
-	'models/player/Group01/male_04.mdl',
-	'models/player/hostage/hostage_03.mdl',
-	'models/player/arctic.mdl',
-}
-
 // Weapons that are available for use
 c.GreenWeapon = {
 	'weapon_crowbar',

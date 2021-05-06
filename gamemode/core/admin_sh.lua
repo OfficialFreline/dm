@@ -1,7 +1,7 @@
 local PLAYER = FindMetaTable( 'Player' )
 
 function PLAYER:Admin()
-	return self:GetRank() == 'admin'
+	return ( self:GetRank() == 'admin' )
 end
 
 if ( SERVER ) then
@@ -11,9 +11,8 @@ if ( SERVER ) then
 	util.AddNetworkString( 'DmAdminRemoveAdminMsg' )
 	util.AddNetworkString( 'DmAdminSetHP' )
 	util.AddNetworkString( 'DmAdminSetHPMsg' )
-	util.AddNetworkString( 'DMAdminEditModel' )
-	util.AddNetworkString( 'DMAdminEditModelMsg' )
-	util.AddNetworkString( 'SpawnMenuGiveWeapon' )
+	util.AddNetworkString( 'DMAdminSetScale' )
+	util.AddNetworkString( 'DMAdminSetScaleMsg' )
 
 	function GM:PlayerNoClip( ply, desiredState )
 		if ( desiredState == false ) then
@@ -72,34 +71,22 @@ if ( SERVER ) then
 		end
 	end )
 
-	net.Receive( 'DmAdminEditModel', function( len, pl )
+	net.Receive( 'DMAdminSetScale', function( len, pl )
 		if ( pl:Admin() ) then
-			local mdl = net.ReadString()
+			local scale = net.ReadFloat()
 			local target = net.ReadEntity()
+			local target_scale = target:GetModelScale()
 
-			target:SetModel( mdl )
+			target:SetModelScale( target_scale * scale, 0 )
+			target:SetViewOffset( Vector( 0, 0, 64 ) * scale )
+			target:SetViewOffsetDucked( Vector( 0, 0, 28 ) * scale )
 
-			net.Start( 'DmAdminEditModelMsg' )
+			net.Start( 'DMAdminSetScaleMsg' )
 				net.WriteEntity( pl )
 				net.WriteEntity( target )
-				net.WriteString( mdl )
+				net.WriteFloat( scale )
 			net.Broadcast()
 		end
-	end )
-
-	net.Receive( 'SpawnMenuGiveWeapon', function( len, pl )
-		-- if ( pl:Admin() ) then
-			local weapon = net.ReadString()
-
-			if ( not table.HasValue( DM.Config.GreenWeapon, weapon ) ) then
-				pl:ChatPrint( 'This weapon cannot be given away.' )
-
-				return
-			end
-
-			pl:Give( weapon )
-			pl:SelectWeapon( weapon )
-		-- end
 	end )
 end
 
@@ -131,12 +118,12 @@ if ( CLIENT ) then
 		chat.PlaySound()
 	end )
 
-	net.Receive( 'DmAdminEditModelMsg', function()
+	net.Receive( 'DMAdminSetScaleMsg', function()
 		local pl = net.ReadEntity()
 		local target = net.ReadEntity()
-		local mdl = net.ReadString()
+		local scale = net.ReadFloat()
 
-		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Changed the model for player ', Color( 102, 95, 180 ), target:GetNick(), color_white, ' to ', Color( 102, 95, 180 ), mdl, color_white, '.' )
+		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Resized player ', Color( 102, 95, 180 ), target:GetNick(), color_white, ' to ', Color( 102, 95, 180 ), tostring( scale ), color_white, '.' )
 		chat.PlaySound()
 	end )
 end

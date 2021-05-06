@@ -192,11 +192,3 @@ function draw.Circle( x, y, w, h, ang, color, x0, y0 )
         surface.DrawTexturedRectRotated( x + newx, y + newy, w, h, i )
     end
 end
-
-surface_CreateFont( 'HUDNumber5', {
-    size = 30,
-    weight = 800,
-    antialias = true,
-    shadow = false,
-    font = 'Default',
-} )

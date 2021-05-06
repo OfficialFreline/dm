@@ -36,13 +36,15 @@ if ( CLIENT ) then
 		return false
 	end
 
+	local color_white = Color( 255, 255, 255 )
+
 	function ENT:Think()
 		local text = self:GetOverlayText()
 
 		if ( text != '' and self:BeingLookedAtByLocalPlayer() and not self:GetNoDraw() ) then
 			AddWorldTip( self:EntIndex(), text, 0.5, self:GetPos(), self )
 
-			halo.Add( { self }, Color( 255, 255, 255 ), 1, 1, 1, true, true )
+			halo.Add( { self }, color_white, 1, 1, 1, true, true )
 		end
 	end
 end

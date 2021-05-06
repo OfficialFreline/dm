@@ -131,7 +131,17 @@ function GMopenTab()
 			playerPrev_panel:Dock( LEFT )
 			playerPrev_panel:SetWide( w / 2.6 )
 			playerPrev_panel.Paint = function( self, w, h )
-				draw.RoundedBox( 0, 0, 0, w, h, Color( 255, 255, 255, 5 ) )
+				draw.RoundedBox( 0, 0, 26, w, h, Color( 255, 255, 255, 5 ) )
+			end
+
+			local btn_return = vgui.Create( 'dm_button', playerPrev_panel )
+			btn_return:Dock( TOP )
+			btn_return:SetTall( 26 )
+			btn_return:SetText( 'Back to the list of players' )
+			btn_return.DoClick = function()
+				menuTab:Remove()
+
+				GMopenTab()
 			end
 
 			local playerPrev = vgui.Create( 'DModelPanel', playerPrev_panel )
@@ -159,7 +169,7 @@ function GMopenTab()
 			local firstk = true
 
 			for l, n in pairs( DMCommandsTable ) do
-				if ( n.localplayer and v == LocalPlayer() or not n.localplayer ) then
+				if ( not n.localplayer ) then
 					cmdButton = vgui.Create( 'dm_button', scrollpanel )
 					cmdButton:Dock( TOP )
 
@@ -178,7 +188,6 @@ function GMopenTab()
 					end
 					
 					cmdButton:SetFont( 'Tab.3' )
-					cmdButton:SetTextColor( Color( 255, 255, 255 ) )
 					cmdButton.DoClick = function()
 						surface.PlaySound( 'UI/buttonclickrelease.wav' )
 
@@ -246,5 +255,5 @@ end
 
 function GM:ScoreboardHide()
 	menuTab:SetVisible( false )
-	menuTab:Remove() // Required for tests
+	-- menuTab:Remove() // Required for tests
 end
