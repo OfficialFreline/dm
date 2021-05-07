@@ -11,9 +11,9 @@ local function give_swep( ply, wepname )
         if ( list.Get( 'Weapon' )[ wepname ] and not ply:Admin() ) then
             ply:ChatPrint( 'This weapon can only be issued by the admin.' )
             ply:EmitSound( 'buttons/blip1.wav' )
+            
+            return
         end
-
-        return
     end
 
     ply:Give( wepname )
