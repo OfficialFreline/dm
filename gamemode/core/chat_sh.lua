@@ -46,6 +46,34 @@ if ( CLIENT ) then
 		chat.AddText( Color( 222, 84, 84 ), '| ', color_white, text )
 		chat.PlaySound()
 	end
+
+	function GM:OnPlayerChat( ply, strText, bTeamOnly, bPlayerIsDead )
+		local ct = {}
+		
+		if ( bPlayerIsDead ) then
+			table.insert( ct, Color( 240, 66, 75 ) )
+			table.insert( ct, '(Dead) ' )
+		end
+	
+		if ( IsValid( ply ) ) then
+			if ( ply:Admin() ) then
+				table.insert( ct, Color( 174, 82, 245 ) )
+				table.insert( ct, 'Admin | ' )
+			end
+
+			table.insert( ct, Color( 85, 178, 232 ) )
+			table.insert( ct, ply:GetNick() )
+		else
+			table.insert( ct, 'Console' )
+		end
+	
+		table.insert( ct, color_white )
+		table.insert( ct, ': ' .. strText )
+		
+		chat.AddText( unpack( ct ) )
+	
+		return true
+	end
 end
 
 if ( SERVER ) then
