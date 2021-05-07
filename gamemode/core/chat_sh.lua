@@ -10,7 +10,7 @@ if ( CLIENT ) then
 	net.Receive( 'dmText', function( len, ply )
 		local tabl = net.ReadTable()
 
-		PrintTable( tabl )
+		-- PrintTable( tabl )
 
 		chat.AddText( unpack( tabl ) )
 		chat.PlaySound()
