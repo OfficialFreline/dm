@@ -5,14 +5,12 @@ function PLAYER:Admin()
 end
 
 if ( SERVER ) then
+	local color_white = Color( 255, 255, 255 )
+
 	util.AddNetworkString( 'DmAdminSetAdmin' )
 	util.AddNetworkString( 'DmAdminRemoveAdmin' )
-	util.AddNetworkString( 'DmAdminSetAdminMsg' )
-	util.AddNetworkString( 'DmAdminRemoveAdminMsg' )
 	util.AddNetworkString( 'DmAdminSetHP' )
-	util.AddNetworkString( 'DmAdminSetHPMsg' )
 	util.AddNetworkString( 'DMAdminSetScale' )
-	util.AddNetworkString( 'DMAdminSetScaleMsg' )
 
 	function GM:PlayerNoClip( ply, desiredState )
 		if ( desiredState == false ) then
@@ -35,10 +33,7 @@ if ( SERVER ) then
 			target:SetRank( 'admin' )
 			target:DataSave()
 
-			net.Start( 'DmAdminSetAdminMsg' )
-				net.WriteEntity( pl )
-				net.WriteEntity( target )
-			net.Broadcast()
+			sendMsgAll( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Issued admin panel to player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
 		end
 	end )
 
@@ -49,10 +44,7 @@ if ( SERVER ) then
 			target:SetRank( 'user' )
 			target:DataSave()
 
-			net.Start( 'DmAdminRemoveAdminMsg' )
-				net.WriteEntity( pl )
-				net.WriteEntity( target )
-			net.Broadcast()
+			sendMsgAll( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Removed the admin panel from the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
 		end
 	end )
 
@@ -63,11 +55,7 @@ if ( SERVER ) then
 
 			target:SetHealth( HP )
 
-			net.Start( 'DmAdminSetHPMsg' )
-				net.WriteEntity( pl )
-				net.WriteEntity( target )
-				net.WriteString( HP )
-			net.Broadcast()
+			sendMsgAll( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Installed ', Color( 102, 95, 180 ), HP .. '%', color_white, ' health for the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
 		end
 	end )
 
@@ -81,49 +69,7 @@ if ( SERVER ) then
 			target:SetViewOffset( Vector( 0, 0, 64 ) * scale )
 			target:SetViewOffsetDucked( Vector( 0, 0, 28 ) * scale )
 
-			net.Start( 'DMAdminSetScaleMsg' )
-				net.WriteEntity( pl )
-				net.WriteEntity( target )
-				net.WriteFloat( scale )
-			net.Broadcast()
+			Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Resized player ', Color( 102, 95, 180 ), target:GetNick(), color_white, ' to ', Color( 102, 95, 180 ), scale, color_white, '.' )
 		end
-	end )
-end
-
-if ( CLIENT ) then
-	local color_white = Color( 255, 255, 255 )
-
-	net.Receive( 'DmAdminSetAdminMsg', function()
-		local pl = net.ReadEntity()
-		local target = net.ReadEntity()
-
-		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Issued admin panel to player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
-		chat.PlaySound()
-	end )
-
-	net.Receive( 'DmAdminRemoveAdminMsg', function()
-		local pl = net.ReadEntity()
-		local target = net.ReadEntity()
-
-		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Removed the admin panel from the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
-		chat.PlaySound()
-	end )
-
-	net.Receive( 'DmAdminSetHPMsg', function()
-		local pl = net.ReadEntity()
-		local target = net.ReadEntity()
-		local HP = net.ReadString()
-
-		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Installed ', Color( 102, 95, 180 ), HP .. '%', color_white, ' health for the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
-		chat.PlaySound()
-	end )
-
-	net.Receive( 'DMAdminSetScaleMsg', function()
-		local pl = net.ReadEntity()
-		local target = net.ReadEntity()
-		local scale = net.ReadFloat()
-
-		chat.AddText( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Resized player ', Color( 102, 95, 180 ), target:GetNick(), color_white, ' to ', Color( 102, 95, 180 ), tostring( scale ), color_white, '.' )
-		chat.PlaySound()
 	end )
 end
