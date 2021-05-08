@@ -127,16 +127,14 @@ function GMopenTab()
 
 			local w = menuTab:GetWide() - 20
 
-			local playerPrev_panel = vgui.Create( 'DPanel', globalPanel )
-			playerPrev_panel:Dock( LEFT )
-			playerPrev_panel:SetWide( w / 2.6 )
-			playerPrev_panel.Paint = function( self, w, h )
-				draw.RoundedBox( 0, 0, 26, w, h, Color( 255, 255, 255, 5 ) )
-			end
+			local leftPanel = vgui.Create( 'DPanel', globalPanel )
+			leftPanel:Dock( LEFT )
+			leftPanel:SetWide( w / 2.6 )
+			leftPanel.Paint = nil	
 
-			local btn_return = vgui.Create( 'dm_button', playerPrev_panel )
+			local btn_return = vgui.Create( 'dm_button', leftPanel )
 			btn_return:Dock( TOP )
-			btn_return:SetTall( 26 )
+			btn_return:SetTall( 40 )
 			btn_return:SetText( 'Back to the list of players' )
 			btn_return.DoClick = function()
 				menuTab:Remove()
@@ -144,10 +142,16 @@ function GMopenTab()
 				GMopenTab()
 			end
 
+			local playerPrev_panel = vgui.Create( 'DPanel', leftPanel )
+			playerPrev_panel:Dock( FILL )
+			playerPrev_panel:DockMargin( 0, 8, 0, 0 )
+			playerPrev_panel.Paint = nil
+
 			local playerPrev = vgui.Create( 'DModelPanel', playerPrev_panel )
 			playerPrev:Dock( FILL )
 			playerPrev:SetModel( v:GetModel() or 'models/player/alyx.mdl' )
-			playerPrev:SetFOV( 32 )
+			playerPrev:SetCamPos( Vector( 45, 15, 45 ) )
+			playerPrev:SetFOV( 58 )
 			playerPrev.LayoutEntity = function( Entity )
 				return
 			end
@@ -164,7 +168,7 @@ function GMopenTab()
 
 			local scrollpanel = vgui.Create( 'dm_scrollpanel', globalPanel )
 			scrollpanel:Dock( RIGHT )
-			scrollpanel:SetWide( w - playerPrev_panel:GetWide() - 10 )
+			scrollpanel:SetWide( w - leftPanel:GetWide() - 10 )
 
 			local firstk = true
 
