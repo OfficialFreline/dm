@@ -6,6 +6,16 @@ local function CreateCM( title )
 	ContextMenu:SetTitle( 'ContextMenu | ' .. title )
 	ContextMenu:SetKeyBoardInputEnabled( false )
 	ContextMenu:ShowCloseButton( false )
+
+    local KeyDown_ = false
+
+    function ContextMenu:Think()
+        if ( input.IsKeyDown( KEY_C ) and KeyDown_ ) then
+            self:Close()
+        elseif ( not input.IsKeyDown( KEY_C ) ) then
+            KeyDown_ = true
+        end
+    end
 end
 
 local function openCmdPanel()
@@ -134,9 +144,4 @@ function GM:OnContextMenuOpen()
 	else
 		ContextMenu:SetVisible( true )
 	end
-end
-
-function GM:OnContextMenuClose()
-	-- ContextMenu:SetVisible( false )
-	ContextMenu:Remove()
 end
