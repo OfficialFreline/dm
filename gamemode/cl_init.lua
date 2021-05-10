@@ -32,12 +32,6 @@ timer.Create( 'CleanBodys', 60, 0, function()
     end   
 end )
 
-RunConsoleCommand( 'cl_drawmonitors', 0 )
-
-hook_Add( 'InitPostEntity', 'cl_init', function()
-	LocalPlayer():ConCommand( 'stopsound; cl_updaterate 32; cl_cmdrate 32; cl_interp_ratio 2; cl_interp 0; mem_max_heapsize 2048; datacachesize 512; mem_min_heapsize 512' )
-end )
-
 local GUIToggled = false
 local mouseX, mouseY = ScrW() * 0.5, ScrH() * 0.5
 
@@ -120,6 +114,32 @@ end
 
 function render.GetDXLevel()
 	return 80
+end
+
+local Commands = {
+    gmod_mcore_test = 1,
+    mat_queue_mode = -1,
+    cl_threaded_bone_setup = 1,
+    r_threaded_particles = 1,
+    r_queued_ropes = 1,
+    cl_threaded_client_leaf_system = 1,
+    r_threaded_renderables = 1,
+    mat_fastnobump = 1,
+    mat_fastspecular = 1,
+    r_fastzreject = 1,
+    cl_phys_props_max = 100,
+    r_propsmaxdist = 500,
+    cl_updaterate = 32,
+    cl_cmdrate = 32,
+    cl_interp = 0.1,
+    cl_interp_ratio = 2,
+    studio_queue_mode = 1,
+    fps_max = 0,
+	cl_drawmonitors = 0,
+}
+
+for k, v in SortedPairs( Commands ) do
+	RunConsoleCommand( k, v )
 end
 
 local scrw, scrh = ScrW(), ScrH()
