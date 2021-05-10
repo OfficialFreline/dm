@@ -5,3 +5,7 @@ hook.Add( 'ScalePlayerDamage', 'ScaleDamage', function( ply, hitgroup, dmginfo )
 		dmginfo:ScaleDamage( 0.6 )
 	end
 end )
+
+function GM:GetFallDamage( ply, speed )
+	return ( speed / ply:Health() ) * DM.Config.FallFactor
+end

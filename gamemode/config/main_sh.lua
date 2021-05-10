@@ -36,3 +36,6 @@ c.GreenWeapon = {
 	'weapon_pistol',
 	'weapon_shotgun',
 }
+
+// The ratio of damage from falling
+c.FallFactor = 5
