@@ -8,5 +8,5 @@
 
   "author_name" "Freline"
   "author_email" ""
-  "author_url" "https://github.com/OfficialFreline/gmod-deathmatch"
+  "author_url" "https://github.com/OfficialFreline/dm"
 }
