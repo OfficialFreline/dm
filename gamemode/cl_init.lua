@@ -58,7 +58,7 @@ function GM:PlayerBindPress( ply, bind, pressed )
 	local bnd = string_match( string_lower( bind ), 'gm_[a-z]+[12]?' )
 
 	if ( bnd and FKeyBinds[ bnd ] and GAMEMODE[ FKeyBinds[ bnd ] ] ) then
-		GAMEMODE[ FKeyBinds[ bnd ]]( GAMEMODE )
+		GAMEMODE[ FKeyBinds[ bnd ] ]( GAMEMODE )
 	end
 
 	return
