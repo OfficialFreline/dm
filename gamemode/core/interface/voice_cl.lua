@@ -1,3 +1,4 @@
+local color_black = Color( 0, 0, 0 )
 local PANEL = {}
 local PlayerVoicePanels = {}
 
@@ -40,7 +41,7 @@ function PANEL:Paint( w, h )
 
 	w = self.lastw
 
-	draw.OutlinedBox( 0, 0, w, h, Color( 59, 59, 59, 190 ), Color( 0, 0, 0 ) )
+	draw.OutlinedBox( 0, 0, w, h, Color( 59, 59, 59, 190 ), color_black )
 
 	if ( self.lastw != cw ) then
 		local nick = self.ply:GetNick()
