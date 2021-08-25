@@ -119,23 +119,23 @@ end
 local Commands = {
     gmod_mcore_test = 1,
     mat_queue_mode = -1,
-    cl_threaded_bone_setup = 1,
-    r_threaded_particles = 1,
-    r_queued_ropes = 1,
-    cl_threaded_client_leaf_system = 1,
-    r_threaded_renderables = 1,
     mat_fastnobump = 1,
     mat_fastspecular = 1,
+    r_threaded_renderables = 1,
     r_fastzreject = 1,
-    cl_phys_props_max = 100,
     r_propsmaxdist = 500,
+    r_threaded_particles = 1,
+    r_queued_ropes = 1,
+    cl_threaded_bone_setup = 1,
+    cl_threaded_client_leaf_system = 1,
+    cl_phys_props_max = 100,
     cl_updaterate = 32,
     cl_cmdrate = 32,
     cl_interp = 0.1,
     cl_interp_ratio = 2,
+    cl_drawmonitors = 0,
     studio_queue_mode = 1,
     fps_max = 0,
-	cl_drawmonitors = 0,
 }
 
 for k, v in SortedPairs( Commands ) do
@@ -196,19 +196,5 @@ function draw.RectBlur( x, y, w, h )
         surface_DrawTexturedRect( 0, 0, scrw, scrh )
         
         render_SetScissorRect( 0, 0, 0, 0, false )
-    end
-end
-
-function draw.Circle( x, y, w, h, ang, color, x0, y0 )
-    for i = 0, ang do
-        local c = math.cos( math.rad( i ) )
-        local s = math.sin( math.rad( i ) )
-        local newx = y0 * s - x0 * c
-        local newy = y0 * c + x0 * s
-
-        draw.NoTexture()
-
-        surface.SetDrawColor( color )
-        surface.DrawTexturedRectRotated( x + newx, y + newy, w, h, i )
     end
 end
