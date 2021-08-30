@@ -7,7 +7,7 @@ function PANEL:Init()
 	self.LabelName:SetFont( 'GModNotify' )
 	self.LabelName:Dock( FILL )
 	self.LabelName:DockMargin( 6, 0, 0, 0 )
-	self.LabelName:SetTextColor( Color( 255, 255, 255 ) )
+	self.LabelName:SetTextColor( DMColor.label_text )
 
 	self.Avatar = vgui.Create( 'AvatarImage', self )
 	self.Avatar:Dock( LEFT )
@@ -41,7 +41,7 @@ function PANEL:Paint( w, h )
 
 	w = self.lastw
 
-	draw.OutlinedBox( 0, 0, w, h, Color( 59, 59, 59, 190 ), color_black )
+	draw.OutlinedBox( 0, 0, w, h, DMColor.frame_background, color_black )
 
 	if ( self.lastw != cw ) then
 		local nick = self.ply:GetNick()

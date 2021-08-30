@@ -7,15 +7,15 @@ local function CreateCM( title )
 	ContextMenu:SetKeyBoardInputEnabled( false )
 	ContextMenu:ShowCloseButton( false )
 
-    local KeyDown_ = false
+    -- local KeyDown_ = false
 
-    function ContextMenu:Think()
-        if ( input.IsKeyDown( KEY_C ) and KeyDown_ ) then
-            self:Close()
-        elseif ( not input.IsKeyDown( KEY_C ) ) then
-            KeyDown_ = true
-        end
-    end
+    -- function ContextMenu:Think()
+    --     if ( input.IsKeyDown( KEY_C ) and KeyDown_ ) then
+    --         self:Close()
+    --     elseif ( not input.IsKeyDown( KEY_C ) ) then
+    --         KeyDown_ = true
+    --     end
+    -- end
 end
 
 local function openCmdPanel()
@@ -44,8 +44,7 @@ local function openCmdPanel()
 			else
 				cmdButton:SetText( n.name )
 			end
-			
-			cmdButton:SetFont( 'Tab.3' )
+
 			cmdButton.DoClick = function()
 				surface.PlaySound( 'UI/buttonclickrelease.wav' )
 
@@ -70,7 +69,7 @@ local function openModelPanel()
 	playerPrev_panel:Dock( LEFT )
 	playerPrev_panel:SetWide( ContextMenu:GetWide() / 2.6 )
 	playerPrev_panel.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, Color( 255, 255, 255, 5 ) )
+		draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 4 )
 	end
 
 	local playerPrev = vgui.Create( 'DModelPanel', playerPrev_panel )
@@ -96,8 +95,8 @@ local function openModelPanel()
 		pan:SetTall( 80 )
 		pan:Dock( TOP )
 		pan.Paint = function( self, w, h )
-			if ( model == LocalPlayer():GetModel() and not btn:IsHovered() ) then
-				draw.RoundedBox( 4, 3, 3, w - 6, h - 6, Color( 222, 115, 115, 40 ) )
+			if ( model == LocalPlayer():GetModel() ) then
+				draw.RoundedBox( 8, 3, 3, w - 6, h - 6, Color(231, 76, 60) )
 			end
 		end
 
@@ -144,4 +143,8 @@ function GM:OnContextMenuOpen()
 	else
 		ContextMenu:SetVisible( true )
 	end
+end
+
+function GM:OnContextMenuClose()
+	ContextMenu:Remove()
 end

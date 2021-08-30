@@ -16,8 +16,8 @@ function GMopenTab()
 	menuTab:MakePopup()
 	menuTab:SetKeyBoardInputEnabled( false )
 	menuTab.Paint = function( self, w, h )
-		draw.OutlinedBox( 0, 0, w, h, Color( 75, 75, 75, 245 ), Color( 0, 0, 0, 230 ) ) -- Background
-		draw.OutlinedBox( 0, 0, w, 70, Color( 63, 63, 63 ), Color( 0, 0, 0 ) ) -- Bar
+		draw.OutlinedBox( 0, 0, w, h, DMColor.frame_background, DMColor.frame_outlined ) -- Background
+		draw.OutlinedBox( 0, 0, w, 70, DMColor.frame_bar, Color(0, 0, 0) ) -- Bar
 	end
 
 	local Title = 'Deathmatch'
@@ -29,6 +29,7 @@ function GMopenTab()
 	TitleLabel:SetSize( menuTab:GetWide(), 50 )
 	TitleLabel:SetText( Title )
 	TitleLabel:SetFont( 'Tab.1' )
+	TitleLabel:SetTextColor( DMColor.label_text )
 
 	local sp = vgui.Create( 'dm_scrollpanel', menuTab )
 	sp:Dock( FILL )
@@ -44,9 +45,9 @@ function GMopenTab()
 	infoButton:Dock( TOP )
 	infoButton:SetText( '' )
 	infoButton.Paint = function( self, w, h )
-		draw.SimpleText( 'Nick', 'Tab.2', 10, 0, Color( 255, 255, 255 ) )
-		draw.SimpleText( 'Ping', 'Tab.2', w - surface.GetTextSize( 'Ping' ) - 10, 0, Color( 255, 255, 255 ) )
-		draw.SimpleText( 'KD (Kills/Deaths)', 'Tab.2', w * 0.5 - surface.GetTextSize( 'KD (Kills/Deaths)' ) * 0.5, 0, Color( 255, 255, 255 ) )
+		draw.SimpleText( 'Nick', 'Tab.2', 10, 0, DMColor.label_text )
+		draw.SimpleText( 'Ping', 'Tab.2', w - surface.GetTextSize( 'Ping' ) - 10, 0, DMColor.label_text )
+		draw.SimpleText( 'KD (Kills/Deaths)', 'Tab.2', w * 0.5 - surface.GetTextSize( 'KD (Kills/Deaths)' ) * 0.5, 0, DMColor.label_text )
 	end
 
 	surface.SetFont( 'Tab.3' )
@@ -67,11 +68,9 @@ function GMopenTab()
 		playerButton.Paint = function( self, w, h )
 			if ( IsValid( v ) ) then
 				local x
-				local textColor = Color( 255, 255, 255 )
+				local textColor = DMColor.label_text
 
 				if ( self:IsHovered() or playerAvatarButton:IsHovered() ) then
-					textColor = Color( 235, 235, 235 )
-
 					playerAvatar:SetVisible( true )
 
 					x = 30
@@ -87,19 +86,21 @@ function GMopenTab()
 					name = v:Name()
 				end
 
-				draw.SimpleText( name, 'Tab.3', 12 + x, 11, textColor )
-				draw.SimpleText( v:Ping() or '', 'Tab.3', w - surface.GetTextSize( v:Ping() or '' ) - 12, 11, textColor )
+				draw.SimpleText( name, 'Button', 12 + x, 11, textColor )
+				draw.SimpleText( v:Ping() or '', 'Button', w - surface.GetTextSize( v:Ping() or '' ) - 12, 11, textColor )
 
 				local frags = v:GetFrags()
 				local deaths = v:GetDeaths()
 
 				if ( deaths < 1 ) then
 					deaths = 1
+				elseif ( deaths == 1 ) then
+					death = 1.5
 				end
 
 				local text = string.sub( frags / deaths, 0, 6 ) .. ' (' .. frags .. '/' .. deaths .. ')' or ''
 
-				draw.SimpleText( text, 'Tab.3', w * 0.5 - surface.GetTextSize( text ) * 0.5, 11, textColor )
+				draw.SimpleText( text, 'Button', w * 0.5 - surface.GetTextSize( text ) * 0.5, 11, textColor )
 			end
 		end
 		playerButton.DoClick = function()
@@ -117,6 +118,7 @@ function GMopenTab()
 			PlayerLabel:SetSize( menuTab:GetWide(), 50 )
 			PlayerLabel:SetText( txt )
 			PlayerLabel:SetFont( 'Tab.1' )
+			PlayerLabel:SetTextColor( DMColor.label_text )
 
 			local globalPanel = vgui.Create( 'DPanel', menuTab )
 			globalPanel:Dock( FILL )
@@ -163,7 +165,7 @@ function GMopenTab()
 			local playerPrev_panel2 = vgui.Create( 'DPanel', playerPrev )
 			playerPrev_panel2:Dock( FILL )
 			playerPrev_panel2.Paint = function( self, w, h )
-				draw.OutlinedBox( 0, 0, w, h, Color( 0, 0, 0, 0 ), Color( 255, 255, 255, 50 ) )
+				draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 4 )
 			end
 
 			local scrollpanel = vgui.Create( 'dm_scrollpanel', globalPanel )
@@ -191,7 +193,6 @@ function GMopenTab()
 						cmdButton:SetText( n.name )
 					end
 					
-					cmdButton:SetFont( 'Tab.3' )
 					cmdButton.DoClick = function()
 						surface.PlaySound( 'UI/buttonclickrelease.wav' )
 

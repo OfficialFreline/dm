@@ -1,16 +1,12 @@
-local color_white = Color( 255, 255, 255 )
 local PANEL = {}
 
 function PANEL:Init()
-	self:SetTextColor( color_white )
+	self:SetFont( 'Button' )
+	self:SetTextColor( DMColor.label_text )
 end
 
 function PANEL:Paint( w, h )
-	if ( self:IsHovered() ) then
-		draw.RoundedBox( 4, 3, 3, w - 6, h - 6, Color( 115, 115, 115, 200 ) )
-	else
-		draw.OutlinedBox( 3, 3, w - 6, h - 6, Color( 0, 0, 0, 0 ), Color( 255, 255, 255, 50 ) )
-	end
+	draw.RoundedBox( 8, 3, 3, w - 6, h - 6, self:IsDown() and Color(22, 160, 133) or self:IsHovered() and DMColor.button_hov or DMColor.button )
 end
 
 vgui.Register( 'dm_button', PANEL, 'DButton' )

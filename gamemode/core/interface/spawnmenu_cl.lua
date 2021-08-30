@@ -27,38 +27,35 @@ local function openSpawnMenu()
 			z = sp_main
 		end
 
-		local button = vgui.Create( 'dm_button', z )
-		button:SetTall( 136 )
-		button:Dock( TOP )
-		button:DockMargin( 0, 2, 0, 0 )
-		button:SetText( '' )
-		button.Paint = function( self, w, h )
-			local b_color = Color( 220, 220, 220 )
+		local pan = vgui.Create( 'DPanel', z )
+		pan:SetTall( 136 )
+		pan:Dock( TOP )
+		pan:DockMargin( 0, 2, 0, 0 )
+		pan.Paint = nil
 
-			if ( self:IsHovered() ) then
-				b_color = Color( 210, 210, 210 )
-			end
+		local button = vgui.Create( 'dm_button', pan )
+		button:Dock( FILL )
+		button:SetText( v.PrintName or v.ClassName )
+		button.DoClick = function()
+			surface.PlaySound( 'UI/buttonclickrelease.wav' )
 
-			draw.RoundedBox( 6, 0, 0, w, h, b_color )
+			RunConsoleCommand( 'dm_giveswep', v.ClassName )
+		end
 
-			surface.SetDrawColor( Color( 0, 0, 0, 200 ) )
-			surface.DrawOutlinedRect( 4, 4, h - 8, h - 8 )
-
+		local icon_wep = vgui.Create( 'DPanel', pan )
+		icon_wep:SetWide( 138 )
+		icon_wep:Dock( LEFT )
+		icon_wep.Paint = function( self, w, h )
 			if ( self:IsHovered() ) then
 				surface.SetDrawColor( Color( 236, 236, 236 ) )
 			else
 				surface.SetDrawColor( Color( 255, 255, 255 ) )
 			end
-
+			
 			surface.SetMaterial( Material( v.IconOverride or 'entities/' .. v.ClassName .. '.png' ) )
 			surface.DrawTexturedRect( 5, 5, h - 10, h - 10 )
 
-			draw.SimpleText( v.PrintName or v.ClassName, 'SpawnMenu.1', w * 0.5 + h * 0.5 - 8, h * 0.5, Color( 0, 0, 0, 240 ), 1, 1 )
-		end
-		button.DoClick = function()
-			surface.PlaySound( 'UI/buttonclickrelease.wav' )
-
-			RunConsoleCommand( 'dm_giveswep', v.ClassName )
+			draw.OutlinedBox( 2, 2, w - 4, h - 4, DMColor.clear, DMColor.frame_bar, 4 )
 		end
 	end
 end

@@ -33,6 +33,9 @@ Include( 'config/main_sh.lua' )
 IncludeDirectory( 'core/language' )
 IncludeDirectory( 'core/player' )
 IncludeDirectory( 'core' )
+
+Include( 'config/color_cl.lua' )
+
 IncludeDirectory( 'core/interface/vgui' )
 IncludeDirectory( 'core/interface' )
 

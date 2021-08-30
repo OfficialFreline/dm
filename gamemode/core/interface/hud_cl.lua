@@ -66,14 +66,14 @@ function GM:HUDPaint()
 
 	-- Health
 	local siz = scrw * 0.15
-	local s = 24
-	local tall = 16
+	local s = 30
+	local tall = 12
 
-	draw.RectBlur( 25 + s, scrh - tall - 25, siz, tall )
+	-- draw.RectBlur( 25 + s, scrh - tall - 25, siz, tall )
 
-	draw.OutlinedBox( 25 + s, scrh - tall - 25, siz, tall, Color( 59, 59, 59, 150 ), color_black )
-	draw.OutlinedBox( 25 + s, scrh - tall - 25, math.Clamp( health, 0, 100 ) * siz / 100, tall, Color( 62, 230, 132 ), color_black )
-	draw.OutlinedBox( 25, scrh - tall - 25, 25, tall, Color( 63, 63, 63 ), color_black ) // Square bar
+	draw.OutlinedBox( 25 + s, scrh - tall - 25, siz, tall, DMColor.frame_background, DMColor.frame_outlined )
+	draw.OutlinedBox( 25 + s, scrh - tall - 25, math.Clamp( health, 0, 100 ) * siz * 0.01, tall, Color( 62, 230, 132 ), DMColor.frame_outlined )
+	draw.OutlinedBox( 25, scrh - tall - 25, 25, tall, Color(241, 196, 15), DMColor.frame_outlined ) // Square bar
 
 	-- Ammo
 	local Weapon = LocalPlayer():GetActiveWeapon()
