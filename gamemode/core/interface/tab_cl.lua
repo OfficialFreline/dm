@@ -50,8 +50,6 @@ function GMopenTab()
 		draw.SimpleText( 'KD (Kills/Deaths)', 'Tab.2', w * 0.5 - surface.GetTextSize( 'KD (Kills/Deaths)' ) * 0.5, 0, DMColor.label_text )
 	end
 
-	surface.SetFont( 'Tab.3' )
-
 	for k, v in pairs( player.GetAll() ) do
 		local playerAvatar
 		local playerAvatarButton
