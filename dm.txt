@@ -9,4 +9,6 @@
   "author_name" "Freline"
   "author_email" ""
   "author_url" "https://github.com/OfficialFreline/dm"
+
+  "workshopid" "2589518973"
 }
