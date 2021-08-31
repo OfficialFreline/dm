@@ -44,9 +44,13 @@ end
 function GM:PlayerSpawn( ply )
 	ply:SetupHands()
 
-	local map = table.Random( DM.Config.SpawnPositionsList[ game.GetMap() ] )
+	local map_Table = DM.Config.SpawnPositionsList[ game.GetMap() ] 
 
-	ply:SetPos( map )
+	if ( map_Table ) then
+		local map = table.Random( DM.Config.SpawnPositionsList[ game.GetMap() ] )
+
+		ply:SetPos( map )
+	end
 end
 
 hook.Add( 'PlayerDeath', 'ply_sv', function( victim, inflictor, attacker )
