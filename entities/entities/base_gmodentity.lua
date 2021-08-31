@@ -35,18 +35,6 @@ if ( CLIENT ) then
 
 		return false
 	end
-
-	local color_white = Color( 255, 255, 255 )
-
-	function ENT:Think()
-		local text = self:GetOverlayText()
-
-		if ( text != '' and self:BeingLookedAtByLocalPlayer() and not self:GetNoDraw() ) then
-			AddWorldTip( self:EntIndex(), text, 0.5, self:GetPos(), self )
-
-			halo.Add( { self }, color_white, 1, 1, 1, true, true )
-		end
-	end
 end
 
 function ENT:SetOverlayText( text )
@@ -66,54 +54,31 @@ function ENT:GetOverlayText()
 
 	local PlayerName = self:GetPlayerName()
 
-	return txt .. '\n(' .. PlayerName .. ')'
+	return txt .. ' (' .. PlayerName .. ')'
 end
 
 function ENT:SetPlayer( ply )
-	self.Founder = ply
-
 	if ( IsValid( ply ) ) then
-		self:SetNWString( 'FounderName', ply:Nick() )
-		self.FounderSID = ply:SteamID64()
-		self.FounderIndex = ply:UniqueID()
-	else
-		self:SetNWString( 'FounderName', '' )
-		self.FounderSID = nil
-		self.FounderIndex = nil
+		self:SetVar( 'Founder', ply )
+		self:SetVar( 'FounderIndex', ply:UniqueID() )
+
+		self:SetNWString( 'FounderName', ply:GetNick() )
 	end
 end
 
 function ENT:GetPlayer()
-	if ( self.Founder == nil ) then
-		return NULL
-	elseif ( IsValid( self.Founder ) ) then
-		return self.Founder
-	end
-
-	local ply = player.GetBySteamID64( self.FounderSID )
-
-	if ( not IsValid( ply ) ) then
-		return NULL
-	end
-
-	self:SetPlayer( ply )
-
-	return ply
+	return self:GetVar( 'Founder', NULL )
 end
 
 function ENT:GetPlayerIndex()
-	return self.FounderIndex or 0
-end
-
-function ENT:GetPlayerSteamID()
-	return self.FounderSID or ''
+	return self:GetVar( 'FounderIndex', 0 )
 end
 
 function ENT:GetPlayerName()
 	local ply = self:GetPlayer()
 
 	if ( IsValid( ply ) ) then
-		return ply:Nick()
+		return ply:GetNick()
 	end
 
 	return self:GetNWString( 'FounderName' )

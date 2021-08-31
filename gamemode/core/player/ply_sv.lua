@@ -4,7 +4,7 @@ util.AddNetworkString( 'PlayerCheckData' )
 net.Receive( 'PlayerChangeNick', function( len, pl )
 	local nick = net.ReadString()
 	
-	sendMsgAll( Color( 15, 170, 235 ), pl:GetNick(), color_white, ' changed his nickname to ', Color( 70, 162, 112 ), nick, color_white, '.')
+	sendMsgAll( Color( 15, 170, 235 ), pl:GetNick(), color_white, ' changed his nickname to ', Color( 70, 162, 112 ), nick, color_white, '.' )
 
     pl:SetNick( nick )
 end )

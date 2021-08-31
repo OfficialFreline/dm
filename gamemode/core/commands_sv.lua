@@ -76,6 +76,8 @@ local function drop_swep( ply, wepname )
     ent:SetModel( model )
     ent:SetSkin( weapon:GetSkin() or 0 )
     ent:SetWeaponClass( weapon:GetClass() )
+    ent:SetPlayer( ply )
+    ent:SetOverlayText( wepname )
     ent.nodupe = true
     ent.clip1 = weapon:Clip1()
     ent.clip2 = weapon:Clip2()

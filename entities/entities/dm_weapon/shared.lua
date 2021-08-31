@@ -5,7 +5,6 @@ ENT.PrintName = 'Spawned Weapon'
 ENT.Author = 'Freline'
 
 ENT.Spawnable = false
-ENT.IsSpawnedWeapon = true
 
 function ENT:SetupDataTables()
     self:NetworkVar( 'Int', 0, 'amount' )
