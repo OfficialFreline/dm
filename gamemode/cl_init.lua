@@ -64,87 +64,23 @@ function GM:PlayerBindPress( ply, bind, pressed )
 	return
 end
 
-hook_Remove( 'RenderScreenspaceEffects', 'RenderColorModify' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderBloom' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderToyTown' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderTexturize' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderSunbeams' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderSobel' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderSharpen' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderMaterialOverlay' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderMotionBlur' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderColorModify' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderBloom' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderToyTown' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderTexturize' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderSunbeams' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderSobel' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderSharpen' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderMaterialOverlay' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderMotionBlur' )
-hook_Remove( 'RenderScreenspaceEffects', 'RenderBokeh' )
-hook_Remove( 'RenderScene', 'RenderStereoscopy' )
-hook_Remove( 'RenderScene', 'RenderSuperDoF' )
-hook_Remove( 'RenderScene', 'RenderStereoscopy' )
-hook_Remove( 'RenderScene', 'RenderSuperDoF' )
-hook_Remove( 'PreRender', 'PreRenderFrameBlend' )
-hook_Remove( 'GUIMousePressed', 'SuperDOFMouseDown' )
-hook_Remove( 'GUIMouseReleased', 'SuperDOFMouseUp' )
-hook_Remove( 'PreventScreenClicks', 'SuperDOFPreventClicks' )
-hook_Remove( 'PostRender', 'RenderFrameBlend' )
-hook_Remove( 'PostDrawEffects', 'RenderWidgets' )
-hook_Remove( 'Think', 'DOFThink' )
-hook_Remove( 'NeedsDepthPass', 'NeedsDepthPass_Bokeh' )
-
-function render.SupportsHDR()
-	return false
-end
-
-function render.SupportsPixelShaders_2_0()
-	return false
-end
-
-function render.SupportsPixelShaders_1_4()
-	return false
-end
-
-function render.SupportsVertexShaders_2_0()
-	return false
-end
-
-function render.GetDXLevel()
-	return 80
-end
-
-local Commands = {
+local Commands_List = {
+    cl_updaterate = 128,
+    cl_cmdrate = 128,
     gmod_mcore_test = 1,
-    mat_queue_mode = -1,
-    mat_fastnobump = 1,
-    mat_fastspecular = 1,
     r_threaded_renderables = 1,
-    r_fastzreject = 1,
-    r_propsmaxdist = 500,
-    r_threaded_particles = 1,
-    r_queued_ropes = 1,
-    cl_threaded_bone_setup = 1,
-    cl_threaded_client_leaf_system = 1,
-    cl_phys_props_max = 100,
-    cl_updaterate = 32,
-    cl_cmdrate = 32,
-    cl_interp = 0.1,
-    cl_interp_ratio = 2,
-    cl_drawmonitors = 0,
+	mat_queue_mode = -1,
     studio_queue_mode = 1,
     fps_max = 0,
 }
 
-for k, v in SortedPairs( Commands ) do
+for k, v in SortedPairs( Commands_List ) do
 	RunConsoleCommand( k, v )
 end
 
 local scrw, scrh = ScrW(), ScrH()
 local Mat = Material( 'pp/blurscreen' )
-local WhiteColor = Color( 255, 255, 255 )
+local WhiteColor = Color(255, 255, 255)
 
 local function DrawRect( x, y, w, h, t )
 	if ( not t ) then
