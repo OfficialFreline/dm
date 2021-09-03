@@ -1,16 +1,13 @@
 DMCommandsTable = {}
 
 local ents_FindByClass = ents.FindByClass
-local hook_Add = hook.Add
 local gui_SetMousePos = gui.SetMousePos
 local gui_MousePos = gui.MousePos
 local gui_EnableScreenClicker = gui.EnableScreenClicker
 local string_match = string.match
 local string_lower = string.lower
-local hook_Remove = hook.Remove
 local Material = Material
 local Color = Color
-local surface_CreateFont = surface.CreateFont
 local surface_SetDrawColor = surface.SetDrawColor
 local surface_SetMaterial = surface.SetMaterial
 local surface_DrawRect = surface.DrawRect
