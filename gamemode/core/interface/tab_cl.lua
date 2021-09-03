@@ -11,7 +11,7 @@ end // Lightweight system
 
 function GMopenTab()
 	menuTab = vgui.Create( 'DPanel' )
-	menuTab:SetSize( ScrW() * 0.6, ScrH() * 0.7 )
+	menuTab:SetSize( math.min( ScrW() - 10, 1000 ), math.min( ScrH() - 6, 640 ) )
 	menuTab:Center()
 	menuTab:MakePopup()
 	menuTab:SetKeyBoardInputEnabled( false )
@@ -109,7 +109,7 @@ function GMopenTab()
 			surface.SetFont( 'Tab.1' )
 
 			local nick = v:GetNick() or ''
-			local txt = 'Player: ' .. nick
+			local txt = '< ' .. nick .. ' >' 
 
 			local PlayerLabel = vgui.Create( 'DLabel', menuTab )
 			PlayerLabel:SetPos( menuTab:GetWide() * 0.5 - surface.GetTextSize( txt ) * 0.5, 11 )
@@ -208,9 +208,9 @@ function GMopenTab()
 			end
 		end
 
-		playerAvatar = vgui.Create( 'AvatarImage', playerButton )
+		playerAvatar = vgui.Create( 'dm_avatar', playerButton )
 		playerAvatar:SetSize( 28, 28 )
-		playerAvatar:SetPos( 6, 6 )
+		playerAvatar:SetPos( 10, 6 )
 		playerAvatar:SetPlayer( v )
 
 		playerAvatarButton = vgui.Create( 'dm_button', playerAvatar )
@@ -218,7 +218,7 @@ function GMopenTab()
 		playerAvatarButton:SetText( '' )
 		playerAvatarButton.Paint = function( self, w, h )
 			if ( self:IsHovered() ) then
-				draw.RoundedBox( 0, 0, 0, w, h, Color( 0, 0, 0, 30 ) )
+				draw.RoundedBox( 100, 0, 0, w, h, Color( 0, 0, 0, 40 ) )
 			end
 		end
 		playerAvatarButton.DoClick = function()
