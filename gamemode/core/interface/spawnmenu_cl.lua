@@ -1,18 +1,26 @@
 local function openSpawnMenu()
 	SpawnMenu = vgui.Create( 'dm_frame' )
-	SpawnMenu:SetSize( ScrW() * 0.6, ScrH() * 0.55 )
+	SpawnMenu:SetSize( math.min( ScrW() - 10, 840 ), math.min( ScrH() - 6, 640 ) )
 	SpawnMenu:Center()
 	SpawnMenu:MakePopup()
 	SpawnMenu:SetTitle( 'SpawnMenu | Taking arms' )
 	SpawnMenu:ShowCloseButton( false )
 	SpawnMenu:SetKeyBoardInputEnabled( false )
 
-	local sp_main = vgui.Create( 'dm_scrollpanel', SpawnMenu )
-	sp_main:SetWide( SpawnMenu:GetWide() * 0.6 )
-	sp_main:Dock( LEFT )
+	local div = vgui.Create( 'DHorizontalDivider', SpawnMenu )
+	div:Dock( FILL )
+	div:SetDividerWidth( 4 )
+	div:SetLeftMin( 20 )
+	div:SetRightMin( 20 )
 
+	local sp_main = vgui.Create( 'dm_scrollpanel', SpawnMenu )
 	local sp_admin = vgui.Create( 'dm_scrollpanel', SpawnMenu )
-	sp_admin:Dock( FILL )
+
+	div:SetLeft( sp_main )
+	div:SetLeftMin( 300 )
+	div:SetLeftWidth( math.max( 300, SpawnMenu:GetWide() * 0.35 ) )
+	div:SetRight( sp_admin )
+	div:SetRightMin( 300 )
 
 	for k, v in pairs( list.Get( 'Weapon' ) ) do
 		if ( not v.Spawnable ) then
