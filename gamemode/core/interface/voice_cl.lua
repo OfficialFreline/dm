@@ -1,4 +1,3 @@
-local color_black = Color( 0, 0, 0 )
 local PANEL = {}
 local PlayerVoicePanels = {}
 
@@ -9,8 +8,9 @@ function PANEL:Init()
 	self.LabelName:DockMargin( 6, 0, 0, 0 )
 	self.LabelName:SetTextColor( DMColor.label_text )
 
-	self.Avatar = vgui.Create( 'AvatarImage', self )
+	self.Avatar = vgui.Create( 'dm_avatar', self )
 	self.Avatar:Dock( LEFT )
+	self.Avatar:DockMargin( 1, 0, 0, 0 )
 	self.Avatar:SetSize( 32, 32 )
 
 	self:SetSize( 250, 40 )
