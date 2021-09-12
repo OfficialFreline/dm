@@ -4,7 +4,7 @@ LANGUAGE = {}
 include( 'list/' .. DM.Config.Language .. '.lua' )
 
 if ( SERVER ) then
-    AddCSLuaFile( 'list/' .. DM.Config.Language .. '.lua' )
+	AddCSLuaFile( 'list/' .. DM.Config.Language .. '.lua' )
 end
 
 DM.Language = LANGUAGE

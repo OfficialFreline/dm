@@ -79,22 +79,22 @@ function GM:HUDPaint()
 	local Weapon = LocalPlayer():GetActiveWeapon()
 
 	if ( IsValid( Weapon ) ) then
-        local CountOne = Weapon:Clip1()
-        local CountTwo = LocalPlayer():GetAmmoCount( Weapon:GetPrimaryAmmoType() )
-        local CountOneMax = Weapon:GetMaxClip1()
+		local CountOne = Weapon:Clip1()
+		local CountTwo = LocalPlayer():GetAmmoCount( Weapon:GetPrimaryAmmoType() )
+		local CountOneMax = Weapon:GetMaxClip1()
 
-        if ( CountOneMax > -1 ) then
+		if ( CountOneMax > -1 ) then
 			local text = CountOne .. '/' .. CountTwo
 			local b = 96
 
-	        if ( CountOne == 0 and CountTwo == 0 ) then
+			if ( CountOne == 0 and CountTwo == 0 ) then
 				text = 'Empty'
 
 				b = 100
 			end
 
 			draw.SimpleText( text, 'Hud.1', 25, scrh - tall - 62, color_white )
-        end 
+		end 
 	end
 
 	-- Crosshair

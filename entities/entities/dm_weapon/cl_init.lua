@@ -25,7 +25,7 @@ function ENT:Draw()
 	self:DrawModel()
 
 	local pos = self:GetPos()
-    local name = self:GetOverlayText()
+	local name = self:GetOverlayText()
 
 	drawEntText( pos, ang, name )
 

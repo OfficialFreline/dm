@@ -18,15 +18,15 @@ local render_SetScissorRect = render.SetScissorRect
 include( 'shared.lua' )
 
 timer.Create( 'CleanBodys', 60, 0, function()
-    RunConsoleCommand( 'r_cleardecals' )
+	RunConsoleCommand( 'r_cleardecals' )
 
-    for k, v in ipairs( ents_FindByClass( 'class C_ClientRagdoll' ) ) do
-        v:Remove()
-    end
+	for k, v in ipairs( ents_FindByClass( 'class C_ClientRagdoll' ) ) do
+		v:Remove()
+	end
 
-    for k, v in ipairs( ents_FindByClass( 'class C_PhysPropClientside' ) ) do
-        v:Remove()
-    end   
+	for k, v in ipairs( ents_FindByClass( 'class C_PhysPropClientside' ) ) do
+		v:Remove()
+	end   
 end )
 
 local GUIToggled = false
@@ -62,13 +62,13 @@ function GM:PlayerBindPress( ply, bind, pressed )
 end
 
 local Commands_List = {
-    cl_updaterate = 128,
-    cl_cmdrate = 128,
-    gmod_mcore_test = 1,
-    r_threaded_renderables = 1,
+	cl_updaterate = 128,
+	cl_cmdrate = 128,
+	gmod_mcore_test = 1,
+	r_threaded_renderables = 1,
 	mat_queue_mode = -1,
-    studio_queue_mode = 1,
-    fps_max = 0,
+	studio_queue_mode = 1,
+	fps_max = 0,
 }
 
 for k, v in SortedPairs( Commands_List ) do
@@ -116,18 +116,18 @@ function draw.Blur( panel, amount )
 end
 
 function draw.RectBlur( x, y, w, h )
-    surface_SetDrawColor( WhiteColor )
-    surface_SetMaterial( Mat )
+	surface_SetDrawColor( WhiteColor )
+	surface_SetMaterial( Mat )
+	
+	for i = 1, 3 do
+		Mat:SetFloat( '$blur', ( i / 3 ) * 8 )
+		Mat:Recompute()
 
-    for i = 1, 3 do
-        Mat:SetFloat( '$blur', ( i / 3 ) * 8 )
-        Mat:Recompute()
+		render_UpdateScreenEffectTexture()
+		render_SetScissorRect( x, y, x + w, y + h, true )
 
-        render_UpdateScreenEffectTexture()
-        render_SetScissorRect( x, y, x + w, y + h, true )
-
-        surface_DrawTexturedRect( 0, 0, scrw, scrh )
-        
-        render_SetScissorRect( 0, 0, 0, 0, false )
-    end
+		surface_DrawTexturedRect( 0, 0, scrw, scrh )
+		
+		render_SetScissorRect( 0, 0, 0, 0, false )
+	end
 end

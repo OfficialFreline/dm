@@ -7,7 +7,7 @@ timer.Destroy( 'HostnameThink' )
 
 hook.Add( 'PreGamemodeLoaded', 'widgets_disabler_cpu', function()
 	function widgets.PlayerTick()
-        -- Clear
+		-- Clear
 	end
 
 	hook.Remove( 'PlayerTick', 'TickWidgets' )

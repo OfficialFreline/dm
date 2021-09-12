@@ -34,8 +34,8 @@ PANEL.lastName = ''
 
 function PANEL:Paint( w, h )
 	if ( not IsValid( self.ply ) ) then
-        return
-    end
+		return
+	end
 
 	local cw = w
 
@@ -78,8 +78,8 @@ function PANEL:FadeOut( anim, delta, data )
 			return
 		end
 
-        return
-    end
+		return
+	end
 			
 	self:SetAlpha( 255 - ( 255 * delta ) )
 end
@@ -88,8 +88,8 @@ derma.DefineControl( 'VoiceNotify2', '', PANEL, 'DPanel' )
 
 function GM:PlayerStartVoice( ply )
 	if ( not IsValid( g_VoicePanelList ) ) then
-        return
-    end
+		return
+	end
 
 	GAMEMODE:PlayerEndVoice( ply )
 
@@ -105,8 +105,8 @@ function GM:PlayerStartVoice( ply )
 	end
 
 	if ( not IsValid( ply ) ) then
-        return
-    end
+		return
+	end
 
 	local pnl = g_VoicePanelList:Add( 'VoiceNotify2' )
 	pnl:Setup( ply )
@@ -127,8 +127,8 @@ timer.Create( 'VoiceClean', 10, 0, VoiceClean )
 function GM:PlayerEndVoice( ply )
 	if ( IsValid( PlayerVoicePanels[ ply ] ) ) then
 		if ( PlayerVoicePanels[ ply ].fadeAnim ) then
-            return
-        end
+			return
+		end
 
 		PlayerVoicePanels[ ply ].fadeAnim = Derma_Anim( 'FadeOut', PlayerVoicePanels[ ply ], PlayerVoicePanels[ ply ].FadeOut )
 		PlayerVoicePanels[ ply ].fadeAnim:Start( 0.5 )

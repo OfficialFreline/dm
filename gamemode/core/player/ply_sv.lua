@@ -6,7 +6,7 @@ net.Receive( 'PlayerChangeNick', function( len, pl )
 	
 	sendMsgAll( Color( 15, 170, 235 ), pl:GetNick(), color_white, ' changed his nickname to ', Color( 70, 162, 112 ), nick, color_white, '.' )
 
-    pl:SetNick( nick )
+	pl:SetNick( nick )
 end )
 
 net.Receive( 'PlayerCheckData', function( len, pl )

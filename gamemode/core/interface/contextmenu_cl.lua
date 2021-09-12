@@ -7,15 +7,15 @@ local function CreateCM( title )
 	ContextMenu:SetKeyBoardInputEnabled( false )
 	ContextMenu:ShowCloseButton( false )
 
-    -- local KeyDown_ = false
+	-- local KeyDown_ = false
 
-    -- function ContextMenu:Think()
-    --     if ( input.IsKeyDown( KEY_C ) and KeyDown_ ) then
-    --         self:Close()
-    --     elseif ( not input.IsKeyDown( KEY_C ) ) then
-    --         KeyDown_ = true
-    --     end
-    -- end
+	-- function ContextMenu:Think()
+	--	 if ( input.IsKeyDown( KEY_C ) and KeyDown_ ) then
+	--		 self:Close()
+	--	 elseif ( not input.IsKeyDown( KEY_C ) ) then
+	--		 KeyDown_ = true
+	--	 end
+	-- end
 end
 
 local function openCmdPanel()
