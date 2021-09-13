@@ -19,7 +19,7 @@ local function CreateCM( title )
 end
 
 local function openCmdPanel()
-	CreateCM( 'Local actions' )
+	CreateCM( LANG.GetTranslation( 'localActions' ) )
 
 	local sp = vgui.Create( 'dm_scrollpanel', ContextMenu )
 	sp:Dock( FILL )
@@ -40,7 +40,7 @@ local function openCmdPanel()
 			cmdButton:SetTall( 40 )
 
 			if ( n.admin ) then
-				cmdButton:SetText( '[' .. DM.Translate( 'Admin', true ) .. '] ' .. n.name )
+				cmdButton:SetText( '[' .. LANG.GetTranslation( 'admin' ) .. '] ' .. n.name )
 			else
 				cmdButton:SetText( n.name )
 			end
@@ -52,7 +52,7 @@ local function openCmdPanel()
 					if ( LocalPlayer():Admin() ) then
 						n.action( v )
 					else
-						ChatTextAdmin( DM.Translate( 'NotAdmin', true ) )
+						ChatTextAdmin( LANG.GetTranslation( 'notAdmin' ) )
 					end
 				else
 					n.action( v )
@@ -63,7 +63,7 @@ local function openCmdPanel()
 end
 
 local function openModelPanel()
-	CreateCM( 'Models' )
+	CreateCM( LANG.GetTranslation( 'models' ) )
 
 	local playerPrev_panel = vgui.Create( 'DPanel', ContextMenu )
 	playerPrev_panel:Dock( LEFT )
@@ -119,7 +119,7 @@ local function openContextMenu()
 	local btn_1 = vgui.Create( 'dm_button', ContextMenu )
 	btn_1:SetWide( ContextMenu:GetWide() * 0.5 - 5 )
 	btn_1:Dock( LEFT )
-	btn_1:SetText( 'Local actions' )
+	btn_1:SetText( LANG.GetTranslation( 'localActions' ) )
 	btn_1.DoClick = function()
 		ContextMenu:Remove()
 
@@ -129,7 +129,7 @@ local function openContextMenu()
 	local btn_2 = vgui.Create( 'dm_button', ContextMenu )
 	btn_2:SetWide( ContextMenu:GetWide() * 0.5 - 5 )
 	btn_2:Dock( RIGHT )
-	btn_2:SetText( 'Models' )
+	btn_2:SetText( LANG.GetTranslation( 'models' ) )
 	btn_2.DoClick = function()
 		ContextMenu:Remove()
 

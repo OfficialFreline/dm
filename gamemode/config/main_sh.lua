@@ -2,9 +2,6 @@ DM.Config = {}
 
 local c = DM.Config
 
-// Gamemode language. Available: en, ru (soon)
-c.Language = 'en'
-
 // Character parameters
 c.JumpPower = 300
 c.DuckSpeed = 0.5

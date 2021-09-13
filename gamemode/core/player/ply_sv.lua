@@ -73,8 +73,8 @@ function PLAYER:DataLoad()
 		self:DataSave()
 
 		Data = util.JSONToTable( file.Read( 'dm/' .. self:UniqueID() .. '.json', 'DATA' ) )
-		Data.name = self:Nick() or DM.Translate( 'Unknown', true )
-		Data.steamid64 = self:SteamID64() or DM.Translate( 'Unknown', true )
+		Data.name = self:Nick() or LANG.GetTranslation( 'unknown' )
+		Data.steamid64 = self:SteamID64() or LANG.GetTranslation( 'unknown' )
 		Data.rank = 'user'
 		Data.frags = 0
 		Data.deaths = 0

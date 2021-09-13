@@ -37,13 +37,13 @@ if ( CLIENT ) then
 		if ( IsValid( ply ) ) then
 			if ( ply:Admin() ) then
 				table.insert( ct, Color( 174, 82, 245 ) )
-				table.insert( ct, 'Admin | ' )
+				table.insert( ct, LANG.GetTranslation( 'admin' ) .. ' | ' )
 			end
 
 			table.insert( ct, Color( 85, 178, 232 ) )
 			table.insert( ct, ply:GetNick() )
 		else
-			table.insert( ct, 'Console' )
+			table.insert( ct, LANG.GetTranslation( 'console' ) )
 		end
 	
 		table.insert( ct, color_white )
@@ -63,7 +63,7 @@ if ( SERVER ) then
 		local target = net.ReadEntity()
 		local text = net.ReadString()
 
-		sendMsg( target, Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), pl:GetNick(), color_white, '->', Color( 85, 130, 158 ), DM.Translate( 'You', true ), color_white, ': ' .. text )
+		sendMsg( target, Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), pl:GetNick(), color_white, '->', Color( 85, 130, 158 ), LANG.GetTranslation( 'you' ), color_white, ': ' .. text )
 	end )
 
 	function sendMsg( player, ... )
@@ -84,11 +84,11 @@ if ( SERVER ) then
 end
 
 hook.Add( 'PlayerConnect', 'ChatPly', function( name, ip )
-	sendMsgAll( Color( 15, 170, 235 ), name, color_white, ' ' .. DM.Translate( 'ConnPly', true ) )
+	sendMsgAll( Color( 15, 170, 235 ), name, color_white, ' joins the server.' )
 end )
 
 hook.Add( 'PlayerDisconnected', 'ChatPly', function( ply )
-	sendMsgAll( Color( 15, 170, 235 ), ply:GetNick() .. ' (' .. ply:SteamID() .. ')', color_white, ' ' .. DM.Translate( 'DiscPly', true ) )
+	sendMsgAll( Color( 15, 170, 235 ), ply:GetNick() .. ' (' .. ply:SteamID() .. ')', color_white, ' exited the server.' )
 end )
 
 local OldData

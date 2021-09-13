@@ -45,9 +45,11 @@ function GMopenTab()
 	infoButton:Dock( TOP )
 	infoButton:SetText( '' )
 	infoButton.Paint = function( self, w, h )
-		draw.SimpleText( 'Nick', 'Tab.2', 10, 0, DMColor.label_text )
-		draw.SimpleText( 'Ping', 'Tab.2', w - surface.GetTextSize( 'Ping' ) - 10, 0, DMColor.label_text )
-		draw.SimpleText( 'KD (Kills/Deaths)', 'Tab.2', w * 0.5 - surface.GetTextSize( 'KD (Kills/Deaths)' ) * 0.5, 0, DMColor.label_text )
+		local kd = LANG.GetTranslation( 'kd' )
+
+		draw.SimpleText( LANG.GetTranslation( 'nick' ), 'Tab.2', 10, 0, DMColor.label_text )
+		draw.SimpleText( LANG.GetTranslation( 'ping' ), 'Tab.2', w - surface.GetTextSize( 'Ping' ) - 10, 0, DMColor.label_text )
+		draw.SimpleText( kd, 'Tab.2', w * 0.5 - surface.GetTextSize( kd ) * 0.5, 0, DMColor.label_text )
 	end
 
 	for k, v in pairs( player.GetAll() ) do
@@ -135,7 +137,7 @@ function GMopenTab()
 			local btn_return = vgui.Create( 'dm_button', leftPanel )
 			btn_return:Dock( TOP )
 			btn_return:SetTall( 40 )
-			btn_return:SetText( 'Back to the list of players' )
+			btn_return:SetText( LANG.GetTranslation( 'backList' ) )
 			btn_return.DoClick = function()
 				menuTab:Remove()
 
@@ -186,7 +188,7 @@ function GMopenTab()
 					cmdButton:SetTall( 40 )
 
 					if ( n.admin ) then
-						cmdButton:SetText( '[' .. DM.Translate( 'Admin', true ) .. '] ' .. n.name )
+						cmdButton:SetText( '[' .. LANG.GetTranslation( 'admin' ) .. '] ' .. n.name )
 					else
 						cmdButton:SetText( n.name )
 					end
@@ -198,7 +200,7 @@ function GMopenTab()
 							if ( LocalPlayer():Admin() ) then
 								n.action( v )
 							else
-								ChatTextAdmin( DM.Translate( 'NotAdmin', true ) )
+								ChatTextAdmin( LANG.GetTranslation( 'notAdmin' ) )
 							end
 						else
 							n.action( v )
@@ -225,22 +227,28 @@ function GMopenTab()
 			local DM = DermaMenu()
 			local steamid = v:SteamID()
 			local steamid64 = v:SteamID64()
+			local name = v:GetNWString( 'ply_name' )
+			local rank = v:GetRank()
 
-			DM:AddOption( v:GetNWString( 'ply_name' ), function()
-				SetClipboardText( v:GetNWString( 'ply_name' ) )
+			DM:AddOption( name, function()
+				SetClipboardText( name )
+
+				ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. name )
 			end ):SetIcon( 'icon16/emoticon_happy.png' )
 			DM:AddOption( 'SteamID:  ' .. steamid, function()
 				SetClipboardText( steamid )
 
-				ChatText( 'Copied: ' .. steamid )
+				ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. steamid )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
 			DM:AddOption( 'SteamID64:  ' .. steamid64, function()
 				SetClipboardText( steamid64 )
 
-				ChatText( 'Copied: ' .. steamid64 )
+				ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. steamid64 )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
-			DM:AddOption( 'Rank:  ' .. v:GetRank(), function()
-				SetClipboardText( v:GetRank() )
+			DM:AddOption( LANG.GetTranslation( 'rank' ) .. ':  ' .. rank, function()
+				SetClipboardText( rank )
+
+				ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. rank )
 			end ):SetIcon( 'icon16/user_suit.png' )
 
 			DM:Open()

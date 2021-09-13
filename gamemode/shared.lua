@@ -10,7 +10,8 @@ local FileSh = function( Important )
 
 	return include( Important )
 end
-local Include = function( f )
+
+DM.Include = function( f )
 	if ( string.find( f, '_sv.lua' ) ) then
 		return FileSv( f )
 	elseif ( string.find( f, '_cl.lua' ) ) then
@@ -19,24 +20,30 @@ local Include = function( f )
 		return FileSh( f )
 	end
 end
-local IncludeDirectory = function( dir )
+
+DM.IncludeDirectory = function( dir )
 	local fol = 'dm/gamemode/' .. dir .. '/'
 	local files, folders = file.Find( fol .. '*', 'LUA' )
 
 	for _, f in ipairs( files ) do
-		Include( fol .. f )
+		DM.Include( fol .. f )
 	end
 end
 
-Include( 'config/main_sh.lua' )
+DM.Include( 'config/main_sh.lua' )
 
-IncludeDirectory( 'core/language' )
-IncludeDirectory( 'core/player' )
-IncludeDirectory( 'core' )
+DM.Include( 'core/language_new/lang_sh.lua' )
 
-Include( 'config/color_cl.lua' )
+DM.IncludeDirectory( 'core/player' )
+DM.IncludeDirectory( 'core' )
 
-IncludeDirectory( 'core/interface/vgui' )
-IncludeDirectory( 'core/interface' )
+DM.Include( 'config/color_cl.lua' )
 
-Include( 'config/cmds_cl.lua' )
+DM.IncludeDirectory( 'core/interface/vgui' )
+DM.IncludeDirectory( 'core/interface' )
+
+if ( CLIENT ) then
+	LANG.Init()
+end
+
+DM.Include( 'config/cmds_cl.lua' )

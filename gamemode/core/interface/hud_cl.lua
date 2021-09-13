@@ -88,7 +88,7 @@ function GM:HUDPaint()
 			local b = 96
 
 			if ( CountOne == 0 and CountTwo == 0 ) then
-				text = 'Empty'
+				text = LANG.GetTranslation( 'empty' )
 
 				b = 100
 			end

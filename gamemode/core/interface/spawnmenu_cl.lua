@@ -3,7 +3,7 @@ local function openSpawnMenu()
 	SpawnMenu:SetSize( math.min( ScrW() - 10, 840 ), math.min( ScrH() - 6, 640 ) )
 	SpawnMenu:Center()
 	SpawnMenu:MakePopup()
-	SpawnMenu:SetTitle( 'SpawnMenu | Taking arms' )
+	SpawnMenu:SetTitle( 'SpawnMenu | ' .. LANG.GetTranslation( 'arms' ) )
 	SpawnMenu:ShowCloseButton( false )
 	SpawnMenu:SetKeyBoardInputEnabled( false )
 

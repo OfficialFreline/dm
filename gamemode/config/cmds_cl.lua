@@ -4,27 +4,27 @@
 	end, true, true ) -- The first bool - for the admin panel or not, the second - for the local player (for the team activator) or not.
 ]]--
 
-AddActionDM( 'Open Steam', function( ply )
+AddActionDM( LANG.GetTranslation( 'openSteam' ), function( ply )
 	ply:ShowProfile()
 end )
 
-AddActionDM( 'Copy SteamID', function( ply )
+AddActionDM( LANG.GetTranslation( 'copySteamID' ), function( ply )
 	local txt = ply:SteamID()
 
 	SetClipboardText( txt )
 
-	ChatText( 'Copied: ' .. txt )
+	ChatText( LANG.GetTranslation( 'copied' ).. txt )
 end )
 
-AddActionDM( 'Copy the position of the player vector', function( ply )
+AddActionDM( LANG.GetTranslation( 'copyPos' ), function( ply )
 	local txt = ( 'Vector( %s )' ):format( string.gsub( tostring( ply:GetPos() ), ' ', ', ' ) )
 
 	SetClipboardText( txt )
 
-	ChatText( 'Copied: ' .. txt )
+	ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. txt )
 end )
 
-local x = 'Change nickname' -- Simplification for the future language system
+local x = LANG.GetTranslation( 'changeNick' )
 
 AddActionDM( x, function( ply )
 	Derma_StringRequest( x, 'Enter the name of the future nickname', '', function( s )
@@ -44,14 +44,14 @@ AddActionDM( x, function( ply )
 	end )
 end, false, true )
 
-AddActionDM( 'Update your database', function( ply )
+AddActionDM( LANG.GetTranslation( 'dataUpdate' ), function( ply )
 	net.Start( 'PlayerCheckData' )
 	net.SendToServer()
 
 	ChatTextAdmin( 'Your details have been updated!' )
 end, false, true )
 
-local x = 'Send private message'
+local x = LANG.GetTranslation( 'sendMsg' )
 
 AddActionDM( x, function( ply )
 	Derma_StringRequest( x, 'Enter your message text', '', function( s )
@@ -71,30 +71,30 @@ AddActionDM( x, function( ply )
 				net.WriteString( s )
 			net.SendToServer( ply )
 
-			chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), DM.Translate( 'You', true ), Color( 255, 255, 255 ), '->', Color( 85, 130, 158 ), ply:GetNick(), Color( 255, 255, 255 ), ': ' .. s )
+			chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), LANG.GetTranslation( 'you' ), Color( 255, 255, 255 ), '->', Color( 85, 130, 158 ), ply:GetNick(), Color( 255, 255, 255 ), ': ' .. s )
 		else
 			chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), 'To myself', Color( 255, 255, 255 ), ': ' .. s )
 		end
 	end )
 end )
 
-AddActionDM( 'Throw away the taken weapon', function( ply )
+AddActionDM( LANG.GetTranslation( 'dropWeapon' ), function( ply )
 	RunConsoleCommand( 'dm_dropswep', LocalPlayer():GetActiveWeapon():GetClass() )
 end, false, true )
 
-AddActionDM( 'Issue admin panel', function( ply )
+AddActionDM( LANG.GetTranslation( 'adminAdd' ), function( ply )
 	net.Start( 'DmAdminSetAdmin' )
 		net.WriteEntity( ply )
 	net.SendToServer()
 end, true, false )
 
-AddActionDM( 'Remove admin panel', function( ply )
+AddActionDM( LANG.GetTranslation( 'adminRemove' ), function( ply )
 	net.Start( 'DmAdminRemoveAdmin' )
 		net.WriteEntity( ply )
 	net.SendToServer()
 end, true, false )
 
-AddActionDM( 'Install HP', function( ply )
+AddActionDM( LANG.GetTranslation( 'setHP' ), function( ply )
 	local DM = DermaMenu()
 
 	DM:AddOption( '15%', function()
@@ -121,11 +121,11 @@ AddActionDM( 'Install HP', function( ply )
 	DM:Open()
 end, true, false )
 
-AddActionDM( 'Commit suicide', function( ply )
+AddActionDM( LANG.GetTranslation( 'killSelf' ), function( ply )
 	RunConsoleCommand( 'kill' )
 end, false, true )
 
-AddActionDM( 'Resize', function( ply )
+AddActionDM( LANG.GetTranslation( 'changeSize' ), function( ply )
 	local DM = DermaMenu()
 
 	DM:AddOption( 'Standart', function()
@@ -151,3 +151,15 @@ AddActionDM( 'Resize', function( ply )
 
 	DM:Open()
 end, true, false )
+
+AddActionDM( LANG.GetTranslation( 'changeLanguage' ), function( ply )
+	local DM = DermaMenu()
+
+	for k, v in ipairs( LANG.GetLanguages() ) do
+		DM:AddOption( v, function()
+			RunConsoleCommand( 'dm_language', v )
+		end )
+	end
+
+	DM:Open()
+end, false, true )
