@@ -36,7 +36,7 @@ function GM:HUDPaint()
 	local health = LocalPlayer():Health()
 
 	if ( health <= 40 ) then
-		if( health <= 30 ) then
+		if ( health <= 30 ) then
 			local blurmul = 0
 			local cutoff = 50
 
@@ -71,7 +71,7 @@ function GM:HUDPaint()
 
 	-- draw.RectBlur( 25 + s, scrh - tall - 25, siz, tall )
 
-	draw.OutlinedBox( 25 + s, scrh - tall - 25, siz, tall, DMColor.frame_background, DMColor.frame_outlined )
+	draw.OutlinedBox( 25 + s, scrh - tall - 25 + 2, siz, tall - 4, DMColor.frame_background, DMColor.frame_outlined )
 	draw.OutlinedBox( 25 + s, scrh - tall - 25, math.Clamp( health, 0, 100 ) * siz * 0.01, tall, Color( 62, 230, 132 ), DMColor.frame_outlined )
 	draw.OutlinedBox( 25, scrh - tall - 25, 25, tall, Color(241, 196, 15), DMColor.frame_outlined ) // Square bar
 
