@@ -96,3 +96,30 @@ concommand.Add( 'dm_dropswep', function( ply, cmd, args )
 
 	drop_swep( ply, weapon )
 end )
+
+local function setRank( ply, user, namerank )
+	if ( not ply:IsPlayer() or ply:Admin() ) then
+
+		local comp
+
+		for l, p in pairs( player.GetAll() ) do
+			if ( p:SteamID64() == user ) then
+				comp = p
+			end
+		end
+
+		// print( comp )
+
+		if ( comp:IsPlayer() ) then
+			comp:SetRank( namerank )
+			comp:DataSave()
+		end
+	end
+end
+
+concommand.Add( 'dm_setrank', function( ply, cmd, args )
+	local steamid64 = args[ 1 ]
+	local rank = args[ 2 ]
+
+	setRank( ply, steamid64, rank )
+end )

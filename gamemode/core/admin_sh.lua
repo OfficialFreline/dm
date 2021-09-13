@@ -30,10 +30,9 @@ if ( SERVER ) then
 		if ( pl:Admin() ) then
 			local target = net.ReadEntity()
 
-			target:SetRank( 'admin' )
-			target:DataSave()
+			RunConsoleCommand( 'dm_setrank', target:SteamID64(), 'admin' )
 
-			sendMsgAll( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Issued admin panel to player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
+			sendMsgAll( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Issued the admin status for the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
 		end
 	end )
 
@@ -41,10 +40,9 @@ if ( SERVER ) then
 		if ( pl:Admin() ) then
 			local target = net.ReadEntity()
 
-			target:SetRank( 'user' )
-			target:DataSave()
+			RunConsoleCommand( 'dm_setrank', target:SteamID64(), 'user' )
 
-			sendMsgAll( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Removed the admin panel from the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
+			sendMsgAll( Color( 202, 68, 68 ), '[', color_white, pl:GetNick(), Color( 202, 68, 68 ), '] ', color_white, 'Removed the admin status of the player ', Color( 102, 95, 180 ), target:GetNick(), color_white, '.' )
 		end
 	end )
 
