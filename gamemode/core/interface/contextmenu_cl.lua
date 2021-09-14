@@ -88,15 +88,24 @@ local function openModelPanel()
 	sp:Dock( FILL )
 	sp:DockMargin( 4, 0, 0, 0 )
 
+	local f
+
 	for name, model in SortedPairs( player_manager.AllValidModels() ) do
 		local btn
 
 		local pan = vgui.Create( 'DPanel', sp )
 		pan:SetTall( 80 )
 		pan:Dock( TOP )
+
+		if ( not f ) then
+			f = true
+		else
+			pan:DockMargin( 0, 8, 0, 0 )
+		end
+
 		pan.Paint = function( self, w, h )
 			if ( model == LocalPlayer():GetModel() ) then
-				draw.RoundedBox( 8, 3, 3, w - 6, h - 6, Color(231, 76, 60) )
+				draw.RoundedBox( 8, 0, 0, w, h, Color(231, 76, 60) )
 			end
 		end
 
@@ -117,7 +126,7 @@ local function openContextMenu()
 	CreateCM( 'Option selection' )
 
 	local btn_1 = vgui.Create( 'dm_button', ContextMenu )
-	btn_1:SetWide( ContextMenu:GetWide() * 0.5 - 5 )
+	btn_1:SetWide( ContextMenu:GetWide() * 0.5 - 8 )
 	btn_1:Dock( LEFT )
 	btn_1:SetText( LANG.GetTranslation( 'localActions' ) )
 	btn_1.DoClick = function()
@@ -127,7 +136,7 @@ local function openContextMenu()
 	end
 
 	local btn_2 = vgui.Create( 'dm_button', ContextMenu )
-	btn_2:SetWide( ContextMenu:GetWide() * 0.5 - 5 )
+	btn_2:SetWide( ContextMenu:GetWide() * 0.5 - 8 )
 	btn_2:Dock( RIGHT )
 	btn_2:SetText( LANG.GetTranslation( 'models' ) )
 	btn_2.DoClick = function()
