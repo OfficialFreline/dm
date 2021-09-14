@@ -20,6 +20,13 @@ function GMopenTab()
 		draw.OutlinedBox( 0, 0, w, 70, DMColor.frame_bar, Color(0, 0, 0) ) -- Bar
 	end
 
+	local main_panel = vgui.Create( 'DPanel', menuTab )
+	main_panel:Dock( FILL )
+	main_panel:DockMargin( 8, 78, 8, 8 )
+	main_panel.Paint = function( self, w, h )
+		draw.Blur( self )
+	end
+
 	local Title = 'Deathmatch'
 
 	surface.SetFont( 'Tab.1' )
@@ -31,12 +38,9 @@ function GMopenTab()
 	TitleLabel:SetFont( 'Tab.1' )
 	TitleLabel:SetTextColor( DMColor.label_text )
 
-	local sp = vgui.Create( 'dm_scrollpanel', menuTab )
+	local sp = vgui.Create( 'dm_scrollpanel', main_panel )
 	sp:Dock( FILL )
-	sp:DockMargin( 10, 80, 10, 10 )
-	sp.Paint = function( self, w, h )
-		draw.Blur( self )
-	end
+	sp.Paint = nil
 
 	surface.SetFont( 'Tab.2' )
 
@@ -106,33 +110,21 @@ function GMopenTab()
 		playerButton.DoClick = function()
 			surface.PlaySound( 'UI/buttonclickrelease.wav' )
 
-			menuTab:Clear()
+			main_panel:Clear()
 
 			surface.SetFont( 'Tab.1' )
 
 			local nick = v:GetNick() or ''
 			local txt = '< ' .. nick .. ' >' 
 
-			local PlayerLabel = vgui.Create( 'DLabel', menuTab )
-			PlayerLabel:SetPos( menuTab:GetWide() * 0.5 - surface.GetTextSize( txt ) * 0.5, 11 )
-			PlayerLabel:SetSize( menuTab:GetWide(), 50 )
-			PlayerLabel:SetText( txt )
-			PlayerLabel:SetFont( 'Tab.1' )
-			PlayerLabel:SetTextColor( DMColor.label_text )
+			TitleLabel:SetText( txt )
 
-			local globalPanel = vgui.Create( 'DPanel', menuTab )
-			globalPanel:Dock( FILL )
-			globalPanel:DockMargin( 10, 80, 10, 10 )
-			globalPanel.Paint = function( self, w, h )
-				draw.Blur( self )
-			end
+			local w = main_panel:GetWide()
 
-			local w = menuTab:GetWide() - 20
-
-			local leftPanel = vgui.Create( 'DPanel', globalPanel )
+			local leftPanel = vgui.Create( 'DPanel', main_panel )
 			leftPanel:Dock( LEFT )
 			leftPanel:SetWide( w / 2.6 )
-			leftPanel.Paint = nil	
+			leftPanel.Paint = nil
 
 			local btn_return = vgui.Create( 'dm_button', leftPanel )
 			btn_return:Dock( TOP )
@@ -144,13 +136,9 @@ function GMopenTab()
 				GMopenTab()
 			end
 
-			local playerPrev_panel = vgui.Create( 'DPanel', leftPanel )
-			playerPrev_panel:Dock( FILL )
-			playerPrev_panel:DockMargin( 0, 8, 0, 0 )
-			playerPrev_panel.Paint = nil
-
-			local playerPrev = vgui.Create( 'DModelPanel', playerPrev_panel )
+			local playerPrev = vgui.Create( 'DModelPanel', leftPanel )
 			playerPrev:Dock( FILL )
+			playerPrev:DockMargin( 0, 4, 0, 0 )
 			playerPrev:SetModel( v:GetModel() or 'models/player/alyx.mdl' )
 			playerPrev:SetCamPos( Vector( 45, 15, 45 ) )
 			playerPrev:SetFOV( 58 )
@@ -168,7 +156,7 @@ function GMopenTab()
 				draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 4 )
 			end
 
-			local scrollpanel = vgui.Create( 'dm_scrollpanel', globalPanel )
+			local scrollpanel = vgui.Create( 'dm_scrollpanel', main_panel )
 			scrollpanel:Dock( RIGHT )
 			scrollpanel:SetWide( w - leftPanel:GetWide() - 10 )
 
@@ -220,7 +208,7 @@ function GMopenTab()
 		playerAvatarButton:SetText( '' )
 		playerAvatarButton.Paint = function( self, w, h )
 			if ( self:IsHovered() ) then
-				draw.RoundedBox( 100, 0, 0, w, h, Color( 0, 0, 0, 40 ) )
+				draw.RoundedBox( 100, 0, 0, w, h, Color(0, 0, 0, 40) )
 			end
 		end
 		playerAvatarButton.DoClick = function()
@@ -229,26 +217,27 @@ function GMopenTab()
 			local steamid64 = v:SteamID64()
 			local name = v:GetNWString( 'ply_name' )
 			local rank = v:GetRank()
+			local copy = LANG.GetTranslation( 'copied' )
 
 			DM:AddOption( name, function()
 				SetClipboardText( name )
 
-				ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. name )
+				ChatText( copy .. ': ' .. name )
 			end ):SetIcon( 'icon16/emoticon_happy.png' )
 			DM:AddOption( 'SteamID:  ' .. steamid, function()
 				SetClipboardText( steamid )
 
-				ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. steamid )
+				ChatText( copy .. ': ' .. steamid )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
 			DM:AddOption( 'SteamID64:  ' .. steamid64, function()
 				SetClipboardText( steamid64 )
 
-				ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. steamid64 )
+				ChatText( copy .. ': ' .. steamid64 )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
 			DM:AddOption( LANG.GetTranslation( 'rank' ) .. ':  ' .. rank, function()
 				SetClipboardText( rank )
 
-				ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. rank )
+				ChatText( copy .. ': ' .. rank )
 			end ):SetIcon( 'icon16/user_suit.png' )
 
 			DM:Open()
