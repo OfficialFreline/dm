@@ -16,8 +16,8 @@ if ( CLIENT ) then
 		chat.PlaySound()
 	end )
 
-	function ChatText( text )
-		chat.AddText( Color( 85, 78, 164 ), '<> ', color_white, text )
+	function ChatText( ... )
+		chat.AddText( Color( 85, 78, 164 ), '<> ', color_white, ... )
 		chat.PlaySound()
 	end
 
@@ -52,6 +52,12 @@ if ( CLIENT ) then
 		chat.AddText( unpack( ct ) )
 	
 		return true
+	end
+
+	function textCopy( content )
+		SetClipboardText( content )
+
+		ChatText( LANG.GetTranslation( 'copied' ) .. ': ', Color(244,255,190), content )
 	end
 end
 

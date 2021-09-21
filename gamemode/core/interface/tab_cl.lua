@@ -220,24 +220,16 @@ function GMopenTab()
 			local copy = LANG.GetTranslation( 'copied' )
 
 			DM:AddOption( name, function()
-				SetClipboardText( name )
-
-				ChatText( copy .. ': ' .. name )
+				textCopy( name )
 			end ):SetIcon( 'icon16/emoticon_happy.png' )
 			DM:AddOption( 'SteamID:  ' .. steamid, function()
-				SetClipboardText( steamid )
-
-				ChatText( copy .. ': ' .. steamid )
+				textCopy( steamid )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
 			DM:AddOption( 'SteamID64:  ' .. steamid64, function()
-				SetClipboardText( steamid64 )
-
-				ChatText( copy .. ': ' .. steamid64 )
+				textCopy( steamid64 )
 			end ):SetIcon( 'icon16/sport_8ball.png' )
 			DM:AddOption( LANG.GetTranslation( 'rank' ) .. ':  ' .. rank, function()
-				SetClipboardText( rank )
-
-				ChatText( copy .. ': ' .. rank )
+				textCopy( rank )
 			end ):SetIcon( 'icon16/user_suit.png' )
 
 			DM:Open()

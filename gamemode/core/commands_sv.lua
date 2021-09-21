@@ -123,3 +123,33 @@ concommand.Add( 'dm_setrank', function( ply, cmd, args )
 
 	setRank( ply, steamid64, rank )
 end )
+
+local function setNick( ply, nick )
+	sendMsgAll( Color(15, 170, 235), ply:GetNick(), Color(255,255,255), ' changed his nickname to ', Color(90,200,140), nick, Color(255,255,255), '.' )
+
+	ply:SetNick( nick )
+end
+
+concommand.Add( 'dm_setnick', function( ply, cmd, args )
+	local text = args[ 1 ]
+
+	setNick( ply, text )
+end )
+
+concommand.Add( 'dm_checkdata', function( ply, cmd, args )
+	if ( not ply:IsPlayer() ) then
+		return
+	end
+
+	local Data = {}
+
+	Data = ply:DataLoad()
+
+	ply:SetNick( Data.name )
+	ply:SetRank( Data.rank )
+	ply:SetFrags( Data.frags )
+	ply:SetDeaths( Data.deaths )
+	ply:SetModel( Data.model )
+
+	sendMsg( ply, Color(255,255,255), 'Your details have been updated!' )
+end )

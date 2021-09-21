@@ -11,17 +11,13 @@ end )
 AddActionDM( LANG.GetTranslation( 'copySteamID' ), function( ply )
 	local txt = ply:SteamID()
 
-	SetClipboardText( txt )
-
-	ChatText( LANG.GetTranslation( 'copied' ).. txt )
+	textCopy( txt )
 end )
 
 AddActionDM( LANG.GetTranslation( 'copyPos' ), function( ply )
 	local txt = ( 'Vector( %s )' ):format( string.gsub( tostring( ply:GetPos() ), ' ', ', ' ) )
 
-	SetClipboardText( txt )
-
-	ChatText( LANG.GetTranslation( 'copied' ) .. ': ' .. txt )
+	textCopy( txt )
 end )
 
 local x = LANG.GetTranslation( 'changeNick' )
@@ -38,17 +34,12 @@ AddActionDM( x, function( ply )
 			return
 		end
 
-		net.Start( 'PlayerChangeNick' )
-			net.WriteString( s )
-		net.SendToServer()
+		RunConsoleCommand( 'dm_setnick', s )
 	end )
 end, false, true )
 
 AddActionDM( LANG.GetTranslation( 'dataUpdate' ), function( ply )
-	net.Start( 'PlayerCheckData' )
-	net.SendToServer()
-
-	ChatTextAdmin( 'Your details have been updated!' )
+	RunConsoleCommand( 'dm_checkdata' )
 end, false, true )
 
 local x = LANG.GetTranslation( 'sendMsg' )

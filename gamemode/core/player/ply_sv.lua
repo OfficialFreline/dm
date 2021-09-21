@@ -1,26 +1,3 @@
-util.AddNetworkString( 'PlayerChangeNick' )
-util.AddNetworkString( 'PlayerCheckData' )
-
-net.Receive( 'PlayerChangeNick', function( len, pl )
-	local nick = net.ReadString()
-	
-	sendMsgAll( Color( 15, 170, 235 ), pl:GetNick(), color_white, ' changed his nickname to ', Color( 70, 162, 112 ), nick, color_white, '.' )
-
-	pl:SetNick( nick )
-end )
-
-net.Receive( 'PlayerCheckData', function( len, pl )
-	local Data = {}
-
-	Data = pl:DataLoad()
-
-	pl:SetNick( Data.name )
-	pl:SetRank( Data.rank )
-	pl:SetFrags( Data.frags )
-	pl:SetDeaths( Data.deaths )
-	pl:SetModel( Data.model )
-end )
-
 local PLAYER = FindMetaTable( 'Player' )
 
 function GM:PlayerInitialSpawn( ply )
