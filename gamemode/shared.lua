@@ -32,7 +32,7 @@ end
 
 DM.Include( 'config/main_sh.lua' )
 
-DM.Include( 'core/language_new/lang_sh.lua' )
+DM.Include( 'core/language/lang_sh.lua' )
 
 DM.IncludeDirectory( 'core/player' )
 DM.IncludeDirectory( 'core' )
