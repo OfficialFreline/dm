@@ -8,6 +8,10 @@ hook.Add( 'RenderScene', 'Hud', function( pos )
 end )
 
 hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
+	if ( not LocalPlayer():Alive() ) then
+		return
+	end
+
 	local Distantion = ply:GetPos():Distance( EyePos )
 
 	if ( Distantion > 550 or not ply:Alive() ) then
