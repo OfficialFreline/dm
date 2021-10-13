@@ -24,7 +24,7 @@ hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
 			
 	local Attach = ply:GetAttachment( Bone )
 	local ColorAlpha = 255 * ( 1 - math.Clamp( ( Distantion - 450 ) * 0.01, 0, 1 ) )
-	local TextNick = ply:Nick()
+	local TextNick = ply:GetNick()
 
 	cam.Start3D2D( Attach.Pos + Vector( 0, 0, 15 ), Angle( 0, ( Attach.Pos - EyePos ):Angle().y - 90, 90 ), 0.05 )
 		draw.SimpleTextOutlined( TextNick, 'Hud.2', 0, 0, Color( 255, 255, 255, ColorAlpha ), 1, 1, 2, Color( 80, 80, 80, ColorAlpha ) )
