@@ -8,8 +8,6 @@ hook.Add( 'RenderScene', 'Hud', function( pos )
 end )
 
 hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
-	surface.SetFont( 'Hud.2' )
-
 	local Distantion = ply:GetPos():Distance( EyePos )
 
 	if ( Distantion > 550 or not ply:Alive() ) then
