@@ -104,7 +104,7 @@ local function openModelPanel()
 		end
 
 		pan.Paint = function( self, w, h )
-			if ( model == LocalPlayer():GetModel() ) then
+			if ( string.lower( model ) == LocalPlayer():GetModel() ) then
 				draw.RoundedBox( 8, 0, 0, w, h, Color(231, 76, 60) )
 			end
 		end
