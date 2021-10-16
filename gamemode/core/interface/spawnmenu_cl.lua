@@ -53,6 +53,7 @@ local function openSpawnMenu()
 		local icon_wep = vgui.Create( 'DPanel', pan )
 		icon_wep:SetWide( 138 )
 		icon_wep:Dock( LEFT )
+		icon_wep:DockMargin( 0, 0, 4, 0 )
 
 		local mat_name = v.IconOverride or 'entities/' .. v.ClassName .. '.png'
 		local mat = Material( mat_name )
@@ -64,11 +65,11 @@ local function openSpawnMenu()
 		end
 
 		icon_wep.Paint = function( self, w, h )
+			draw.RoundedBox( 4, 4, 4, w - 8, h - 8, DMColor.frame_bar )
+
 			surface.SetDrawColor( self:IsHovered() and Color(236,236,236) or Color(255, 255, 255) )
 			surface.SetMaterial( mat )
-			surface.DrawTexturedRect( 5, 5, h - 10, h - 10 )
-
-			draw.OutlinedBox( 2, 2, w - 4, h - 4, DMColor.clear, DMColor.frame_bar, 4 )
+			surface.DrawTexturedRect( 10, 10, w - 20, h - 20 )
 		end
 	end
 end
