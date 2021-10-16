@@ -77,7 +77,7 @@ function GMopenTab()
 				if ( self:IsHovered() or playerAvatarButton:IsHovered() ) then
 					playerAvatar:SetVisible( true )
 
-					x = 30
+					x = 35
 				else
 					playerAvatar:SetVisible( false )
 
