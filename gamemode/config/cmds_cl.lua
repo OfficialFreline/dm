@@ -70,7 +70,15 @@ AddActionDM( x, function( ply )
 end )
 
 AddActionDM( LANG.GetTranslation( 'dropWeapon' ), function( ply )
-	RunConsoleCommand( 'dm_dropswep', LocalPlayer():GetActiveWeapon():GetClass() )
+	local wep = LocalPlayer():GetActiveWeapon()
+
+	if ( not IsValid( wep ) ) then
+		ChatText( "You don't have a gun on you!" )
+
+		return
+	end
+
+	RunConsoleCommand( 'dm_dropswep', wep:GetClass() )
 end, false, true )
 
 AddActionDM( LANG.GetTranslation( 'adminAdd' ), function( ply )
