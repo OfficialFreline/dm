@@ -214,7 +214,7 @@ function GMopenTab()
 		playerAvatarButton.DoClick = function()
 			local DM = DermaMenu()
 			local steamid = v:SteamID()
-			local steamid64 = v:SteamID64()
+			local steamid64 = v:SteamID64() or 'NULL'
 			local name = v:GetNWString( 'ply_name' )
 			local rank = v:GetRank()
 			local copy = LANG.GetTranslation( 'copied' )
