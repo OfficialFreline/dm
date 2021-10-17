@@ -153,7 +153,7 @@ function GMopenTab()
 			local playerPrev_panel2 = vgui.Create( 'DPanel', playerPrev )
 			playerPrev_panel2:Dock( FILL )
 			playerPrev_panel2.Paint = function( self, w, h )
-				draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 4 )
+				draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 6 )
 			end
 
 			local scrollpanel = vgui.Create( 'dm_scrollpanel', main_panel )

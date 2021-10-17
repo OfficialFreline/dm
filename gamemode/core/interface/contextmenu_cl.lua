@@ -69,7 +69,7 @@ local function openModelPanel()
 	playerPrev_panel:Dock( LEFT )
 	playerPrev_panel:SetWide( ContextMenu:GetWide() / 2.6 )
 	playerPrev_panel.Paint = function( self, w, h )
-		draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 4 )
+		draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 6 )
 	end
 
 	local playerPrev = vgui.Create( 'DModelPanel', playerPrev_panel )
