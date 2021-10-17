@@ -82,40 +82,29 @@ AddActionDM( LANG.GetTranslation( 'dropWeapon' ), function( ply )
 end, false, true )
 
 AddActionDM( LANG.GetTranslation( 'adminAdd' ), function( ply )
-	net.Start( 'DmAdminSetAdmin' )
-		net.WriteEntity( ply )
-	net.SendToServer()
+	RunConsoleCommand( 'dm_setrank', ply:SteamID64(), 'admin' )
 end, true, false )
 
 AddActionDM( LANG.GetTranslation( 'adminRemove' ), function( ply )
-	net.Start( 'DmAdminRemoveAdmin' )
-		net.WriteEntity( ply )
-	net.SendToServer()
+	RunConsoleCommand( 'dm_setrank', ply:SteamID64(), 'user' )
 end, true, false )
 
 AddActionDM( LANG.GetTranslation( 'setHP' ), function( ply )
 	local DM = DermaMenu()
 
-	DM:AddOption( '15%', function()
-		net.Start( 'DmAdminSetHP' )
-			net.WriteEntity( ply )
-			net.WriteString( 15 )
-		net.SendToServer()
-	end )
+	local tabl_hp = {
+		15,
+		25,
+		50,
+		75,
+		100,
+	}
 
-	DM:AddOption( '50%', function()
-		net.Start( 'DmAdminSetHP' )
-			net.WriteEntity( ply )
-			net.WriteString( 50 )
-		net.SendToServer()
-	end )
-
-	DM:AddOption( '100%', function()
-		net.Start( 'DmAdminSetHP' )
-			net.WriteEntity( ply )
-			net.WriteString( 100 )
-		net.SendToServer()
-	end )
+	for x, c in ipairs( tabl_hp ) do
+		DM:AddOption( c .. '%', function()
+			RunConsoleCommand( 'dm_sethp', ply:SteamID64(), c )
+		end )	
+	end
 
 	DM:Open()
 end, true, false )

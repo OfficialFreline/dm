@@ -1,3 +1,5 @@
+local color_white = Color(255,255,255)
+
 local function give_swep( ply, wepname )
 	if ( not IsValid( ply ) ) then
 		return
@@ -99,7 +101,6 @@ end )
 
 local function setRank( ply, user, namerank )
 	if ( not ply:IsPlayer() or ply:Admin() ) then
-
 		local comp
 
 		for l, p in pairs( player.GetAll() ) do
@@ -152,4 +153,29 @@ concommand.Add( 'dm_checkdata', function( ply, cmd, args )
 	ply:SetModel( Data.model )
 
 	sendMsg( ply, Color(255,255,255), 'Your details have been updated!' )
+end )
+
+local function setHP( ply, user, health )
+	if ( not ply:IsPlayer() or ply:Admin() ) then
+		local comp
+
+		for l, p in pairs( player.GetAll() ) do
+			if ( p:SteamID64() == user ) then
+				comp = p
+			end
+		end
+
+		if ( comp:IsPlayer() ) then
+			comp:SetHealth( health )
+
+			sendMsgAll( Color(202, 68, 68), '[', color_white, ply:GetNick(), Color(202, 68, 68), '] ', color_white, 'Installed ', Color(102, 95, 180), tonumber( health ) .. '%', color_white, ' health for the player ', Color(102, 95, 180), comp:GetNick(), color_white, '.' )
+		end
+	end
+end
+
+concommand.Add( 'dm_sethp', function( ply, cmd, args )
+	local steamid64 = args[ 1 ]
+	local hp = args[ 2 ]
+
+	setHP( ply, steamid64, hp )
 end )
