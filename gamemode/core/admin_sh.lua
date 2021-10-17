@@ -33,7 +33,7 @@ if ( SERVER ) then
 			target:SetViewOffset( Vector( 0, 0, 64 ) * scale )
 			target:SetViewOffsetDucked( Vector( 0, 0, 28 ) * scale )
 
-			sendMsgAll( Color(202, 68, 68), '[', color_white, pl:GetNick(), Color(202, 68, 68), '] ', color_white, 'Resized player ', Color(102, 95, 180), target:GetNick(), color_white, ' to ', Color(102, 95, 180), scale, color_white, '.' )
+			sendMsgAll( Color(202, 68, 68), '[', color_white, pl:GetNick(), Color(202, 68, 68), '] ', color_white, 'Resized player ', Color(102, 95, 180), target:GetNick(), color_white, ' to ', Color(102, 95, 180), tostring( scale ), color_white, '.' )
 		end
 	end )
 end
