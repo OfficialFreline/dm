@@ -41,19 +41,24 @@ local function openSpawnMenu()
 		pan:DockMargin( 0, 2, 0, 0 )
 		pan.Paint = nil
 
+		local function SelectWeapon( wep )
+			surface.PlaySound( 'UI/buttonclickrelease.wav' )
+
+			RunConsoleCommand( 'dm_giveswep', wep )
+		end
+
 		local button = vgui.Create( 'dm_button', pan )
 		button:Dock( FILL )
 		button:SetText( v.PrintName or v.ClassName )
 		button.DoClick = function()
-			surface.PlaySound( 'UI/buttonclickrelease.wav' )
-
-			RunConsoleCommand( 'dm_giveswep', v.ClassName )
+			SelectWeapon( v.ClassName )
 		end
 
-		local icon_wep = vgui.Create( 'DPanel', pan )
+		local icon_wep = vgui.Create( 'DButton', pan )
 		icon_wep:SetWide( 138 )
 		icon_wep:Dock( LEFT )
 		icon_wep:DockMargin( 0, 0, 4, 0 )
+		icon_wep:SetText( '' )
 
 		local mat_name = v.IconOverride or 'entities/' .. v.ClassName .. '.png'
 		local mat = Material( mat_name )
@@ -70,6 +75,9 @@ local function openSpawnMenu()
 			surface.SetDrawColor( self:IsHovered() and Color(236,236,236) or Color(255, 255, 255) )
 			surface.SetMaterial( mat )
 			surface.DrawTexturedRect( 10, 10, w - 20, h - 20 )
+		end
+		icon_wep.DoClick = function()
+			SelectWeapon( v.ClassName )
 		end
 	end
 end
