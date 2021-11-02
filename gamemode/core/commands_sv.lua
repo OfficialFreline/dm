@@ -126,13 +126,19 @@ concommand.Add( 'dm_setrank', function( ply, cmd, args )
 end )
 
 local function setNick( ply, nick )
-	sendMsgAll( Color(15, 170, 235), ply:GetNick(), Color(255,255,255), ' changed his nickname to ', Color(90,200,140), nick, Color(255,255,255), '.' )
+	sendMsgAll( Color(15, 170, 235), ply:GetNick(), color_white, ' changed his nickname to ', Color(90,200,140), nick, color_white, '.' )
 
 	ply:SetNick( nick )
 end
 
 concommand.Add( 'dm_setnick', function( ply, cmd, args )
 	local text = args[ 1 ]
+
+	if ( string.len( text ) < 3 or string.len( text ) > 20 ) then
+		sendMsg( ply, color_white, 'Your nick is too ', Color(255,252,96), ( string.len( text ) < 3 and 'short' ) or 'long', color_white, '.' )
+
+		return
+	end
 
 	setNick( ply, text )
 end )
@@ -152,7 +158,7 @@ concommand.Add( 'dm_checkdata', function( ply, cmd, args )
 	ply:SetDeaths( Data.deaths )
 	ply:SetModel( Data.model )
 
-	sendMsg( ply, Color(255,255,255), 'Your details have been updated!' )
+	sendMsg( ply, color_white, 'Your details have been updated!' )
 end )
 
 local function setHP( ply, user, health )

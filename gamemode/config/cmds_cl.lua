@@ -24,15 +24,6 @@ local x = LANG.GetTranslation( 'changeNick' )
 
 AddActionDM( x, function( ply )
 	Derma_StringRequest( x, 'Enter the name of the future nickname', '', function( s )
-		if ( string.len( s ) > 30 ) then
-			ChatText( 'Nick is too big!' )
-
-			return
-		elseif ( string.len( s ) <= 2 ) then
-			ChatText( 'Nick is too small!' )
-
-			return
-		end
 
 		RunConsoleCommand( 'dm_setnick', s )
 	end )
