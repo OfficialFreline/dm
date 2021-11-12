@@ -10,6 +10,6 @@ DMColor = DMColor or {
 
 	clear = Color(0,0,0,0),
 
-	sp = Color(230, 126, 34),
-	sp_hov = Color(211, 84, 0),
+	sp = Color(230, 152, 34),
+	sp_hov = Color(211, 120, 0),
 }
