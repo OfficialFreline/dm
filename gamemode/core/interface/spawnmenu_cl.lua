@@ -75,6 +75,13 @@ local function openSpawnMenu()
 			surface.SetDrawColor( self:IsHovered() and Color(236,236,236) or Color(255, 255, 255) )
 			surface.SetMaterial( mat )
 			surface.DrawTexturedRect( 10, 10, w - 20, h - 20 )
+
+			if ( icon_wep:IsHovered() ) then
+				
+				button.Depressed = true
+			else
+				button.Depressed = false
+			end
 		end
 		icon_wep.DoClick = function()
 			SelectWeapon( v.ClassName )
