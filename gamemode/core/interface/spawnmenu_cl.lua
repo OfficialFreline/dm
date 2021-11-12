@@ -77,10 +77,9 @@ local function openSpawnMenu()
 			surface.DrawTexturedRect( 10, 10, w - 20, h - 20 )
 
 			if ( icon_wep:IsHovered() ) then
-				
-				button.Depressed = true
+				button.Depr = true
 			else
-				button.Depressed = false
+				button.Depr = false
 			end
 		end
 		icon_wep.DoClick = function()
