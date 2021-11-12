@@ -55,7 +55,7 @@ function GM:HUDPaint()
 			DrawMotionBlur( 0.15 * blurmul, 0.955 * blurmul, 0.07 * blurmul )
 		end
 
-		surface.SetDrawColor( 135, 0, 0, 160 * ( 1 - math.Clamp( health * 0.02, 0, 1 ) ) )
+		surface.SetDrawColor( 0, 0, 0, 160 * ( 1 - math.Clamp( health * 0.02, 0, 1 ) ) )
 		surface.DrawRect( 0, 0, scrw, scrh )
 	end
 
@@ -112,6 +112,7 @@ local DeleteHudElementsList = {
 	[ 'CHudCrosshair' ] = false,
 	[ 'CHudAmmo' ] = true,
 	[ 'CHudSecondaryAmmo' ] = true,
+	[ 'CHudDamageIndicator' ] = true,
 }
 
 hook.Add( 'HUDShouldDraw', 'Hud', function( name )
