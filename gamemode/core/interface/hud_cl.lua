@@ -61,7 +61,8 @@ function GM:HUDPaint()
 
 	-- Death
 	if ( not LocalPlayer():Alive() ) then
-		draw.SimpleTextOutlined( LANG.GetTranslation( 'player_death' ), 'Hud.Death', scrw * 0.5, scrh * 0.5, color_white, 1, 1, 1, color_black )
+		// Who wants to - will use
+		-- draw.SimpleTextOutlined( LANG.GetTranslation( 'player_death' ), 'Hud.Death', scrw * 0.5, scrh * 0.5, color_white, 1, 1, 1, color_black )
 
 		return
 	end
