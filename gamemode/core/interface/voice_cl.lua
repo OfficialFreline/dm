@@ -5,17 +5,16 @@ function PANEL:Init()
 	self.LabelName = vgui.Create( 'DLabel', self )
 	self.LabelName:SetFont( 'GModNotify' )
 	self.LabelName:Dock( FILL )
-	self.LabelName:DockMargin( 6, 0, 0, 0 )
+	self.LabelName:DockMargin( 4, 0, 0, 0 )
 	self.LabelName:SetTextColor( DMColor.label_text )
 
 	self.Avatar = vgui.Create( 'dm_avatar', self )
 	self.Avatar:Dock( LEFT )
-	self.Avatar:DockMargin( 1, 0, 0, 0 )
 	self.Avatar:SetSize( 32, 32 )
 
-	self:SetSize( 250, 40 )
+	self:SetSize( 250, 38 )
 	self:DockPadding( 4, 4, 4, 4 )
-	self:DockMargin( 2, 2, 2, 2 )
+	self:DockMargin( 1, 1, 1, 1 )
 	self:Dock( TOP )
 end
 
@@ -50,7 +49,7 @@ function PANEL:Paint( w, h )
 
 		local w2, h2 = surface.GetTextSize( nick )
 
-		w2 = w2 + 32 + 16
+		w2 = w2 + 32 + 12
 
 		self:SetSize( w2, h )
 		self.lastw = w2
@@ -139,7 +138,7 @@ local function CreateVoiceVGUI()
 	g_VoicePanelList = vgui.Create( 'DPanel' )
 	g_VoicePanelList:ParentToHUD()
 	g_VoicePanelList:SetPos( 20, 20 )
-	g_VoicePanelList:SetSize( 250, ScrH() - 40 )
+	g_VoicePanelList:SetSize( 250, ScrH() - 38 )
 	g_VoicePanelList:SetDrawBackground( false )
 end
 
