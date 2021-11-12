@@ -18,6 +18,7 @@ i.copied = 'Скопировано'
 // ContextMenu
 i.localActions = 'Локальные действия'
 i.models = 'Модели'
+i.options = 'Выбор опции'
 
 // SpawnMenu
 i.arms = 'Взятие вооружения'

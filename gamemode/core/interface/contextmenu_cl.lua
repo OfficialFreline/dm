@@ -123,7 +123,7 @@ local function openModelPanel()
 end
 
 local function openContextMenu()
-	CreateCM( 'Option selection' )
+	CreateCM( LANG.GetTranslation( 'options' ) )
 
 	local btn_1 = vgui.Create( 'dm_button', ContextMenu )
 	btn_1:SetWide( ContextMenu:GetWide() * 0.5 - 8 )

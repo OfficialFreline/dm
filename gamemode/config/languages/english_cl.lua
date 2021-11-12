@@ -18,6 +18,7 @@ i.copied = 'Copied'
 // ContextMenu
 i.localActions = 'Local actions'
 i.models = 'Models'
+i.options = 'Option selection'
 
 // SpawnMenu
 i.arms = 'Taking arms'
