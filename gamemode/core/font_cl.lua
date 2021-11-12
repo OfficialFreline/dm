@@ -27,6 +27,15 @@ surface.CreateFont( 'Hud.2', {
 	font = 'Arial',
 } )
 
+
+surface.CreateFont( 'Hud.Death', {
+	size = 54,
+	weight = 800,
+	antialias = true,
+	extended = true,
+	font = 'Arial',
+} )
+
 surface.CreateFont( 'Button', {
 	size = 18,
 	weight = 700,

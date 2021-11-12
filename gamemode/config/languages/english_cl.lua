@@ -6,6 +6,7 @@ i.unknown = 'Unknown'
 i.you = 'You'
 i.notAdmin = 'You are not an admin!'
 i.console = 'Console'
+i.player_death = "You're dead"
 
 // Tab
 i.nick = 'Nick'
