@@ -7,6 +7,7 @@ i.you = 'You'
 i.notAdmin = 'You are not an admin!'
 i.console = 'Console'
 i.player_death = "You're dead"
+i.standart = 'Standart'
 
 // Tab
 i.nick = 'Nick'
@@ -20,6 +21,8 @@ i.copied = 'Copied'
 i.localActions = 'Local actions'
 i.models = 'Models'
 i.options = 'Option selection'
+i.crosshairs = 'Crosshairs'
+i.type_cross = 'Choose the type of your crosshair'
 
 // SpawnMenu
 i.arms = 'Taking arms'

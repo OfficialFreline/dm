@@ -7,6 +7,7 @@ i.you = 'Вы'
 i.notAdmin = 'Вы не админ!'
 i.console = 'Консоль'
 i.player_death = 'Вы умерли'
+i.standart = 'Стандарт'
 
 // Tab
 i.nick = 'Ник'
@@ -20,6 +21,8 @@ i.copied = 'Скопировано'
 i.localActions = 'Локальные действия'
 i.models = 'Модели'
 i.options = 'Выбор опции'
+i.crosshairs = 'Прицелы'
+i.type_cross = 'Выберите тип вашего перекрестия'
 
 // SpawnMenu
 i.arms = 'Взятие вооружения'

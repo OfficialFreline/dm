@@ -104,15 +104,11 @@ function GM:HUDPaint()
 			draw.SimpleText( text, 'Hud.1', 25, scrh - tall - 62, color_white )
 		end 
 	end
-
-	-- Crosshair
-	-- draw_RoundedBox( 0, scrw * 0.5 - 2, scrh * 0.5 - 2, 4, 4, Color( 255, 255, 255, 200 ) )
 end
 
 local DeleteHudElementsList = {
 	[ 'CHudHealth' ] = true,
 	[ 'CHudBattery' ] = true,
-	[ 'CHudCrosshair' ] = false,
 	[ 'CHudAmmo' ] = true,
 	[ 'CHudSecondaryAmmo' ] = true,
 	[ 'CHudDamageIndicator' ] = true,

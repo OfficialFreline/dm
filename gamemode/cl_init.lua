@@ -15,6 +15,8 @@ local surface_DrawTexturedRect = surface.DrawTexturedRect
 local render_UpdateScreenEffectTexture = render.UpdateScreenEffectTexture
 local render_SetScissorRect = render.SetScissorRect
 
+CreateClientConVar( 'crosshair_dm', 0, true )
+
 include( 'shared.lua' )
 
 timer.Create( 'CleanBodys', 60, 0, function()
