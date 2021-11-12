@@ -21,7 +21,8 @@ surface.CreateFont( 'Hud.1', {
 } )
 
 surface.CreateFont( 'Hud.2', {
-	size = 114,
+	size = 100,
+	weight = 700,
 	antialias = true,
 	extended = true,
 	font = 'Arial',
