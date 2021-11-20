@@ -1,7 +1,7 @@
 local PLAYER = FindMetaTable( 'Player' )
 
 function PLAYER:Admin()
-	return ( self:GetRank() == 'admin' or self:IsSuperAdmin() )
+	return ( self:GetRank() == 'admin' or self:IsSuperAdmin() or self:IsAdmin() )
 end
 
 if ( SERVER ) then
