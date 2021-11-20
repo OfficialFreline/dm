@@ -104,7 +104,7 @@ timer.Create( 'TimeConsoleTime', 0.5, 0, function()
 		local NewData = os.date( ' %H:%M ' )
 
 		if ( NewData != OldData ) then
-			MsgC( Color(123,132,255), '|', ( '=' ):rep( 12 ) .. ': ' .. NewData .. ' :' ..  ( '=' ):rep( 12 ), '|' .. '\n' )
+			MsgC( Color(123,132,255), '|', ( '=' ):rep( 12 ) .. ': ', color_white, NewData, Color(123,132,255), ' :' ..  ( '=' ):rep( 12 ), '|' .. '\n' )
 
 			OldData = NewData
 		end
