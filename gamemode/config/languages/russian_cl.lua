@@ -27,6 +27,8 @@ i.thirdperson = 'Третье лицо'
 
 // SpawnMenu
 i.arms = 'Взятие вооружения'
+i.available = 'Доступное'
+i.rest = 'Остальное (для админов)'
 
 // Cmds
 i.openSteam = 'Открыть Steam'

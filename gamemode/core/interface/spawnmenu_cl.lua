@@ -1,3 +1,5 @@
+local color_white = Color(255,255,255)
+
 local function openSpawnMenu()
 	SpawnMenu = vgui.Create( 'dm_frame' )
 	SpawnMenu:SetSize( math.min( ScrW() - 10, 840 ), math.min( ScrH() - 6, 640 ) )
@@ -12,6 +14,14 @@ local function openSpawnMenu()
 	div:SetDividerWidth( 4 )
 	div:SetLeftMin( 20 )
 	div:SetRightMin( 20 )
+
+	local text_info = vgui.Create( 'DPanel', SpawnMenu )
+	text_info:Dock( TOP )
+	text_info:DockMargin( 0, 0, 0, 4 )
+	text_info.Paint = function( self, w, h )
+		draw.SimpleText( LANG.GetTranslation( 'available' ), 'Button', div:GetLeftWidth() * 0.5, h * 0.5, color_white, 1, 1 )
+		draw.SimpleText( LANG.GetTranslation( 'rest' ), 'Button', div:GetLeftWidth() + ( SpawnMenu:GetWide() - div:GetLeftWidth() ) * 0.5, h * 0.5, color_white, 1, 1 )
+	end
 
 	local sp_main = vgui.Create( 'dm_scrollpanel', SpawnMenu )
 	local sp_admin = vgui.Create( 'dm_scrollpanel', SpawnMenu )
@@ -72,7 +82,7 @@ local function openSpawnMenu()
 		icon_wep.Paint = function( self, w, h )
 			draw.RoundedBox( 4, 4, 4, w - 8, h - 8, DMColor.frame_bar )
 
-			surface.SetDrawColor( self:IsHovered() and Color(236,236,236) or Color(255, 255, 255) )
+			surface.SetDrawColor( self:IsHovered() and Color(236,236,236) or color_white )
 			surface.SetMaterial( mat )
 			surface.DrawTexturedRect( 10, 10, w - 20, h - 20 )
 

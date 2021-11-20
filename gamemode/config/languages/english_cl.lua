@@ -27,6 +27,8 @@ i.thirdperson = 'Third Person'
 
 // SpawnMenu
 i.arms = 'Taking arms'
+i.available = 'Available'
+i.rest = 'The rest (for admins)'
 
 // Cmds
 i.openSteam = 'Open Steam'
