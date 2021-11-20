@@ -26,7 +26,7 @@ hook.Add( 'CalcView', 'FrelCalcView', function( pl, origin, ang, fov )
 end )
 
 concommand.Add( 'person_menu', function()
-	local menu = vgui.Create( 'DFrame' )
+	local menu = vgui.Create( 'dm_frame' )
 	menu:SetSize( math.min( 300, ScrW() * 0.2 ), 144 )
 	menu:Center()
 	menu:MakePopup()
