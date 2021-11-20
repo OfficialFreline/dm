@@ -23,6 +23,7 @@ i.models = 'Models'
 i.options = 'Option selection'
 i.crosshairs = 'Crosshairs'
 i.type_cross = 'Choose the type of your crosshair'
+i.thirdperson = 'Third Person'
 
 // SpawnMenu
 i.arms = 'Taking arms'

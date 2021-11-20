@@ -23,6 +23,7 @@ i.models = 'Модели'
 i.options = 'Выбор опции'
 i.crosshairs = 'Прицелы'
 i.type_cross = 'Выберите тип вашего перекрестия'
+i.thirdperson = 'Третье лицо'
 
 // SpawnMenu
 i.arms = 'Взятие вооружения'

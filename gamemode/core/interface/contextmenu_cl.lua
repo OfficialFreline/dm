@@ -189,14 +189,28 @@ local function openContextMenu()
 		openModelPanel()
 	end
 
-	local btn_3 = vgui.Create( 'dm_button', ContextMenu )
-	btn_3:Dock( BOTTOM )
-	btn_3:DockMargin( 0, 4, 0, 0 )
-	btn_3:SetText( LANG.GetTranslation( 'crosshairs' ) )
-	btn_3.DoClick = function()
+	local pan_bottom = vgui.Create( 'DPanel', ContextMenu )
+	pan_bottom:Dock( BOTTOM )
+	pan_bottom:DockMargin( 0, 4, 0, 0 )
+	pan_bottom.Paint = nil
+
+	local btn_bottom_left = vgui.Create( 'dm_button', pan_bottom )
+	btn_bottom_left:SetWide( ContextMenu:GetWide() * 0.5 - 8 )
+	btn_bottom_left:SetText( LANG.GetTranslation( 'crosshairs' ) )
+	btn_bottom_left.DoClick = function()
 		ContextMenu:Remove()
 
 		openCrosshairMenu()
+	end
+
+	local btn_bottom_right = vgui.Create( 'dm_button', pan_bottom )
+	btn_bottom_right:Dock( RIGHT )
+	btn_bottom_right:SetWide( ContextMenu:GetWide() * 0.5 - 8 )
+	btn_bottom_right:SetText( LANG.GetTranslation( 'thirdperson' ) )
+	btn_bottom_right.DoClick = function()
+		ContextMenu:Remove()
+
+		RunConsoleCommand( 'person_menu' )
 	end
 end
 
