@@ -65,15 +65,9 @@ end
 local function openModelPanel()
 	CreateCM( LANG.GetTranslation( 'models' ) )
 
-	local playerPrev_panel = vgui.Create( 'DPanel', ContextMenu )
-	playerPrev_panel:Dock( LEFT )
-	playerPrev_panel:SetWide( ContextMenu:GetWide() / 2.6 )
-	playerPrev_panel.Paint = function( self, w, h )
-		draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 6 )
-	end
-
-	local playerPrev = vgui.Create( 'DModelPanel', playerPrev_panel )
-	playerPrev:Dock( FILL )
+	local playerPrev = vgui.Create( 'DModelPanel', ContextMenu )
+	playerPrev:Dock( LEFT )
+	playerPrev:SetWide( ContextMenu:GetWide() / 2.6 )
 	playerPrev:SetModel( LocalPlayer():GetModel() )
 	playerPrev:SetFOV( 32 )
 	playerPrev.LayoutEntity = function( Entity )
@@ -82,6 +76,12 @@ local function openModelPanel()
 
 	function playerPrev.Entity:GetPlayerColor()
 		return LocalPlayer():GetPlayerColor()
+	end
+
+	local playerPrev_panel = vgui.Create( 'DPanel', playerPrev )
+	playerPrev_panel:Dock( FILL )
+	playerPrev_panel.Paint = function( self, w, h )
+		draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 6 )
 	end
 
 	local sp = vgui.Create( 'dm_scrollpanel', ContextMenu )
@@ -94,7 +94,7 @@ local function openModelPanel()
 		local btn
 
 		local pan = vgui.Create( 'DPanel', sp )
-		pan:SetTall( 80 )
+		pan:SetTall( 30 )
 		pan:Dock( TOP )
 
 		if ( not f ) then
