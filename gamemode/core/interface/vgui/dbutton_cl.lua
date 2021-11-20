@@ -6,7 +6,9 @@ function PANEL:Init()
 end
 
 function PANEL:Paint( w, h )
-	draw.RoundedBox( 8, 0, 0, w, h, ( self:IsDown() or self.Depr ) and Color(22, 160, 133) or self:IsHovered() and DMColor.button_hov or DMColor.button )
+	local r = self:IsDown() and 1 or 0
+
+	draw.RoundedBox( 8, r, r, w - r * 2, h - r * 2, ( self:IsDown() or self.Depr ) and Color(22, 160, 133) or self:IsHovered() and DMColor.button_hov or DMColor.button )
 end
 
 vgui.Register( 'dm_button', PANEL, 'DButton' )
