@@ -114,6 +114,8 @@ local function setRank( ply, user, namerank )
 		if ( comp:IsPlayer() ) then
 			comp:SetRank( namerank )
 			comp:DataSave()
+
+			sendMsgAll( Color(15,170,235), comp:GetNick(), color_white, ' received the rank ', Color(80,200,140), namerank, color_white, '.' )
 		end
 	end
 end
