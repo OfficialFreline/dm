@@ -11,7 +11,7 @@ local function give_swep( ply, wepname )
 
 	if ( not table.HasValue( DM.Config.GreenWeapon, wepname ) ) then
 		if ( list.Get( 'Weapon' )[ wepname ] and not ply:Admin() ) then
-			ply:ChatPrint( 'This weapon can only be issued by the admin.' )
+			ply:SendLua( 'notification.AddLegacy( "This weapon does not enter into the list of available (only for admins)", NOTIFY_ERROR, 2.5 )' )
 			ply:EmitSound( 'buttons/blip1.wav' )
 			
 			return
