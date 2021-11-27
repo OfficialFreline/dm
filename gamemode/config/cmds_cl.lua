@@ -18,10 +18,10 @@ function dmBuildCmd()
 	end )
 
 	AddActionDM( LANG.GetTranslation( 'copyPos' ), function( ply )
-		local txt = ( 'Vector( %s )' ):format( string.gsub( tostring( ply:GetPos() ), ' ', ', ' ) )
+		local txt = ( 'Vector( %s )' ):format( string.gsub( tostring( LocalPlayer():GetPos() ), ' ', ', ' ) )
 
 		textCopy( txt )
-	end )
+	end, false, true )
 
 	local x = LANG.GetTranslation( 'changeNick' )
 
