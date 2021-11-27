@@ -1,5 +1,3 @@
-DMCommandsTable = {}
-
 local ents_FindByClass = ents.FindByClass
 local gui_SetMousePos = gui.SetMousePos
 local gui_MousePos = gui.MousePos
@@ -18,6 +16,8 @@ local render_SetScissorRect = render.SetScissorRect
 CreateClientConVar( 'crosshair_dm', 0, true )
 
 include( 'shared.lua' )
+
+dmBuildCmd()
 
 timer.Create( 'CleanBodys', 60, 0, function()
 	RunConsoleCommand( 'r_cleardecals' )

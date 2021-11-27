@@ -39,11 +39,11 @@ DM.IncludeDirectory( 'core' )
 
 DM.Include( 'config/color_cl.lua' )
 
-DM.IncludeDirectory( 'core/interface/vgui' )
-DM.IncludeDirectory( 'core/interface' )
-
 if ( CLIENT ) then
 	LANG.Init()
 end
 
 DM.Include( 'config/cmds_cl.lua' )
+
+DM.IncludeDirectory( 'core/interface/vgui' )
+DM.IncludeDirectory( 'core/interface' )
