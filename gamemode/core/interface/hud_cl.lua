@@ -1,5 +1,8 @@
-local color_white = Color( 255, 255, 255 )
-local color_black = Color( 0, 0, 0 )
+local color_white = Color(255,255,255)
+local color_black = Color(0,0,0)
+local color_gray = Color(58,58,58)
+local color_red = Color(255,91,91)
+local color_yellow = Color(241,196,15)
 local scrw, scrh = ScrW(), ScrH()
 local draw_RoundedBox = draw.RoundedBox
 
@@ -87,10 +90,10 @@ function GM:HUDPaint()
 	draw.RoundedBox( 4, 25 + s, scrh - tall - 25 + 2, siz, tall - 4, DMColor.frame_background )
 
 	draw.RoundedBox( 4, 24, scrh - tall - 26, 27, tall + 2, DMColor.frame_outlined )
-	draw.RoundedBox( 4, 25, scrh - tall - 25, 25, tall, Color(241, 196, 15), DMColor.frame_outlined )
+	draw.RoundedBox( 4, 25, scrh - tall - 25, 25, tall, color_yellow, DMColor.frame_outlined )
 
 	draw.RoundedBox( 4, 24 + s, scrh - tall - 26, math.Clamp( health, 0, 100 ) * siz * 0.01 + 2, tall + 2, DMColor.frame_outlined )
-	draw.RoundedBox( 4, 25 + s, scrh - tall - 25, math.Clamp( health, 0, 100 ) * siz * 0.01, tall, Color(255,91,91) )
+	draw.RoundedBox( 4, 25 + s, scrh - tall - 25, math.Clamp( health, 0, 100 ) * siz * 0.01, tall, color_red )
 
 	-- Ammo
 	local Weapon = LocalPlayer():GetActiveWeapon()
@@ -110,7 +113,7 @@ function GM:HUDPaint()
 				b = 100
 			end
 
-			draw.SimpleText( text, 'Hud.1', 25, scrh - tall - 62, color_white )
+			draw.SimpleTextOutlined( text, 'Hud.1', 25, scrh - tall - 62, color_white, nil, nil, 1, color_gray )
 		end 
 	end
 end
