@@ -63,19 +63,23 @@ function GM:PlayerBindPress( ply, bind, pressed )
 	return
 end
 
-local Commands_List = {
-	cl_updaterate = 128,
-	cl_cmdrate = 128,
-	gmod_mcore_test = 1,
-	r_threaded_renderables = 1,
-	mat_queue_mode = -1,
-	studio_queue_mode = 1,
-	fps_max = 0,
-}
+// I think not a gamemode should do this)
 
-for k, v in SortedPairs( Commands_List ) do
-	RunConsoleCommand( k, v )
-end
+--[[
+	local Commands_List = {
+		cl_updaterate = 128,
+		cl_cmdrate = 128,
+		gmod_mcore_test = 1,
+		r_threaded_renderables = 1,
+		mat_queue_mode = -1,
+		studio_queue_mode = 1,
+		fps_max = 0,
+	}
+
+	for k, v in SortedPairs( Commands_List ) do
+		RunConsoleCommand( k, v )
+	end
+--]]
 
 local scrw, scrh = ScrW(), ScrH()
 local Mat = Material( 'pp/blurscreen' )
