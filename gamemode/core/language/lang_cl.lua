@@ -105,7 +105,7 @@ function LANG.SetActiveLanguage( lang_name )
 		if ( old_name != lang_name ) then
 			hook.Call( 'DMLanguageChanged', GAMEMODE, old_name, lang_name )
 
-			if ( IsValid( dmBuildCmd ) ) then
+			if ( DMCommandsTable != nil ) then
 				dmBuildCmd()
 			end
 		end
