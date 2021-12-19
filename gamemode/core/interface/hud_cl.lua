@@ -38,6 +38,11 @@ hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
 end )
 
 function GM:HUDPaint()
+	-- Checking to disable hud
+	if ( not GetConVar( 'cl_drawhud' ):GetBool() ) then
+		return
+	end
+
 	-- Effect at low HP
 	local health = LocalPlayer():Health()
 
