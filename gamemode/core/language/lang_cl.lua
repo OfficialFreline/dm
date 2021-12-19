@@ -105,7 +105,9 @@ function LANG.SetActiveLanguage( lang_name )
 		if ( old_name != lang_name ) then
 			hook.Call( 'DMLanguageChanged', GAMEMODE, old_name, lang_name )
 
-			dmBuildCmd()
+			if ( IsValid( dmBuildCmd ) ) then
+				dmBuildCmd()
+			end
 		end
 	else
 		MsgN( Format( "The language '%s' does not exist on this server. Falling back to English...", lang_name ) )

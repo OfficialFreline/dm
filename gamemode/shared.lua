@@ -43,7 +43,7 @@ if ( CLIENT ) then
 	LANG.Init()
 end
 
-DM.Include( 'config/cmds_cl.lua' )
-
 DM.IncludeDirectory( 'core/interface/vgui' )
 DM.IncludeDirectory( 'core/interface' )
+
+DM.Include( 'config/cmds_cl.lua' )
