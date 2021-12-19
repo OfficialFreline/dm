@@ -20,6 +20,10 @@ end
 local ang = Angle( 0, 0, 90 )
 
 function ENT:Draw()
+	if ( LocalPlayer():GetPos():Distance( self:GetPos() ) > 1000 ) then
+		return
+	end
+
 	ang.y = -180 * math.Remap( CurTime() % 3, 0, 3, 0, 1 )
 
 	self:DrawModel()
