@@ -31,9 +31,9 @@ hook.Add( 'PostPlayerDraw', 'Hud', function( ply )
 	cam.Start3D2D( Attach.Pos + Vector( 0, 0, 15 ), Angle( 0, ( Attach.Pos - EyePos ):Angle().y - 90, 90 ), 0.05 )
 		draw.SimpleTextOutlined( TextNick, 'Hud.2', 0, 0, Color( 255, 255, 255, ColorAlpha ), 1, 1, 2, Color( 80, 80, 80, ColorAlpha ) )
 
-		if ( ply:IsSpeaking() ) then
-			draw.RoundedBox( 100, -32, -32 * 4, 64, 64, color_white )
-		end
+		-- if ( ply:IsSpeaking() ) then
+		-- 	draw.RoundedBox( 100, -32, -32 * 4, 64, 64, color_white )
+		-- end
 	cam.End3D2D()
 end )
 
