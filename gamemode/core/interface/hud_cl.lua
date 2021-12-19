@@ -90,7 +90,7 @@ function GM:HUDPaint()
 	draw.RoundedBox( 4, 25, scrh - tall - 25, 25, tall, Color(241, 196, 15), DMColor.frame_outlined )
 
 	draw.RoundedBox( 4, 24 + s, scrh - tall - 26, math.Clamp( health, 0, 100 ) * siz * 0.01 + 2, tall + 2, DMColor.frame_outlined )
-	draw.RoundedBox( 4, 25 + s, scrh - tall - 25, math.Clamp( health, 0, 100 ) * siz * 0.01, tall, Color( 62, 230, 132 ) )
+	draw.RoundedBox( 4, 25 + s, scrh - tall - 25, math.Clamp( health, 0, 100 ) * siz * 0.01, tall, Color(255,91,91) )
 
 	-- Ammo
 	local Weapon = LocalPlayer():GetActiveWeapon()
