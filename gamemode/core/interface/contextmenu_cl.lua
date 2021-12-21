@@ -62,62 +62,101 @@ local function openCmdPanel()
 	end
 end
 
+// Old version of model selection
+
+-- local function openModelPanel()
+-- 	CreateCM( LANG.GetTranslation( 'models' ) )
+
+-- 	local playerPrev = vgui.Create( 'DModelPanel', ContextMenu )
+-- 	playerPrev:Dock( LEFT )
+-- 	playerPrev:SetWide( ContextMenu:GetWide() / 2.6 )
+-- 	playerPrev:SetModel( LocalPlayer():GetModel() )
+-- 	playerPrev:SetFOV( 32 )
+-- 	playerPrev.LayoutEntity = function( Entity )
+-- 		return
+-- 	end
+
+-- 	function playerPrev.Entity:GetPlayerColor()
+-- 		return LocalPlayer():GetPlayerColor()
+-- 	end
+
+-- 	local playerPrev_panel = vgui.Create( 'DPanel', playerPrev )
+-- 	playerPrev_panel:Dock( FILL )
+-- 	playerPrev_panel.Paint = function( self, w, h )
+-- 		draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 6 )
+-- 	end
+
+-- 	local sp = vgui.Create( 'dm_scrollpanel', ContextMenu )
+-- 	sp:Dock( FILL )
+-- 	sp:DockMargin( 4, 0, 0, 0 )
+
+-- 	local f
+
+-- 	for name, model in SortedPairs( player_manager.AllValidModels() ) do
+-- 		local btn
+
+-- 		local pan = vgui.Create( 'DPanel', sp )
+-- 		pan:SetTall( 30 )
+-- 		pan:Dock( TOP )
+
+-- 		if ( not f ) then
+-- 			f = true
+-- 		else
+-- 			pan:DockMargin( 0, 8, 0, 0 )
+-- 		end
+
+-- 		pan.Paint = function( self, w, h )
+-- 			if ( string.lower( model ) == LocalPlayer():GetModel() ) then
+-- 				draw.RoundedBox( 8, 0, 0, w, h, Color(231, 76, 60) )
+-- 			end
+-- 		end
+
+-- 		btn = vgui.Create( 'dm_button', pan )
+-- 		btn:Dock( FILL )
+-- 		btn:SetText( model )
+-- 		btn.DoClick = function()
+-- 			surface.PlaySound( 'UI/buttonclickrelease.wav' )
+			
+-- 			RunConsoleCommand( 'dm_changemdl', model )
+
+-- 			playerPrev:SetModel( model )
+-- 		end
+-- 	end
+-- end
+
 local function openModelPanel()
 	CreateCM( LANG.GetTranslation( 'models' ) )
 
-	local playerPrev = vgui.Create( 'DModelPanel', ContextMenu )
-	playerPrev:Dock( LEFT )
-	playerPrev:SetWide( ContextMenu:GetWide() / 2.6 )
-	playerPrev:SetModel( LocalPlayer():GetModel() )
-	playerPrev:SetFOV( 32 )
-	playerPrev.LayoutEntity = function( Entity )
-		return
+	local PanelSelect = ContextMenu:Add( 'DPanelSelect' )
+	PanelSelect:Dock( FILL )
+
+	-- From ScrollPanel
+	PanelSelect.VBar:SetWide( 14 )
+	PanelSelect.VBar:SetHideButtons( true )
+	PanelSelect.VBar.Paint = nil
+	PanelSelect.VBar.btnGrip.Paint = function( self, w, h )
+		draw.RoundedBox( 4, 4, 4, w - 8, h - 8, self.Depressed and DMColor.sp_hov or DMColor.sp )
 	end
-
-	function playerPrev.Entity:GetPlayerColor()
-		return LocalPlayer():GetPlayerColor()
-	end
-
-	local playerPrev_panel = vgui.Create( 'DPanel', playerPrev )
-	playerPrev_panel:Dock( FILL )
-	playerPrev_panel.Paint = function( self, w, h )
-		draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 6 )
-	end
-
-	local sp = vgui.Create( 'dm_scrollpanel', ContextMenu )
-	sp:Dock( FILL )
-	sp:DockMargin( 4, 0, 0, 0 )
-
-	local f
 
 	for name, model in SortedPairs( player_manager.AllValidModels() ) do
-		local btn
-
-		local pan = vgui.Create( 'DPanel', sp )
-		pan:SetTall( 30 )
-		pan:Dock( TOP )
-
-		if ( not f ) then
-			f = true
-		else
-			pan:DockMargin( 0, 8, 0, 0 )
+		local icon = vgui.Create( 'SpawnIcon' )
+		icon:SetSize( 64, 64 )
+		icon:SetModel( model )
+		icon.mdl = model
+		icon.OpenMenu = function( button )
+			local DM = DermaMenu()
+			DM:AddOption( '#spawnmenu.menu.copy', function()
+				SetClipboardText( model )
+			end ):SetIcon( 'icon16/page_copy.png' )
+			DM:Open()
 		end
 
-		pan.Paint = function( self, w, h )
-			if ( string.lower( model ) == LocalPlayer():GetModel() ) then
-				draw.RoundedBox( 8, 0, 0, w, h, Color(231, 76, 60) )
-			end
-		end
+		PanelSelect:AddPanel( icon )
+	end
 
-		btn = vgui.Create( 'dm_button', pan )
-		btn:Dock( FILL )
-		btn:SetText( model )
-		btn.DoClick = function()
-			surface.PlaySound( 'UI/buttonclickrelease.wav' )
-			
-			RunConsoleCommand( 'dm_changemdl', model )
-
-			playerPrev:SetModel( model )
+	function PanelSelect:OnActivePanelChanged( old, new )
+		if ( old != new ) then
+			RunConsoleCommand( 'dm_changemdl', new.mdl )
 		end
 	end
 end
