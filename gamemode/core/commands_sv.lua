@@ -185,3 +185,36 @@ concommand.Add( 'dm_sethp', function( ply, cmd, args )
 
 	setHP( ply, steamid64, hp )
 end )
+
+local function PM( ply, user, msg )
+	local comp
+
+	for l, p in pairs( player.GetAll() ) do
+		if ( p:SteamID64() == user ) then
+			comp = p
+		end
+	end
+
+	if ( comp:IsPlayer() ) then
+		if ( string.len( msg ) > 35 or string.len( msg ) <= 0 ) then
+			sendMsg( comp, Color(253,202,62), 'The message does not match the size (from 1 to 35)' )
+
+			return
+		end
+
+		sendMsg( comp, Color(215,125,60), '(PM) ', Color(85,130,158), ply:GetNick(), color_white, ': ' .. msg )
+
+		if ( comp == ply ) then
+			return
+		end
+
+		sendMsg( ply, Color(215,125,60), '(PM --> ', Color(85,130,158), ply:GetNick(), Color(215,125,60), ') ', color_white, msg )
+	end
+end
+
+concommand.Add( 'dm_pm', function( ply, cmd, args )
+	local steamid64 = args[ 1 ]
+	local msg = args[ 2 ]
+
+	PM( ply, steamid64, msg )
+end )

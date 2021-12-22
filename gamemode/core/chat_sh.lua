@@ -61,14 +61,6 @@ end
 
 if ( SERVER ) then
 	util.AddNetworkString( 'dmText' )
-	util.AddNetworkString( 'Pm' )
-
-	net.Receive( 'Pm', function( len, pl )
-		local target = net.ReadEntity()
-		local text = net.ReadString()
-
-		sendMsg( target, Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), pl:GetNick(), color_white, '->', Color( 85, 130, 158 ), LANG.GetTranslation( 'you' ), color_white, ': ' .. text )
-	end )
 
 	function sendMsg( player, ... )
 		local tbl = { ... }

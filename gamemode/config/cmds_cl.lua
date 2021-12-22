@@ -40,26 +40,7 @@ function dmBuildCmd()
 
 	AddActionDM( x, function( ply )
 		Derma_StringRequest( x, 'Enter your message text', '', function( s )
-			if ( string.len( s ) > 35 ) then
-				ChatText( 'The message is too big!' )
-
-				return
-			elseif ( string.len( s ) <= 0 ) then
-				ChatText( 'The message is empty!' )
-
-				return
-			end
-
-			if ( LocalPlayer() != ply ) then
-				net.Start( 'Pm' )
-					net.WriteEntity( ply )
-					net.WriteString( s )
-				net.SendToServer( ply )
-
-				chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), LANG.GetTranslation( 'you' ), Color( 255, 255, 255 ), '->', Color( 85, 130, 158 ), ply:GetNick(), Color( 255, 255, 255 ), ': ' .. s )
-			else
-				chat.AddText( Color( 215, 125, 60 ), '(PM) ', Color( 85, 130, 158 ), 'To myself', Color( 255, 255, 255 ), ': ' .. s )
-			end
+			RunConsoleCommand( 'dm_pm', ply:SteamID64(), s )
 		end )
 	end )
 
