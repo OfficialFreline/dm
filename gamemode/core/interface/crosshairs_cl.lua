@@ -1,9 +1,3 @@
---[[
-	In the future, a large crosshair customization system is planned.
-
-	A great utility for creating your own crosshair online in the game + an already created list of crosshairs that are in the form of materials
-]]--
-
 local scrw, scrh = ScrW(), ScrH()
 
 hook.Add( 'HUDPaint', 'Cross', function()

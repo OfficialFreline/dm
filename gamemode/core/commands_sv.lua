@@ -109,8 +109,6 @@ local function setRank( ply, user, namerank )
 			end
 		end
 
-		// print( comp )
-
 		if ( comp:IsPlayer() ) then
 			comp:SetRank( namerank )
 			comp:DataSave()

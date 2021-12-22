@@ -6,16 +6,6 @@ local function CreateCM( title )
 	ContextMenu:SetTitle( 'ContextMenu | ' .. title )
 	ContextMenu:SetKeyBoardInputEnabled( false )
 	ContextMenu:ShowCloseButton( false )
-
-	-- local KeyDown_ = false
-
-	-- function ContextMenu:Think()
-	--	 if ( input.IsKeyDown( KEY_C ) and KeyDown_ ) then
-	--		 self:Close()
-	--	 elseif ( not input.IsKeyDown( KEY_C ) ) then
-	--		 KeyDown_ = true
-	--	 end
-	-- end
 end
 
 local function openCmdPanel()
@@ -61,68 +51,6 @@ local function openCmdPanel()
 		end
 	end
 end
-
-// Old version of model selection
-
--- local function openModelPanel()
--- 	CreateCM( LANG.GetTranslation( 'models' ) )
-
--- 	local playerPrev = vgui.Create( 'DModelPanel', ContextMenu )
--- 	playerPrev:Dock( LEFT )
--- 	playerPrev:SetWide( ContextMenu:GetWide() / 2.6 )
--- 	playerPrev:SetModel( LocalPlayer():GetModel() )
--- 	playerPrev:SetFOV( 32 )
--- 	playerPrev.LayoutEntity = function( Entity )
--- 		return
--- 	end
-
--- 	function playerPrev.Entity:GetPlayerColor()
--- 		return LocalPlayer():GetPlayerColor()
--- 	end
-
--- 	local playerPrev_panel = vgui.Create( 'DPanel', playerPrev )
--- 	playerPrev_panel:Dock( FILL )
--- 	playerPrev_panel.Paint = function( self, w, h )
--- 		draw.OutlinedBox( 0, 0, w, h, DMColor.clear, DMColor.frame_bar, 6 )
--- 	end
-
--- 	local sp = vgui.Create( 'dm_scrollpanel', ContextMenu )
--- 	sp:Dock( FILL )
--- 	sp:DockMargin( 4, 0, 0, 0 )
-
--- 	local f
-
--- 	for name, model in SortedPairs( player_manager.AllValidModels() ) do
--- 		local btn
-
--- 		local pan = vgui.Create( 'DPanel', sp )
--- 		pan:SetTall( 30 )
--- 		pan:Dock( TOP )
-
--- 		if ( not f ) then
--- 			f = true
--- 		else
--- 			pan:DockMargin( 0, 8, 0, 0 )
--- 		end
-
--- 		pan.Paint = function( self, w, h )
--- 			if ( string.lower( model ) == LocalPlayer():GetModel() ) then
--- 				draw.RoundedBox( 8, 0, 0, w, h, Color(231, 76, 60) )
--- 			end
--- 		end
-
--- 		btn = vgui.Create( 'dm_button', pan )
--- 		btn:Dock( FILL )
--- 		btn:SetText( model )
--- 		btn.DoClick = function()
--- 			surface.PlaySound( 'UI/buttonclickrelease.wav' )
-			
--- 			RunConsoleCommand( 'dm_changemdl', model )
-
--- 			playerPrev:SetModel( model )
--- 		end
--- 	end
--- end
 
 local function openModelPanel()
 	CreateCM( LANG.GetTranslation( 'models' ) )
