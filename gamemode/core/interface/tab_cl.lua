@@ -9,6 +9,8 @@ function AddActionDM( Name, Do, AdminBool, LocalPlayerBool )
 	table.Add( DMCommandsTable, { tabl } )
 end // Lightweight system
 
+local color_white = Color(255,255,255)
+
 function GMopenTab()
 	menuTab = vgui.Create( 'DPanel' )
 	menuTab:SetSize( math.min( ScrW() - 10, 1000 ), math.min( ScrH() - 6, 640 ) )
@@ -166,6 +168,7 @@ function GMopenTab()
 				if ( not n.localplayer ) then
 					cmdButton = vgui.Create( 'dm_button', scrollpanel )
 					cmdButton:Dock( TOP )
+					cmdButton:SetText( '' )
 
 					if ( not firstk ) then
 						cmdButton:DockMargin( 0, 5, 0, 0 )
@@ -174,13 +177,13 @@ function GMopenTab()
 					end
 					
 					cmdButton:SetTall( 40 )
+					cmdButton.PaintOver = function( self, w, h )
+						draw.SimpleText( n.name, 'Button', w * 0.5, h * 0.5, color_white, 1, 1 )
 
-					if ( n.admin ) then
-						cmdButton:SetText( '[' .. LANG.GetTranslation( 'admin' ) .. '] ' .. n.name )
-					else
-						cmdButton:SetText( n.name )
+						if ( n.admin ) then
+							draw.SimpleText( LANG.GetTranslation( 'admin' ), 'Button', 12, h * 0.5, color_white, 0, 1 )
+						end
 					end
-					
 					cmdButton.DoClick = function()
 						surface.PlaySound( 'UI/buttonclickrelease.wav' )
 
