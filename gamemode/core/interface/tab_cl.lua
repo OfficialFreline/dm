@@ -125,7 +125,7 @@ function GMopenTab()
 
 			local leftPanel = vgui.Create( 'DPanel', main_panel )
 			leftPanel:Dock( LEFT )
-			leftPanel:SetWide( w / 2.6 )
+			leftPanel:SetWide( w / 3.2 )
 			leftPanel.Paint = nil
 
 			local btn_return = vgui.Create( 'dm_button', leftPanel )
