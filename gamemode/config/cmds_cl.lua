@@ -117,4 +117,8 @@ function dmBuildCmd()
 
 		DM:Open()
 	end, false, true )
+
+	AddActionDM( LANG.GetTranslation( 'resetScore' ), function( ply )
+		RunConsoleCommand( 'dm_resetscore', ply:SteamID64() )
+	end, true, false )
 end

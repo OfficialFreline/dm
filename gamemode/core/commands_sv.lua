@@ -247,3 +247,31 @@ concommand.Add( 'dm_setscale', function( ply, cmd, args )
 
 	setScale( ply, steamid64, scale )
 end )
+
+local function resetScore( ply, user )
+	if ( not ply:IsPlayer() or ply:Admin() ) then
+		local comp
+
+		for l, p in pairs( player.GetAll() ) do
+			if ( p:SteamID64() == user ) then
+				comp = p
+			end
+		end
+
+		if ( comp:IsPlayer() ) then
+			local Data = {}
+
+			Data = comp:DataLoad()
+
+			comp:SetFrags( 0 )
+			comp:SetDeaths( 0 )
+			comp:DataSave()
+		end
+	end
+end
+
+concommand.Add( 'dm_resetscore', function( ply, cmd, args )
+	local steamid64 = args[ 1 ]
+
+	resetScore( ply, steamid64 )
+end )
