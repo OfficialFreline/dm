@@ -15,7 +15,7 @@ function GM:PlayerInitialSpawn( ply )
 
 	player_manager.SetPlayerClass( ply, 'dm_player' )
 
-	ply:ChatPrint( 'To take the weapon press Q' )
+	sendMsg( ply, Color(255,0,0), '! ', Color(255,255,255), 'To take the weapon press Q' )
 end
 
 function GM:PlayerSpawn( ply )
