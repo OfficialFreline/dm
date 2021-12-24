@@ -218,3 +218,32 @@ concommand.Add( 'dm_pm', function( ply, cmd, args )
 
 	PM( ply, steamid64, msg )
 end )
+
+local function setScale( ply, user, scale )
+	if ( not ply:IsPlayer() or ply:Admin() ) then
+		local comp
+
+		for l, p in pairs( player.GetAll() ) do
+			if ( p:SteamID64() == user ) then
+				comp = p
+			end
+		end
+
+		if ( comp:IsPlayer() ) then
+			local target_scale = comp:GetModelScale()
+
+			comp:SetModelScale( target_scale * scale, 0 )
+			comp:SetViewOffset( Vector( 0, 0, 64 ) * scale )
+			comp:SetViewOffsetDucked( Vector( 0, 0, 28 ) * scale )
+
+			sendMsgAll( Color(202,68,68), '[', color_white, ply:GetNick(), Color(202,68,68), '] ', color_white, 'Resized player ', Color(102,95,180), comp:GetNick(), color_white, ' to ', Color(102,95,180), tostring( scale ), color_white, '.' )
+		end
+	end
+end
+
+concommand.Add( 'dm_setscale', function( ply, cmd, args )
+	local steamid64 = args[ 1 ]
+	local scale = args[ 2 ]
+
+	setScale( ply, steamid64, scale )
+end )
