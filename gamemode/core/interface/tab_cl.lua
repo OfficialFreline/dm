@@ -220,7 +220,6 @@ function GMopenTab()
 			local steamid64 = v:SteamID64() or 'NULL'
 			local name = v:GetNWString( 'ply_name' )
 			local rank = v:GetRank()
-			local copy = LANG.GetTranslation( 'copied' )
 
 			DM:AddOption( name, function()
 				textCopy( name )
