@@ -29,7 +29,7 @@ if ( CLIENT ) then
 		
 		if ( bPlayerIsDead ) then
 			table.insert( ct, Color( 240, 66, 75 ) )
-			table.insert( ct, '(Dead) ' )
+			table.insert( ct, LANG.GetTranslation( 'dead' ) .. ' ' )
 		end
 	
 		if ( IsValid( ply ) ) then

@@ -8,6 +8,7 @@ i.notAdmin = 'Вы не админ!'
 i.console = 'Консоль'
 i.player_death = 'Вы умерли'
 i.standart = 'Стандарт'
+i.dead = '(Мёртв)'
 
 // Tab
 i.nick = 'Ник'
