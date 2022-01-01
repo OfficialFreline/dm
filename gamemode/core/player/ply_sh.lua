@@ -1,19 +1,35 @@
 if ( CLIENT ) then
 	CreateConVar( 'cl_playercolor', '0.24 0.34 0.41', { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, '' )
-	CreateConVar( 'dm_weaponcolor', '0.30 1.80 2.10', { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, '' )
+	CreateConVar( 'cl_weaponcolor', '0.30 1.80 2.10', { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, '' )
 end
 
 player_manager.RegisterClass( 'dm_player', {
 	DisplayName = 'DM Player Class',
 
 	Spawn = function( self )
+		local mdl = self.Player:GetInfo( 'cl_playermodel' )
+
+		self.Player:SetModel( mdl )
+
+		local map_Table = DM.Config.SpawnPositionsList[ game.GetMap() ] 
+	
+		if ( map_Table ) then
+			local map = table.Random( DM.Config.SpawnPositionsList[ game.GetMap() ] )
+	
+			self.Player:SetPos( map )
+		end
+
 		local col = self.Player:GetInfo( 'cl_playercolor' )
 
 		self.Player:SetPlayerColor( Vector( col ) )
 
-		local col = self.Player:GetInfo( 'dm_weaponcolor' )
+		local col = Vector( self.Player:GetInfo( 'cl_weaponcolor' ) )
 
-		self.Player:SetWeaponColor( Vector( col ) )
+		if ( col:Length() < 0.001 ) then
+			col = Vector( 0.001, 0.001, 0.001 )
+		end
+
+		self.Player:SetWeaponColor( col )
 	end,
 
 	TauntCam = TauntCamera(),
@@ -34,6 +50,12 @@ player_manager.RegisterClass( 'dm_player', {
 		if ( self.TauntCam:ShouldDrawLocalPlayer( self.Player, self.Player:IsPlayingTaunt() ) ) then
 			return true
 		end
+	end,
+
+	GetHandsModel = function( self )
+		local cl_playermodel = self.Player:GetInfo( 'cl_playermodel' )
+
+		return player_manager.TranslatePlayerHands( cl_playermodel )
 	end,
 
 	JumpPower = DM.Config.JumpPower,

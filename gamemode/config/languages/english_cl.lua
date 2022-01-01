@@ -24,6 +24,9 @@ i.options = 'Option selection'
 i.crosshairs = 'Crosshairs'
 i.type_cross = 'Choose the type of your crosshair'
 i.thirdperson = 'Third Person'
+i.colors = 'Colors'
+i.colorPlayer = 'Player Color'
+i.colorWeapon = 'Weapon Color'
 
 // SpawnMenu
 i.arms = 'Taking arms'

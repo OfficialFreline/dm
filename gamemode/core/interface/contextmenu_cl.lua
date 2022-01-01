@@ -70,7 +70,7 @@ local function openModelPanel()
 		local icon = vgui.Create( 'SpawnIcon' )
 		icon:SetSize( 64, 64 )
 		icon:SetModel( model )
-		icon.mdl = model
+		icon.mdl = name
 		icon.OpenMenu = function( button )
 			local DM = DermaMenu()
 			DM:AddOption( '#spawnmenu.menu.copy', function()
@@ -84,7 +84,7 @@ local function openModelPanel()
 
 	function PanelSelect:OnActivePanelChanged( old, new )
 		if ( old != new ) then
-			RunConsoleCommand( 'dm_changemdl', new.mdl )
+			RunConsoleCommand( 'cl_playermodel', new.mdl )
 		end
 	end
 end
@@ -127,6 +127,52 @@ local function openCrosshairMenu()
 			RunConsoleCommand( 'crosshair_dm', m )
 		end
 	end
+end
+
+local function openColorPanel()
+	CreateCM( LANG.GetTranslation( 'colors' ) )
+
+	local left_pnl = vgui.Create( 'DPanel', ContextMenu )
+	left_pnl:Dock( LEFT )
+	left_pnl:SetWide( ContextMenu:GetWide() * 0.5 - 8 )
+	left_pnl.Paint = nil
+
+	local text_info = vgui.Create( 'DPanel', left_pnl )
+	text_info:Dock( TOP )
+	text_info:DockMargin( 0, 0, 0, 4 )
+	text_info.Paint = function( self, w, h )
+		draw.SimpleText( LANG.GetTranslation( 'colorPlayer' ), 'Button', w * 0.5, h * 0.5, Color(255,255,255), 1, 1 )
+	end
+
+	local mixer_left = vgui.Create( 'DColorMixer', left_pnl )
+	mixer_left:Dock( FILL )
+	mixer_left:SetAlphaBar( false )
+	mixer_left:SetPalette( false )
+
+	local right_pnl = vgui.Create( 'DPanel', ContextMenu )
+	right_pnl:Dock( RIGHT )
+	right_pnl:SetWide( ContextMenu:GetWide() * 0.5 - 8 )
+	right_pnl.Paint = nil
+
+	local text_info = vgui.Create( 'DPanel', right_pnl )
+	text_info:Dock( TOP )
+	text_info:DockMargin( 0, 0, 0, 4 )
+	text_info.Paint = function( self, w, h )
+		draw.SimpleText( LANG.GetTranslation( 'colorWeapon' ), 'Button', w * 0.5, h * 0.5, Color(255,255,255), 1, 1 )
+	end
+
+	local mixer_right = vgui.Create( 'DColorMixer', right_pnl )
+	mixer_right:Dock( FILL )
+	mixer_right:SetAlphaBar( false )
+	mixer_right:SetPalette( false )
+
+	local function UpdateFromControls()
+		RunConsoleCommand( 'cl_playercolor', tostring( mixer_left:GetVector() ) )
+		RunConsoleCommand( 'cl_weaponcolor', tostring( mixer_right:GetVector() ) )
+	end
+
+	mixer_left.ValueChanged = UpdateFromControls
+	mixer_right.ValueChanged = UpdateFromControls
 end
 
 local function openContextMenu()
@@ -178,6 +224,16 @@ local function openContextMenu()
 		ContextMenu:Remove()
 
 		RunConsoleCommand( 'person_menu' )
+	end
+
+	local btn_top = vgui.Create( 'dm_button', ContextMenu )
+	btn_top:Dock( TOP )
+	btn_top:DockMargin( 0, 0, 0, 4 )
+	btn_top:SetText( LANG.GetTranslation( 'colors' ) )
+	btn_top.DoClick = function()
+		ContextMenu:Remove()
+
+		openColorPanel()
 	end
 end
 

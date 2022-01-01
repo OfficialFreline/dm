@@ -28,28 +28,6 @@ concommand.Add( 'dm_giveswep', function( ply, cmd, args )
 	give_swep( ply, weapon )
 end )
 
-local function change_model( ply, mdlname )
-	if ( not IsValid( ply ) ) then
-		return
-	end
-
-	if ( mdlname == nil ) then
-		return
-	end
-
-	if ( not player_manager.TranslateToPlayerModelName( mdlname ) ) then
-		return
-	end
-
-	ply:SetModel( mdlname )
-end
-
-concommand.Add( 'dm_changemdl', function( ply, cmd, args )
-	local model = args[ 1 ]
-
-	change_model( ply, model )
-end )
-
 local function drop_swep( ply, wepname )
 	if ( not IsValid( ply ) ) then
 		return

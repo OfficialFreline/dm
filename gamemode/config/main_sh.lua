@@ -3,7 +3,7 @@ DM.Config = {}
 local c = DM.Config
 
 // Character parameters
-c.JumpPower = 300
+c.JumpPower = 260
 c.DuckSpeed = 0.5
 c.WalkSpeed = 200
 c.RunSpeed = 550

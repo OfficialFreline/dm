@@ -18,18 +18,6 @@ function GM:PlayerInitialSpawn( ply )
 	sendMsg( ply, Color(255,0,0), '! ', Color(255,255,255), 'To take the weapon press Q' )
 end
 
-function GM:PlayerSpawn( ply )
-	ply:SetupHands()
-
-	local map_Table = DM.Config.SpawnPositionsList[ game.GetMap() ] 
-
-	if ( map_Table ) then
-		local map = table.Random( DM.Config.SpawnPositionsList[ game.GetMap() ] )
-
-		ply:SetPos( map )
-	end
-end
-
 hook.Add( 'PlayerDeath', 'ply_sv', function( victim, inflictor, attacker )
 	if ( victim == attacker ) then
 		victim:SetDeaths( victim:GetDeaths() + 1 )

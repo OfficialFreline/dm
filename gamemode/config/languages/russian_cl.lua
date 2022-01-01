@@ -24,6 +24,9 @@ i.options = 'Выбор опции'
 i.crosshairs = 'Прицелы'
 i.type_cross = 'Выберите тип вашего перекрестия'
 i.thirdperson = 'Третье лицо'
+i.colors = 'Цвета'
+i.colorPlayer = 'Цвет Игрока'
+i.colorWeapon = 'Цвет Оружия'
 
 // SpawnMenu
 i.arms = 'Взятие вооружения'
