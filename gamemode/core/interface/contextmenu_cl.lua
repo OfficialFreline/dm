@@ -1,6 +1,6 @@
 local function CreateCM( title )
 	ContextMenu = vgui.Create( 'dm_frame' )
-	ContextMenu:SetSize( ScrW() * 0.35, ScrH() * 0.45 )
+	ContextMenu:SetSize( math.min( ScrW() - 10, 690 ), math.min( ScrH() - 6, 500 ) )
 	ContextMenu:Center()
 	ContextMenu:MakePopup()
 	ContextMenu:SetTitle( 'ContextMenu | ' .. title )
