@@ -80,11 +80,11 @@ local function openSpawnMenu()
 		end
 
 		icon_wep.Paint = function( self, w, h )
-			draw.RoundedBox( 4, 4, 4, w - 8, h - 8, DMColor.frame_bar )
+			draw.RoundedBox( 8, 4, 4, w - 8, h - 8, DMColor.frame_bar )
 
 			surface.SetDrawColor( self:IsHovered() and Color(236,236,236) or color_white )
 			surface.SetMaterial( mat )
-			surface.DrawTexturedRect( 10, 10, w - 20, h - 20 )
+			surface.DrawTexturedRect( 12, 12, w - 24, h - 24 )
 
 			if ( icon_wep:IsHovered() ) then
 				button.Depr = true
