@@ -40,7 +40,7 @@ function PANEL:Paint( w, h )
 
 	w = self.lastw
 
-	draw.OutlinedBox( 0, 0, w, h, DMColor.frame_background, color_black )
+	draw.RoundedBox( 6, 0, 0, w, h, DMColor.frame_background )
 
 	if ( self.lastw != cw ) then
 		local nick = self.ply:GetNick()
