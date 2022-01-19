@@ -237,10 +237,6 @@ local function resetScore( ply, user )
 		end
 
 		if ( comp:IsPlayer() ) then
-			local Data = {}
-
-			Data = comp:DataLoad()
-
 			comp:SetFrags( 0 )
 			comp:SetDeaths( 0 )
 			comp:DataSave()
