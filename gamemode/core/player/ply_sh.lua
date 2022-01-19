@@ -109,7 +109,6 @@ function PLAYER:DataSave()
 		rank = self:GetRank(),
 		frags = self:GetFrags(),
 		deaths = self:GetDeaths(),
-		model = self:GetModel(),
 	}
 
 	file.Write( 'dm/' .. self:UniqueID() .. '.json', util.TableToJSON( Data ) )

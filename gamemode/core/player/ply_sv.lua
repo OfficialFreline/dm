@@ -9,7 +9,6 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetRank( Data.rank )
 	ply:SetFrags( Data.frags )
 	ply:SetDeaths( Data.deaths )
-	ply:SetModel( Data.model )
 
 	ply:DataSave()
 
@@ -43,7 +42,6 @@ function PLAYER:DataLoad()
 		Data.rank = 'user'
 		Data.frags = 0
 		Data.deaths = 0
-		Data.model = 'models/player/alyx.mdl'
 
 		self:DataSave()
 
