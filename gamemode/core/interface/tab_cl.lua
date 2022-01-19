@@ -98,13 +98,7 @@ function GMopenTab()
 				local frags = v:GetFrags()
 				local deaths = v:GetDeaths()
 
-				if ( deaths < 1 ) then
-					deaths = 1
-				elseif ( deaths == 1 ) then
-					death = 1.5
-				end
-
-				local text = string.sub( frags / deaths, 0, 6 ) .. ' (' .. frags .. '/' .. deaths .. ')' or ''
+				local text = string.sub( frags / ( deaths != 0 and deaths or 1 ), 0, 6 ) .. ' (' .. frags .. '/' .. deaths .. ')' or ''
 
 				draw.SimpleText( text, 'Button', w * 0.5 - surface.GetTextSize( text ) * 0.5, 11, textColor )
 			end
