@@ -134,7 +134,6 @@ concommand.Add( 'dm_checkdata', function( ply, cmd, args )
 	ply:SetRank( Data.rank )
 	ply:SetFrags( Data.frags )
 	ply:SetDeaths( Data.deaths )
-	ply:SetModel( Data.model )
 
 	sendMsg( ply, color_white, 'Your details have been updated!' )
 end )
