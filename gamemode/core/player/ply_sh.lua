@@ -99,8 +99,8 @@ function PLAYER:SetDeaths( deaths )
 end
 
 function PLAYER:DataSave()
-	if ( not file.IsDir( 'dm', 'DATA' ) ) then 
-		file.CreateDir( 'dm' )
+	if ( not file.IsDir( 'dm/players', 'DATA' ) ) then 
+		file.CreateDir( 'dm/players' )
 	end
 
 	local Data = { 
@@ -111,5 +111,5 @@ function PLAYER:DataSave()
 		deaths = self:GetDeaths(),
 	}
 
-	file.Write( 'dm/' .. self:UniqueID() .. '.json', util.TableToJSON( Data ) )
+	file.Write( 'dm/players/' .. self:UniqueID() .. '.json', util.TableToJSON( Data ) )
 end

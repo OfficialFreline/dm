@@ -11,3 +11,7 @@ hook.Add( 'PreGamemodeLoaded', 'widgets_disabler_cpu', function()
 
 	hook.Remove( 'PlayerTick', 'TickWidgets' )
 end )
+
+if ( not file.IsDir( 'dm', 'DATA' ) ) then 
+	file.CreateDir( 'dm' )
+end

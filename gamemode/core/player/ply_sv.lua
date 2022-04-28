@@ -29,16 +29,16 @@ end )
 function PLAYER:DataLoad()
 	local Data = {}
 
-	if ( file.Exists( 'dm/' .. self:UniqueID() .. '.json', 'DATA' ) ) then
-		Data = util.JSONToTable( file.Read( 'dm/' .. self:UniqueID() .. '.json', 'DATA' ) )
+	if ( file.Exists( 'dm/players/' .. self:UniqueID() .. '.json', 'DATA' ) ) then
+		Data = util.JSONToTable( file.Read( 'dm/players/' .. self:UniqueID() .. '.json', 'DATA' ) )
 
 		return Data
 	else
 		self:DataSave()
 
-		Data = util.JSONToTable( file.Read( 'dm/' .. self:UniqueID() .. '.json', 'DATA' ) )
-		Data.name = self:Nick() or LANG.GetTranslation( 'unknown' )
-		Data.steamid64 = self:SteamID64() or LANG.GetTranslation( 'unknown' )
+		Data = util.JSONToTable( file.Read( 'dm/players/' .. self:UniqueID() .. '.json', 'DATA' ) )
+		Data.name = self:Nick()
+		Data.steamid64 = self:SteamID64()
 		Data.rank = 'user'
 		Data.frags = 0
 		Data.deaths = 0
