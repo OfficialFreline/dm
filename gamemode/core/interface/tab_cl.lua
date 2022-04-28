@@ -13,7 +13,7 @@ local color_white = Color(255,255,255)
 
 function GMopenTab()
 	menuTab = vgui.Create( 'DPanel' )
-	menuTab:SetSize( math.min( ScrW() - 10, 1000 ), math.min( ScrH() - 6, 640 ) )
+	menuTab:SetSize( math.min( ScrW() - 10, 880 ), math.min( ScrH() - 6, 640 ) )
 	menuTab:Center()
 	menuTab:MakePopup()
 	menuTab:SetKeyBoardInputEnabled( false )
@@ -119,7 +119,7 @@ function GMopenTab()
 
 			local leftPanel = vgui.Create( 'DPanel', main_panel )
 			leftPanel:Dock( LEFT )
-			leftPanel:SetWide( w / 3.2 )
+			leftPanel:SetWide( w * 0.42 )
 			leftPanel.Paint = nil
 
 			local btn_return = vgui.Create( 'dm_button', leftPanel )

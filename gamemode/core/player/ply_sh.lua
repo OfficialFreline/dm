@@ -100,7 +100,7 @@ end
 
 function PLAYER:DataSave()
 	if ( not file.IsDir( 'dm', 'DATA' ) ) then 
-		file.CreateDir( 'dm' ) 
+		file.CreateDir( 'dm' )
 	end
 
 	local Data = { 
