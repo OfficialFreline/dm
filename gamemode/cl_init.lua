@@ -9,6 +9,7 @@ local Color = Color
 local surface_SetDrawColor = surface.SetDrawColor
 local surface_SetMaterial = surface.SetMaterial
 local surface_DrawRect = surface.DrawRect
+local surface_DrawOutlinedRect = surface.DrawOutlinedRect
 local surface_DrawTexturedRect = surface.DrawTexturedRect
 local render_UpdateScreenEffectTexture = render.UpdateScreenEffectTexture
 local render_SetScissorRect = render.SetScissorRect
@@ -65,26 +66,14 @@ end
 
 local scrw, scrh = ScrW(), ScrH()
 local Mat = Material( 'pp/blurscreen' )
-local WhiteColor = Color(255, 255, 255)
-
-local function DrawRect( x, y, w, h, t )
-	if ( not t ) then
-		t = 1
-	end
-
-	surface_DrawRect( x, y, w, t )
-	surface_DrawRect( x, y + h - t, w, t )
-	surface_DrawRect( x, y, t, h )
-	surface_DrawRect( x + w - t, y, t, h )
-end
+local WhiteColor = Color(255,255,255)
 
 function draw.OutlinedBox( x, y, w, h, col, bordercol, thickness )
 	surface_SetDrawColor( col )
-	surface_DrawRect( x + 1, y + 1, w - 2, h - 2 )
+	surface_DrawRect( x + thickness, y + thickness, w - thickness * 2, h - thickness * 2 )
 
 	surface_SetDrawColor( bordercol )
-
-	DrawRect( x, y, w, h, thickness )
+	surface_DrawOutlinedRect( x, y, w, h, thickness )
 end
 
 function draw.Blur( panel, amount )
