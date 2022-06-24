@@ -117,12 +117,12 @@ local function openCrosshairMenu()
 		RunConsoleCommand( 'crosshair_dm', 0 )
 	end
 
-	for m, n in pairs( list_aim ) do
+	for m, crosshair_name in pairs( list_aim ) do
 		local btn = vgui.Create( 'dm_button', sp )
 		btn:Dock( TOP )
 		btn:DockMargin( 0, 4, 0, 0 )
 		btn:SetTall( 32 )
-		btn:SetText( n )
+		btn:SetText( crosshair_name )
 		btn.DoClick = function()
 			surface.PlaySound( 'UI/buttonclickrelease.wav' )
 
@@ -134,49 +134,49 @@ end
 local function openColorPanel()
 	CreateCM( LANG.GetTranslation( 'colors' ) )
 
-	local left_pnl = vgui.Create( 'DPanel', ContextMenu )
-	left_pnl:Dock( LEFT )
-	left_pnl:SetWide( ContextMenu:GetWide() * 0.5 - 8 )
-	left_pnl.Paint = nil
+	local color_white = Color(255,255,255)
 
-	local text_info = vgui.Create( 'DPanel', left_pnl )
-	text_info:Dock( TOP )
-	text_info:DockMargin( 0, 0, 0, 4 )
-	text_info.Paint = function( self, w, h )
-		draw.SimpleText( LANG.GetTranslation( 'colorPlayer' ), 'Button', w * 0.5, h * 0.5, Color(255,255,255), 1, 1 )
+	// Player
+
+	local PlayerPanel = vgui.Create( 'DPanel', ContextMenu )
+	PlayerPanel:Dock( TOP )
+	PlayerPanel:SetTall( ContextMenu:GetTall() * 0.5 - 30 )
+	PlayerPanel:DockMargin( 0, 0, 0, 6 )
+	PlayerPanel.Paint = function( self, w, h )
+		draw.SimpleText( LANG.GetTranslation( 'colorPlayer' ), 'Button', w * 0.25, h * 0.5, color_white, 1, 1 )
 	end
 
-	local mixer_left = vgui.Create( 'DColorMixer', left_pnl )
-	mixer_left:Dock( FILL )
-	mixer_left:SetAlphaBar( false )
-	mixer_left:SetPalette( false )
-	mixer_left:SetVector( Vector( GetConVarString( 'cl_playercolor' ) ) )
+	local mixer_weapon = vgui.Create( 'DColorMixer', PlayerPanel )
+	mixer_weapon:Dock( RIGHT )
+	mixer_weapon:SetWide( ContextMenu:GetWide() * 0.5 )
+	mixer_weapon:SetAlphaBar( false )
+	mixer_weapon:SetPalette( false )
+	mixer_weapon:SetVector( Vector( GetConVarString( 'cl_playercolor' ) ) )
 
-	local right_pnl = vgui.Create( 'DPanel', ContextMenu )
-	right_pnl:Dock( RIGHT )
-	right_pnl:SetWide( ContextMenu:GetWide() * 0.5 - 8 )
-	right_pnl.Paint = nil
+	// Weapon
 
-	local text_info = vgui.Create( 'DPanel', right_pnl )
-	text_info:Dock( TOP )
-	text_info:DockMargin( 0, 0, 0, 4 )
-	text_info.Paint = function( self, w, h )
-		draw.SimpleText( LANG.GetTranslation( 'colorWeapon' ), 'Button', w * 0.5, h * 0.5, Color(255,255,255), 1, 1 )
+	local WeaponPanel = vgui.Create( 'DPanel', ContextMenu )
+	WeaponPanel:Dock( FILL )
+	WeaponPanel.Paint = function( self, w, h )
+		draw.SimpleText( LANG.GetTranslation( 'colorWeapon' ), 'Button', w * 0.25, h * 0.5, color_white, 1, 1 )
 	end
 
-	local mixer_right = vgui.Create( 'DColorMixer', right_pnl )
-	mixer_right:Dock( FILL )
-	mixer_right:SetAlphaBar( false )
-	mixer_right:SetPalette( false )
-	mixer_right:SetVector( Vector( GetConVarString( 'cl_weaponcolor' ) ) )
+	local mixer_weapon = vgui.Create( 'DColorMixer', WeaponPanel )
+	mixer_weapon:Dock( RIGHT )
+	mixer_weapon:SetWide( ContextMenu:GetWide() * 0.5 )
+	mixer_weapon:SetAlphaBar( false )
+	mixer_weapon:SetPalette( false )
+	mixer_weapon:SetVector( Vector( GetConVarString( 'cl_weaponcolor' ) ) )
+
+	// Mixers Properties
 
 	local function UpdateFromControls()
-		RunConsoleCommand( 'cl_playercolor', tostring( mixer_left:GetVector() ) )
-		RunConsoleCommand( 'cl_weaponcolor', tostring( mixer_right:GetVector() ) )
+		RunConsoleCommand( 'cl_playercolor', tostring( mixer_weapon:GetVector() ) )
+		RunConsoleCommand( 'cl_weaponcolor', tostring( mixer_weapon:GetVector() ) )
 	end
 
-	mixer_left.ValueChanged = UpdateFromControls
-	mixer_right.ValueChanged = UpdateFromControls
+	mixer_weapon.ValueChanged = UpdateFromControls
+	mixer_weapon.ValueChanged = UpdateFromControls
 end
 
 local function openContextMenu()
