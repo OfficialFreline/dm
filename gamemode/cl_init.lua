@@ -69,6 +69,10 @@ local Mat = Material( 'pp/blurscreen' )
 local WhiteColor = Color(255,255,255)
 
 function draw.OutlinedBox( x, y, w, h, col, bordercol, thickness )
+	if ( !thickness ) then
+		thickness = 1
+	end
+
 	surface_SetDrawColor( col )
 	surface_DrawRect( x + thickness, y + thickness, w - thickness * 2, h - thickness * 2 )
 
