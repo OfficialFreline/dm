@@ -3,9 +3,9 @@ local function CreateCM( title )
 	ContextMenu:SetSize( math.min( ScrW() - 10, 690 ), math.min( ScrH() - 6, 500 ) )
 	ContextMenu:Center()
 	ContextMenu:MakePopup()
-	ContextMenu:SetTitle( 'ContextMenu | ' .. title )
+	ContextMenu:title( 'ContextMenu | ' .. title )
 	ContextMenu:SetKeyBoardInputEnabled( false )
-	ContextMenu:ShowCloseButton( false )
+	ContextMenu:CloseButton( false )
 end
 
 local function openCmdPanel()

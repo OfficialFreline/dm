@@ -32,10 +32,10 @@ concommand.Add( 'person_menu', function()
 	local color_close = Color(253,116,92)
 
 	local menu = vgui.Create( 'dm_frame' )
-	menu:SetSize( math.min( 300, ScrW() * 0.2 ), 175 )
+	menu:SetSize( math.min( 300, ScrW() * 0.2 ), 185 )
 	menu:Center()
 	menu:MakePopup()
-	menu:SetTitle( 'Third Person Settings' )
+	menu:title( 'Third Person Settings' )
 
 	local Checkbox = menu:Add( 'DCheckBoxLabel' )
 	Checkbox:Dock( TOP )

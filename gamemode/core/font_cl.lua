@@ -44,3 +44,11 @@ surface.CreateFont( 'Button', {
 	extended = true,
 	font = 'Arial',
 } )
+
+surface.CreateFont( 'Frame', {
+	size = 19,
+	weight = 700,
+	antialias = true,
+	extended = true,
+	font = 'Arial',
+} )
