@@ -107,6 +107,8 @@ function GM:OnSpawnMenuOpen()
 end
 
 function GM:OnSpawnMenuClose()
-	SpawnMenu:SetVisible( false )
-	-- SpawnMenu:Remove()
+	if ( IsValid( SpawnMenu ) ) then
+		SpawnMenu:SetVisible( false )
+		-- SpawnMenu:Remove()
+	end
 end
