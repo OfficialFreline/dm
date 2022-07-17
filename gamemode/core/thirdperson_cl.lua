@@ -1,9 +1,10 @@
--- Taken and used from https://github.com/OfficialFreline/thirdperson
+-- Taken and used from https://github.com/darkfated/thirdperson
 
 CreateClientConVar( 'third_person', 0, true )
 CreateClientConVar( 'third_person_ud', 0, true )
 CreateClientConVar( 'third_person_rl', 0, true )
-CreateClientConVar( 'third_person_fb', -30, true )
+CreateClientConVar( 'third_person_fb', -60, true )
+CreateClientConVar( 'third_person_ang', 0, true )
 
 hook.Add( 'ShouldDrawLocalPlayer', 'FrelDrawPlayer', function()
 	if ( GetConVar( 'third_person' ):GetBool() ) then
@@ -19,15 +20,19 @@ hook.Add( 'CalcView', 'FrelCalcView', function( pl, origin, ang, fov )
 				endpos = origin + ( ang:Up() * GetConVar( 'third_person_ud' ):GetInt() ) + ( ang:Right() * GetConVar( 'third_person_rl' ):GetInt() ) + ( ang:Forward() * GetConVar( 'third_person_fb' ):GetInt() ),
 				filter = pl,
 			} ).HitPos + ( ang:Forward() * 16 ),
-			angles = ang,
+			angles = Vector( ang.x, ang.y, ang.z + GetConVar( 'third_person_ang' ):GetInt() ),
 			fov = fov,
 		}
 	end
 end )
 
 concommand.Add( 'person_menu', function()
+	local color_header = Color(69,69,69)
+	local color_background = Color(54,54,54)
+	local color_close = Color(253,116,92)
+
 	local menu = vgui.Create( 'dm_frame' )
-	menu:SetSize( math.min( 300, ScrW() * 0.2 ), 144 )
+	menu:SetSize( math.min( 300, ScrW() * 0.2 ), 175 )
 	menu:Center()
 	menu:MakePopup()
 	menu:SetTitle( 'Third Person Settings' )
@@ -64,4 +69,13 @@ concommand.Add( 'person_menu', function()
 	slider_fb:SetMax( -30 )
 	slider_fb:SetDecimals( 0 )
 	slider_fb:SetConVar( 'third_person_fb' )
+
+	local slider_ang = vgui.Create( 'DNumSlider', menu )
+	slider_ang:Dock( TOP )
+	slider_ang:DockMargin( 2, 0, 0, 0 )
+	slider_ang:SetText( 'Camera rotation' )
+	slider_ang:SetMin( -45 )
+	slider_ang:SetMax( 45 )
+	slider_ang:SetDecimals( 0 )
+	slider_ang:SetConVar( 'third_person_ang' )
 end )
