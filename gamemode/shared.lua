@@ -1,5 +1,5 @@
 GM.Name = 'Deathmatch'
-GM.Author = 'Freline'
+GM.Author = 'DarkFated'
 
 DM = DM or {}
 
