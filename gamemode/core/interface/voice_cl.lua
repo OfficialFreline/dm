@@ -10,12 +10,10 @@ function PANEL:Init()
 
 	self.Avatar = vgui.Create( 'dm_avatar', self )
 	self.Avatar:Dock( LEFT )
-	self.Avatar:SetSize( 32, 32 )
+	self.Avatar:SetWide( 32 )
 
-	self:SetSize( 250, 38 )
+	self:SetSize( 250, 40 )
 	self:DockPadding( 4, 4, 4, 4 )
-	self:DockMargin( 1, 1, 1, 1 )
-	self:Dock( TOP )
 end
 
 function PANEL:Setup( ply )
@@ -49,14 +47,14 @@ function PANEL:Paint( w, h )
 
 		local w2, h2 = surface.GetTextSize( nick )
 
-		w2 = w2 + 32 + 12
+		w2 = w2 + 32 + 13
 
 		self:SetSize( w2, h )
 		self.lastw = w2
 
 		if ( self.lastName != nick ) then
 			self.LabelName:SetText( nick )
-			
+
 			self.lastName = nick
 		end
 	end
@@ -79,7 +77,7 @@ function PANEL:FadeOut( anim, delta, data )
 
 		return
 	end
-			
+
 	self:SetAlpha( 255 - ( 255 * delta ) )
 end
 
@@ -109,7 +107,7 @@ function GM:PlayerStartVoice( ply )
 
 	local pnl = g_VoicePanelList:Add( 'VoiceNotify2' )
 	pnl:Setup( ply )
-	
+
 	PlayerVoicePanels[ ply ] = pnl
 end
 
@@ -138,7 +136,7 @@ local function CreateVoiceVGUI()
 	g_VoicePanelList = vgui.Create( 'DPanel' )
 	g_VoicePanelList:ParentToHUD()
 	g_VoicePanelList:SetPos( 20, 20 )
-	g_VoicePanelList:SetSize( 250, ScrH() - 38 )
+	g_VoicePanelList:SetSize( 250, ScrH() - 40 )
 	g_VoicePanelList:SetDrawBackground( false )
 end
 
