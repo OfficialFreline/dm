@@ -1,14 +1,14 @@
 "dm"
 {
-  "base" "base"
-  "title" "Deathmatch"
-  "maps" "^dm_|^gm_"
-  "category" "pvp"
-  "menusystem" "1"
+	"base" "base"
+	"title" "Deathmatch"
+	"maps" "^dm_|^gm_"
+	"category" "pvp"
+	"menusystem" "1"
 
-  "author_name" "Freline"
-  "author_email" ""
-  "author_url" "https://github.com/OfficialFreline/dm"
+	"author_name" "DarkFated"
+	"author_email" ""
+	"author_url" "https://github.com/darkfated/dm"
 
-  "workshopid" "2589518973"
+	"workshopid" "2589518973"
 }
